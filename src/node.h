@@ -3,13 +3,6 @@
 
 #include <stdint.h>
 
-typedef struct Node Node;
-struct Node {
-  Node *left;
-  Node *right;
-  int balanceFactor;
-  void *data;    // will be change ltr ,no neccessary integer
-};
 
 typedef struct STPNode STPNode;
 struct STPNode {
@@ -17,8 +10,23 @@ struct STPNode {
   STPNode *right;
   int LeftCost;
   int RightCost;
-  int Vertex;
+  int VertexCost;
 };
+
+
+typedef struct Vertex Vertex;
+struct Vertex {
+  char *name;
+  int value;
+};
+
+
+typedef struct Vertexlink Vertexlink;
+struct Vertexlink{
+  Vertex *next;
+  int cost;
+};
+
 
 
 

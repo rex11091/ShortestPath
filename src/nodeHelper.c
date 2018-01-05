@@ -4,16 +4,16 @@ extern STPNode node1 ,node5, node10,node15, node20, node25, node30, node35, node
 extern STPNode node45, node50, node55, node60, node65, node70, node75, node80;
 extern STPNode node85, node90, node95, node100;
 
-void initNode (STPNode *node, STPNode *left, STPNode *right,int LC,int RC,int Vertex){
+void initNode (STPNode *node, STPNode *left, STPNode *right,int LC,int RC,int VC){
 
-  STPNode->left = left;
-  STPNode->right = right;
-  STPNode->LeftCost = LC;
-  STPNode->rightCost = RC;
-  STPNode->Vertex = Vertex;
+  node->left = left;
+  node->right = right;
+  node->LeftCost = LC;
+  node->RightCost = RC;
+  node->VertexCost = VC;
 
 }
-
+/*
 void giveInitdata(void){
   node1.data = (int *)1 ;
   node5.data = (int *)5 ;
@@ -38,3 +38,4 @@ void giveInitdata(void){
   node100.data = (int *)100 ;
 
 }
+*/

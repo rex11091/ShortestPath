@@ -1,7 +1,13 @@
 #ifndef _SHORTESTPATH_H
 #define _SHORTESTPATH_H
 
-#define INFINITY      10000000000
+#include "node.h"
 
 
+
+//STPNode *ShortestPath(STPNode **mainNode);
+
+
+Vertex *createVertex(char *name, int value);
+void addNeighbour(int n1st, int NumberToaddNeighbour,...);
 #endif // _SHORTESTPATH_H

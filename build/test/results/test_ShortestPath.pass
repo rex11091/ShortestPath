@@ -4,16 +4,25 @@
   :file: test_ShortestPath.c
 :successes:
 - :test: test_ShortestPath_create_node
-  :line: 20
+  :line: 16
+  :message: ''
+- :test: test_ShortestPath_Vertexlink
+  :line: 35
+  :message: ''
+- :test: test_ShortestPath_addneighbour_VA_expect_neigboring_with_another_vertex
+  :line: 63
+  :message: ''
+- :test: test_ShortestPath_addneighbour_VA_expect_neigboring_with_another_vertex1
+  :line: 102
+  :message: ''
+- :test: test_ShortestPath_addneighbour_VA_expect_neigboring_with_another_vertex2
+  :line: 145
   :message: ''
 :failures: []
-:ignores:
-- :test: test_ShortestPath_NeedToImplement
-  :line: 17
-  :message: Need to Implement ShortestPath
+:ignores: []
 :counts:
-  :total: 2
-  :passed: 1
+  :total: 5
+  :passed: 5
   :failed: 0
-  :ignored: 1
+  :ignored: 0
 :stdout: []

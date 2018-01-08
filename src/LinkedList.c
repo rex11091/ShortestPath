@@ -23,7 +23,9 @@ void ListAdd(LinkedList *list, Item *item)
   }
 }
 
-void createItem(Item *item, void *data, Item *next){
+
+void createItem(Item *item, void *data,Item *next){
   item->data = data;
   item->next = next;
+
 }

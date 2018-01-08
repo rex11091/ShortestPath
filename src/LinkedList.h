@@ -1,14 +1,14 @@
 #ifndef _LINKEDLIST_H
 #define _LINKEDLIST_H
 
-
 typedef struct Item Item;
 typedef struct LinkedList LinkedList;
 typedef struct Vertex Vertex;
+typedef struct Vertexlink Vertexlink;
 
 struct Item{
   Item *next;
-  Vertex *data;
+  Vertexlink *data;
 };
 
 struct LinkedList{
@@ -18,19 +18,17 @@ struct LinkedList{
 
 };
 
-
 struct Vertex {
   char *name;
-  int value;
+  int PathCost;
   LinkedList *list;
 };
 
-typedef struct Vertexlink Vertexlink;
+
 struct Vertexlink{
-  Vertex *next;
+  Vertex *NextVertex;
   int cost;
 };
-
 
 
 

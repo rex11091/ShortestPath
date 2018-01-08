@@ -30,8 +30,11 @@ char* GlobalOrderError;
 /*=======External Functions This Runner Calls=====*/
 extern void setUp(void);
 extern void tearDown(void);
-extern void test_ShortestPath_NeedToImplement(void);
 extern void test_ShortestPath_create_node(void);
+extern void test_ShortestPath_Vertexlink(void);
+extern void test_ShortestPath_addneighbour_VA_expect_neigboring_with_another_vertex(void);
+extern void test_ShortestPath_addneighbour_VA_expect_neigboring_with_another_vertex1(void);
+extern void test_ShortestPath_addneighbour_VA_expect_neigboring_with_another_vertex2(void);
 
 
 /*=======Test Reset Option=====*/
@@ -47,8 +50,11 @@ void resetTest(void)
 int main(void)
 {
   UnityBegin("test_ShortestPath.c");
-  RUN_TEST(test_ShortestPath_NeedToImplement, 15);
-  RUN_TEST(test_ShortestPath_create_node, 20);
+  RUN_TEST(test_ShortestPath_create_node, 16);
+  RUN_TEST(test_ShortestPath_Vertexlink, 35);
+  RUN_TEST(test_ShortestPath_addneighbour_VA_expect_neigboring_with_another_vertex, 63);
+  RUN_TEST(test_ShortestPath_addneighbour_VA_expect_neigboring_with_another_vertex1, 102);
+  RUN_TEST(test_ShortestPath_addneighbour_VA_expect_neigboring_with_another_vertex2, 145);
 
   return (UnityEnd());
 }

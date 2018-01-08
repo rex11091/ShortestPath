@@ -32,7 +32,6 @@ extern void setUp(void);
 extern void tearDown(void);
 extern void test_ShortestPath_NeedToImplement(void);
 extern void test_ShortestPath_create_node(void);
-extern void test_ShortestPath_create_node1(void);
 
 
 /*=======Test Reset Option=====*/
@@ -48,9 +47,8 @@ void resetTest(void)
 int main(void)
 {
   UnityBegin("test_ShortestPath.c");
-  RUN_TEST(test_ShortestPath_NeedToImplement, 16);
-  RUN_TEST(test_ShortestPath_create_node, 51);
-  RUN_TEST(test_ShortestPath_create_node1, 66);
+  RUN_TEST(test_ShortestPath_NeedToImplement, 15);
+  RUN_TEST(test_ShortestPath_create_node, 20);
 
   return (UnityEnd());
 }

@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdarg.h>
+#include "LinkedList.h"
 
 
 /*
@@ -46,24 +47,36 @@ STPNode *ShortestPath(STPNode **mainNode)
 
 */
 
-// A structure to represent an adjacency liat
 
-// A utility function to create a new adjacency list node
 Vertex *createVertex(char *name, int value)
 {
     Vertex *newVertex=(Vertex*) malloc(sizeof(Vertex));
     newVertex->name = name;
     newVertex->value = value;
+
+    newVertex->list = (LinkedList *)malloc(sizeof(LinkedList));
+    ListInit(newVertex->list);
     return newVertex;
 }
 
 
+void addNeighbors(Vertex *vertex,Vertexlink *Vertexlink)
+{
+  Item *newItem = (Item *)malloc(sizeof(Item));
+  createItem(newItem,Vertexlink->next,NULL);
+  ListAdd(vertex->list,newItem);
+}
 
-void addNeighbour(int zz, int NumberToaddNeighbour,...){
-
-  va_list args;
+void addNeighbors1(Vertex *vertex,int numbofneighbors,...)
+{
   int i;
-  va_start(args, NumberToaddNeighbour);
-for(i=0;i<NumberToaddNeighbour;i++)
-  printf("%d\n",va_arg(args,int ));
+  Vertexlink *Vtl;
+  va_list args;
+  va_start(args, numbofneighbors);
+  for(i=0;i<numbofneighbors;i++){
+  Vtl = va_arg(args,Vertexlink *);
+  Item *newItem = (Item *)malloc(sizeof(Item));
+  createItem(newItem,Vtl->next,NULL);
+  ListAdd(vertex->list,newItem);
+  }
 }

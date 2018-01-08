@@ -17,7 +17,7 @@
     - test:all
 
 #:release_build:
-#  :output: MyApp.out
+#  :output: HashMap.exe
 #  :use_assembly: FALSE
 
 :environment:
@@ -42,6 +42,8 @@
   :test:
     - *common_defines
     - TEST
+    - _ISOC99_SOURCE
+
   :test_preprocess:
     - *common_defines
     - TEST

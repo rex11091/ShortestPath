@@ -40,6 +40,7 @@
   :test:
   - &1 []
   - TEST
+  - _ISOC99_SOURCE
   :test_preprocess:
   - *1
   - TEST
@@ -70,10 +71,10 @@
   :testfail: ".fail"
   :dependencies: ".d"
 :unity:
-  :vendor_path: C:/Student/Rex/Project/C/DataStructure/ShortestPath/vendor/ceedling/vendor
+  :vendor_path: C:/Users/User_Lenovo/Desktop/ShortestPath/vendor/ceedling/vendor
   :defines: []
 :cmock:
-  :vendor_path: C:/Student/Rex/Project/C/DataStructure/ShortestPath/vendor/ceedling/vendor
+  :vendor_path: C:/Users/User_Lenovo/Desktop/ShortestPath/vendor/ceedling/vendor
   :defines: []
   :includes: []
   :mock_prefix: mock_
@@ -92,7 +93,7 @@
   :verbosity: 3
   :unity_helper: false
 :cexception:
-  :vendor_path: C:/Student/Rex/Project/C/DataStructure/ShortestPath/vendor/ceedling/vendor
+  :vendor_path: C:/Users/User_Lenovo/Desktop/ShortestPath/vendor/ceedling/vendor
   :defines: []
 :test_runner:
   :includes: []

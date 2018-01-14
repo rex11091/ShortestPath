@@ -8,8 +8,11 @@
   Unity.NumberOfTests++; \
   if (TEST_PROTECT()) \
   { \
+    CEXCEPTION_T e; \
+    Try { \
       setUp(); \
       TestFunc(); \
+    } Catch(e) { TEST_ASSERT_EQUAL_HEX32_MESSAGE(CEXCEPTION_NONE, e, "Unhandled Exception!"); } \
   } \
   if (TEST_PROTECT()) \
   { \
@@ -22,6 +25,7 @@
 #include "unity.h"
 #include <setjmp.h>
 #include <stdio.h>
+#include "CException.h"
 
 int GlobalExpectCount;
 int GlobalVerifyOrder;
@@ -50,11 +54,11 @@ void resetTest(void)
 int main(void)
 {
   UnityBegin("test_ShortestPath.c");
-  RUN_TEST(test_ShortestPath_create_node, 16);
-  RUN_TEST(test_ShortestPath_Vertexlink, 35);
-  RUN_TEST(test_ShortestPath_addneighbour_VA_expect_neigboring_with_another_vertex, 63);
-  RUN_TEST(test_ShortestPath_addneighbour_VA_expect_neigboring_with_another_vertex1, 102);
-  RUN_TEST(test_ShortestPath_addneighbour_VA_expect_neigboring_with_another_vertex2, 145);
+  RUN_TEST(test_ShortestPath_create_node, 21);
+  RUN_TEST(test_ShortestPath_Vertexlink, 40);
+  RUN_TEST(test_ShortestPath_addneighbour_VA_expect_neigboring_with_another_vertex, 68);
+  RUN_TEST(test_ShortestPath_addneighbour_VA_expect_neigboring_with_another_vertex1, 107);
+  RUN_TEST(test_ShortestPath_addneighbour_VA_expect_neigboring_with_another_vertex2, 150);
 
   return (UnityEnd());
 }

@@ -2,6 +2,11 @@
 #include "stdlib.h"
 #include "LinkedList.h"
 #include "ShortestPath.h"
+#include "avlAdd.h"
+#include "remove.h"
+#include "rotate.h"
+#include "Exception.h"
+#include "CException.h"
 
 void setUp(void)
 {
@@ -145,23 +150,27 @@ void test_ShortestPath_addneighbour_VA_expect_neigboring_with_another_vertex1(vo
 void test_ShortestPath_addneighbour_VA_expect_neigboring_with_another_vertex2(void)
 {   Vertex *vt;
     Vertex *VA = createVertex("A",0);
-    Vertex *VB = createVertex("b",0);
-    Vertex *VC = createVertex("C",0);
-    Vertex *VE = createVertex("E",0);
-    Vertex *VD = createVertex("D",0);
+    Vertex *VB = createVertex("b",INT_MAX);
+    Vertex *VC = createVertex("C",INT_MAX);
+    Vertex *VE = createVertex("E",INT_MAX);
+    Vertex *VD = createVertex("D",INT_MAX);
 
-    Vertexlink LAC = {VC,2};
-    Vertexlink LAB = {VB,3};
+    Vertexlink LAC = {VC,3};
+    Vertexlink LAB = {VB,2};
     Vertexlink LBD = {VD,1};
     Vertexlink LBE = {VE,4};
 
     addNeighbors(VA,2,&LAB,&LAC);
     addNeighbors(VB,2,&LBD,&LBE);
 
-  //  Item *item = getVertexFromLinkedList(VA);
+    Node *root = NULL;
+    avladdVertex(&root,VA);
 
-    //TEST_ASSERT_EQUAL_STRING("B",item->NextVertex->name);
-  //  TEST_ASSERT_NOT_NULL(item);
+    //TEST_ASSERT_NOT_NULL(VA->list->head);
+    //TEST_ASSERT_EQUAL(3,root->data->cost);
+    //TEST_ASSERT_EQUAL_PTR(NULL,root);
+
+
 
     free(VA);
     free(VB);

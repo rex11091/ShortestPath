@@ -2,14 +2,14 @@
 #define _NODE_H
 
 #include <stdint.h>
-#include <LinkedList.h>
+#include "LinkedList.h"
 
 typedef struct Node Node;
 struct Node {
   Node *left;
   Node *right;
   int balanceFactor;
-  void *data;
+  Vertexlink *data;    // will be change ltr ,no neccessary integer
 };
 typedef struct intNode intNode;
 struct intNode{
@@ -26,15 +26,6 @@ struct StringNode {
   StringNode *right;
   int balanceFactor;
   char *data;
-};
-
-
-typedef struct VertexNode VertexNode;
-struct VertexNode {
-  VertexNode *left;
-  VertexNode *right;
-  int balanceFactor;
-  Vertex *data;
 };
 
 

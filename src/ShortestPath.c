@@ -28,8 +28,126 @@ void addNeighbors(Vertex *vertex,int numbofneighbors,...)
   Item *newItem = (Item *)malloc(sizeof(Item));
   createItem(newItem,Vtl,NULL);
   ListAdd(vertex->list,newItem);
+  //free(newItem);
   }
 }
+
+/**
+*/
+
+int avladdVertex(Node **root,Vertex *vertex){
+    Node *smallestCost;
+    LinkedList *templist  = vertex->list;
+    Item *TempToPoint1 = NULL ;
+    Item *TempToPoint2 = templist->head;
+
+      	if(templist->head == NULL)
+      	return 0;
+
+      	else
+      	{
+      		while(TempToPoint2 !=NULL)
+      		{
+            Node *newNode = (Node *)malloc(sizeof(Node));
+            createNodeofVertexLink(newNode,TempToPoint2->data);
+            VertexaddAvl(root,newNode);
+      			TempToPoint1 = TempToPoint2;
+            TempToPoint2 = TempToPoint2->next;
+
+      	}
+      }
+        while(root!=NULL){
+           smallestCost = findSmallestNode(root);
+           Vertex *tempVertex = smallestCost->data->NextVertex;
+           ListReplaceVertexPathCost(templist,smallestCost);
+           VertexRemoveNodeAvl(root,smallestCost->data);
+          if(tempVertex->list->head!=NULL){
+           avladdVertex(root,tempVertex);
+          }
+    }
+}
+
+
+
+
+Node *findSmallestNode(Node **rootPtr)
+{
+Node *temp1;
+Node *current = (*rootPtr)->left;
+    /* loop down to find the leftmost leaf */
+ if(current!=NULL){
+      if(current->left != NULL)
+         findSmallestNode(&(*rootPtr)->left);
+     else{
+         if(current->right !=NULL){
+          return current->right;
+        }
+        else
+         return current;
+        }
+  }
+  else
+    temp1 = *rootPtr;
+     return temp1;
+    }
+    
+
+
+
+
+    
+void ListReplaceVertexPathCost(LinkedList *list,Node *VertexNode)
+{
+	Item *temp;
+	for(temp = list->head; temp!=NULL;temp = temp->next){
+		if(temp->data->NextVertex == VertexNode->data->NextVertex){
+      if(temp->data->NextVertex == INT_MAX){
+        temp->data->NextVertex->PathCost = VertexNode->data->cost;
+      }
+      else{
+        if(temp->data->NextVertex->PathCost < VertexNode->data->cost)
+        temp->data->NextVertex->PathCost = VertexNode->data->cost;
+        else
+        temp->data->NextVertex->PathCost = temp->data->NextVertex->PathCost;
+      }
+  }
+ }
+}
+
+
+
+
+
+
+
+void createNodeofVertexLink(Node *node,Vertexlink *vertexlink){
+    node->left = NULL;
+    node->right = NULL;
+    node->balanceFactor =0;
+    node->data = vertexlink;
+}
+
+int CostCompare(Vertexlink *nodedata, Node *refNode)
+{
+	
+	int data1 = refNode->data->cost;
+
+  int data2 = nodedata->cost;
+
+  if (data2 < data1)
+  {
+    return -1;
+  }
+  else if(data2 > data1)
+  {
+    return 1;
+  }
+  else
+    return 0;
+}
+
+
+
 
 
 

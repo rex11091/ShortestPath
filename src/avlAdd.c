@@ -3,7 +3,9 @@
 #include "stdio.h"
 #include "node.h"
 #include "rotate.h"
-#include "avlAddInteger.h"
+#include "Exception.h"
+#include "CException.h"
+
 
 
 int avlAdd(Node **rootPtr, Node *nodeToAdd,Compare CompareFunc){
@@ -36,6 +38,9 @@ int avlAdd(Node **rootPtr, Node *nodeToAdd,Compare CompareFunc){
           }
         else
           (*rootPtr)->balanceFactor =(*rootPtr)->balanceFactor;
+      }
+      else{
+        Throw(createException("Node to add is already exist", NODE_ADD_EXIST));
       }
     }
     if((*rootPtr)->balanceFactor >= 2)

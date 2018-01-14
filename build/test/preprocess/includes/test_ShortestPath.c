@@ -2,4 +2,9 @@
 - unity.h
 - LinkedList.h
 - ShortestPath.h
+- avlAdd.h
+- remove.h
+- rotate.h
+- Exception.h
+- CException.h
 - build/temp/_test_ShortestPath.c

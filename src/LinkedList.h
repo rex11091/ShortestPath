@@ -31,9 +31,8 @@ struct Vertexlink{
 };
 
 
-
 void ListInit(LinkedList *list);
 void ListAdd(LinkedList *list, Item *item);
-void createItem(Item *item, void *data, Item *next);
+void createItem(Item *item, Vertexlink *vertexlink,Item *next);
 
 #endif // _LINKLIST_H

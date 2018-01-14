@@ -24,8 +24,7 @@ void ListAdd(LinkedList *list, Item *item)
 }
 
 
-void createItem(Item *item, void *data,Item *next){
-  item->data = data;
+void createItem(Item *item, Vertexlink *vertexlink,Item *next){
+  item->data = vertexlink;
   item->next = next;
-
 }

@@ -1,6 +1,7 @@
 {
     "files.associations": {
         "costcompare.h": "c",
-        "node.h": "c"
+        "node.h": "c",
+        "nodeverifier.h": "c"
     }
 }

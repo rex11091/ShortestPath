@@ -5,6 +5,7 @@
 #include "avlAdd.h"
 #include "remove.h"
 #include "rotate.h"
+#include "nodeVerifier.h"
 #include "Exception.h"
 #include "CException.h"
 
@@ -56,6 +57,113 @@ void test_ShortestPath_Vertexlink(void)
     free(VC);
 
 }
+
+void test_ShortestPath_CreateNodeForInsertAVL(void)
+{  
+
+    Vertex *VA = createVertex("A",0);
+    Vertex *VB = createVertex("b",0);
+    Vertex *VC = createVertex("C",0);
+
+    Vertexlink LAC = {VC,2};
+    Vertexlink LAB = {VB,3};
+
+    Node *VertexNodeC = (Node *)malloc(sizeof(Node));
+    Node *VertexNodeB = (Node *)malloc(sizeof(Node));
+    createNodeForAddAVL(VertexNodeB,&LAB);
+    createNodeForAddAVL(VertexNodeC,&LAC);
+
+    TEST_ASSERT_NOT_NULL(VertexNodeB);
+    TEST_ASSERT_EQUAL(3,VertexNodeB->data->cost);
+    TEST_ASSERT_EQUAL_PTR(&LAB,VertexNodeB->data);
+    TEST_ASSERT_NOT_NULL(VertexNodeC);
+    TEST_ASSERT_EQUAL(2,VertexNodeC->data->cost);
+    TEST_ASSERT_EQUAL_PTR(&LAC,VertexNodeC->data);
+    
+    free(VertexNodeC);
+    free(VertexNodeB);
+    free(VA);
+    free(VB);
+    free(VC);
+}
+
+
+void test_ShortestPath_VertexaddAvl_add_VertexNodeB_VertexNodeC_VertexNodeD_to_avl_expect_balance(void)
+{  
+
+    Vertex *VB = createVertex("b",0);
+    Vertex *VC = createVertex("C",0);
+    Vertex *VD = createVertex("D",0);
+
+    Vertexlink LAC = {VC,2};
+    Vertexlink LAB = {VB,3};
+    Vertexlink LAD = {VD,1};
+
+    Node *VertexNodeC = (Node *)malloc(sizeof(Node));
+    Node *VertexNodeB = (Node *)malloc(sizeof(Node));
+    Node *VertexNodeD = (Node *)malloc(sizeof(Node));
+    createNodeForAddAVL(VertexNodeB,&LAB);
+    createNodeForAddAVL(VertexNodeC,&LAC);
+    createNodeForAddAVL(VertexNodeD,&LAD);
+
+
+    VertexaddAvl(&VertexNodeC,VertexNodeB);
+    VertexaddAvl(&VertexNodeC,VertexNodeD);
+
+    TEST_ASSERT_EQUAL_NODE(VertexNodeD,VertexNodeB,0,VertexNodeC);
+
+    free(VertexNodeC);
+    free(VertexNodeB);
+    free(VertexNodeD);
+    free(VB);
+    free(VC);
+}
+
+/*
+                    VertexNodeC(0)
+                     /       \                         ------search smallest----->          VertexNodeD
+             vertexNodeD(0)  VertexNodeB(0)     
+
+
+*/
+void test_ShortestPath_VertexaddAvl_Finding_smallestNode_expect_return_VertexNodeD(void)
+{  
+
+    Vertex *VB = createVertex("b",0);
+    Vertex *VC = createVertex("C",0);
+    Vertex *VD = createVertex("D",0);
+
+    Vertexlink LAC = {VC,2};
+    Vertexlink LAB = {VB,3};
+    Vertexlink LAD = {VD,1};
+
+    Node *VertexNodeC = (Node *)malloc(sizeof(Node));
+    Node *VertexNodeB = (Node *)malloc(sizeof(Node));
+    Node *VertexNodeD = (Node *)malloc(sizeof(Node));
+    createNodeForAddAVL(VertexNodeB,&LAB);
+    createNodeForAddAVL(VertexNodeC,&LAC);
+    createNodeForAddAVL(VertexNodeD,&LAD);
+
+    Node *root = VertexNodeC;
+
+    VertexaddAvl(&root,VertexNodeB);
+    VertexaddAvl(&root,VertexNodeD); 
+    Node *smallest = findSmallestNode(&root);
+    TEST_ASSERT_EQUAL_NODE(VertexNodeD,VertexNodeB,0,VertexNodeC);
+    TEST_ASSERT_EQUAL(1,smallest->data->cost);
+    free(VertexNodeC);
+    free(VertexNodeB);
+    free(VertexNodeD);
+    free(VB);
+    free(VC);
+}
+
+
+
+
+
+
+
 /*
                       C
                       |
@@ -147,8 +255,9 @@ void test_ShortestPath_addneighbour_VA_expect_neigboring_with_another_vertex1(vo
     free(VC);
 }
 
-void test_ShortestPath_addneighbour_VA_expect_neigboring_with_another_vertex2(void)
-{   Vertex *vt;
+void test_ShortestPath_trying_sorting(void)
+{   CEXCEPTION_T ex;
+    Vertex *vt;
     Vertex *VA = createVertex("A",0);
     Vertex *VB = createVertex("b",INT_MAX);
     Vertex *VC = createVertex("C",INT_MAX);
@@ -163,8 +272,14 @@ void test_ShortestPath_addneighbour_VA_expect_neigboring_with_another_vertex2(vo
     addNeighbors(VA,2,&LAB,&LAC);
     addNeighbors(VB,2,&LBD,&LBE);
 
+
     Node *root = NULL;
-    avladdVertex(&root,VA);
+    Try{
+    LinkedList *shortestpath = ComputeShortestPath(&root,VA);
+    }Catch(ex){
+    dumpException(ex);
+    }
+    //freeException1(ex);
 
     //TEST_ASSERT_NOT_NULL(VA->list->head);
     //TEST_ASSERT_EQUAL(3,root->data->cost);
@@ -176,6 +291,10 @@ void test_ShortestPath_addneighbour_VA_expect_neigboring_with_another_vertex2(vo
     free(VB);
     free(VC);
 }
+
+
+
+
 
 /*
                       C(2)

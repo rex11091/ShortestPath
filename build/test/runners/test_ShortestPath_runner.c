@@ -36,9 +36,12 @@ extern void setUp(void);
 extern void tearDown(void);
 extern void test_ShortestPath_create_node(void);
 extern void test_ShortestPath_Vertexlink(void);
+extern void test_ShortestPath_CreateNodeForInsertAVL(void);
+extern void test_ShortestPath_VertexaddAvl_add_VertexNodeB_VertexNodeC_VertexNodeD_to_avl_expect_balance(void);
+extern void test_ShortestPath_VertexaddAvl_Finding_smallestNode_expect_return_VertexNodeD(void);
 extern void test_ShortestPath_addneighbour_VA_expect_neigboring_with_another_vertex(void);
 extern void test_ShortestPath_addneighbour_VA_expect_neigboring_with_another_vertex1(void);
-extern void test_ShortestPath_addneighbour_VA_expect_neigboring_with_another_vertex2(void);
+extern void test_ShortestPath_trying_sorting(void);
 
 
 /*=======Test Reset Option=====*/
@@ -54,11 +57,14 @@ void resetTest(void)
 int main(void)
 {
   UnityBegin("test_ShortestPath.c");
-  RUN_TEST(test_ShortestPath_create_node, 21);
-  RUN_TEST(test_ShortestPath_Vertexlink, 40);
-  RUN_TEST(test_ShortestPath_addneighbour_VA_expect_neigboring_with_another_vertex, 68);
-  RUN_TEST(test_ShortestPath_addneighbour_VA_expect_neigboring_with_another_vertex1, 107);
-  RUN_TEST(test_ShortestPath_addneighbour_VA_expect_neigboring_with_another_vertex2, 150);
+  RUN_TEST(test_ShortestPath_create_node, 22);
+  RUN_TEST(test_ShortestPath_Vertexlink, 41);
+  RUN_TEST(test_ShortestPath_CreateNodeForInsertAVL, 61);
+  RUN_TEST(test_ShortestPath_VertexaddAvl_add_VertexNodeB_VertexNodeC_VertexNodeD_to_avl_expect_balance, 91);
+  RUN_TEST(test_ShortestPath_VertexaddAvl_Finding_smallestNode_expect_return_VertexNodeD, 129);
+  RUN_TEST(test_ShortestPath_addneighbour_VA_expect_neigboring_with_another_vertex, 176);
+  RUN_TEST(test_ShortestPath_addneighbour_VA_expect_neigboring_with_another_vertex1, 215);
+  RUN_TEST(test_ShortestPath_trying_sorting, 258);
 
   return (UnityEnd());
 }

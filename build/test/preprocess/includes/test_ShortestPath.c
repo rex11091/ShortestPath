@@ -5,6 +5,7 @@
 - avlAdd.h
 - remove.h
 - rotate.h
+- nodeVerifier.h
 - Exception.h
 - CException.h
 - build/temp/_test_ShortestPath.c

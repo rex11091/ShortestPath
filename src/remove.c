@@ -49,7 +49,7 @@ Node *current = (*rootPtr)->left;
  }
 
 
-Node *avlRemove(Node **rootPtr, int data,Compare CompareFunc){
+Node *avlRemove(Node **rootPtr, void *data,Compare CompareFunc){
     int heightchange;
     Node *avlRemove = _avlRemove(rootPtr, data, &heightchange,CompareFunc);
     if(avlRemove == NULL){
@@ -59,7 +59,7 @@ Node *avlRemove(Node **rootPtr, int data,Compare CompareFunc){
 }
 
 
-Node *_avlRemove(Node **root, int nodeToRemove ,int *heightchange,Compare CompareFunc){
+Node *_avlRemove(Node **root, void *nodeToRemove ,int *heightchange,Compare CompareFunc){
 
         Node *temp = *root;
         //heightchange to determine either root's heigh change or unchange
@@ -68,7 +68,7 @@ Node *_avlRemove(Node **root, int nodeToRemove ,int *heightchange,Compare Compar
        if (*root == NULL)
            return NULL; //heigh change
 
-       int compareResult = CompareFunc((void *)nodeToRemove,*root);
+       int compareResult = CompareFunc(nodeToRemove,*root);
        if(compareResult==-1){
          if(temp->left==NULL){
            Throw(createException("This data cannot be found in this Avl tree ",Data_not_found));
@@ -109,8 +109,10 @@ Node *_avlRemove(Node **root, int nodeToRemove ,int *heightchange,Compare Compar
              else // One child case
              {
               *root = current; // Copy the contents of the non-empty child
-              *heightchange=CHANGED; // height change
+              *heightchange=CHANGED; // height change          
              }
+             //free();
+    
         }
         else// node with two children case
         {

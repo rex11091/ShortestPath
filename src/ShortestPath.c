@@ -35,7 +35,7 @@ void addNeighbors(Vertex *vertex,int numbofneighbors,...)
 /**
 */
 
-int avladdVertex(Node **root,Vertex *vertex){
+LinkedList *ComputeShortestPath(Node **root,Vertex *vertex){
     Node *smallestCost;
     LinkedList *templist  = vertex->list;
     Item *TempToPoint1 = NULL ;
@@ -49,22 +49,24 @@ int avladdVertex(Node **root,Vertex *vertex){
       		while(TempToPoint2 !=NULL)
       		{
             Node *newNode = (Node *)malloc(sizeof(Node));
-            createNodeofVertexLink(newNode,TempToPoint2->data);
+            createNodeForAddAVL(newNode,TempToPoint2->data);
             VertexaddAvl(root,newNode);
       			TempToPoint1 = TempToPoint2;
             TempToPoint2 = TempToPoint2->next;
 
       	}
       }
-        while(root!=NULL){
+        while(*root!=NULL){
            smallestCost = findSmallestNode(root);
            Vertex *tempVertex = smallestCost->data->NextVertex;
-           ListReplaceVertexPathCost(templist,smallestCost);
-           VertexRemoveNodeAvl(root,smallestCost->data);
+           int *nodetoRemove = (int*)((uintptr_t)(smallestCost->data->cost));
+           ListReplaceVertexPathCost(vertex,smallestCost);
+           VertexRemoveNodeAvl(root,nodetoRemove);
           if(tempVertex->list->head!=NULL){
-           avladdVertex(root,tempVertex);
+           ComputeShortestPath(root,tempVertex);
           }
     }
+    return vertex->list;
 }
 
 
@@ -89,23 +91,24 @@ Node *current = (*rootPtr)->left;
   else
     temp1 = *rootPtr;
      return temp1;
-    }
-    
+}
 
 
 
 
-    
-void ListReplaceVertexPathCost(LinkedList *list,Node *VertexNode)
+
+
+void ListReplaceVertexPathCost(Vertex *vertex,Node *VertexNode)
 {
 	Item *temp;
-	for(temp = list->head; temp!=NULL;temp = temp->next){
+	for(temp = vertex->list->head; temp!=NULL;temp = temp->next){
 		if(temp->data->NextVertex == VertexNode->data->NextVertex){
-      if(temp->data->NextVertex == INT_MAX){
+      if(temp->data->NextVertex->PathCost == INT_MAX){
         temp->data->NextVertex->PathCost = VertexNode->data->cost;
       }
       else{
-        if(temp->data->NextVertex->PathCost < VertexNode->data->cost)
+        //here is if(vertex's path cost + vertexlink->cost >  NextVertex->Pathcost than remain )
+        if(temp->data->NextVertex->PathCost > (vertex->PathCost + VertexNode->data->cost))
         temp->data->NextVertex->PathCost = VertexNode->data->cost;
         else
         temp->data->NextVertex->PathCost = temp->data->NextVertex->PathCost;
@@ -115,30 +118,48 @@ void ListReplaceVertexPathCost(LinkedList *list,Node *VertexNode)
 }
 
 
-
-
-
-
-
-void createNodeofVertexLink(Node *node,Vertexlink *vertexlink){
+void createNodeForAddAVL(Node *node,Vertexlink *vertexlink){
     node->left = NULL;
     node->right = NULL;
     node->balanceFactor =0;
     node->data = vertexlink;
 }
 
+void freeVertexNode(Node *Vertexroot){
+  if(Vertexroot ==NULL){
+  return;
+  }
+  freeVertexNode(Vertexroot->right);
+  freeVertexNode(Vertexroot->right);
+  free(Vertexroot->data);
+  free(Vertexroot);
+}
+
 int CostCompare(Vertexlink *nodedata, Node *refNode)
 {
-	
+  int data  = nodedata->cost;
 	int data1 = refNode->data->cost;
 
-  int data2 = nodedata->cost;
-
-  if (data2 < data1)
+  if (data < data1)
   {
     return -1;
   }
-  else if(data2 > data1)
+  else if(data > data1)
+  {
+    return 1;
+  }
+  else
+    return 0;
+}
+int CostCompareforRemove(int nodedata, Node *refNode)
+{
+	int data1 = refNode->data->cost;
+
+  if (nodedata < data1)
+  {
+    return -1;
+  }
+  else if(nodedata > data1)
   {
     return 1;
   }

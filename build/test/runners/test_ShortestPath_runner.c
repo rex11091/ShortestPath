@@ -37,12 +37,16 @@ extern void tearDown(void);
 extern void test_ShortestPath_create_node(void);
 extern void test_ShortestPath_Vertexlink(void);
 extern void test_ShortestPath_CreateNodeForInsertAVL(void);
+extern void test_ShortestPath_addneighbour_VA_expect_neigboring_with_another_Graph1(void);
+extern void test_ShortestPath_addneighbour_VA_expect_neigboring_with_another_Graph2(void);
+extern void test_ShortestPath_addneighbour_VA_expect_neigboring_with_another_Graph3(void);
 extern void test_ShortestPath_VertexaddAvl_add_VertexNodeB_VertexNodeC_VertexNodeD_to_avl_expect_balance(void);
 extern void test_ShortestPath_VertexaddAvl_Finding_smallestNode_when_only_root_expect_return_VertexNodeC(void);
 extern void test_ShortestPath_VertexaddAvl_Finding_smallestNode_expect_return_VertexNodeD(void);
 extern void test_ShortestPath_VertexaddAvl_Finding_smallestNode_expect_return_VertexNodeE(void);
-extern void test_ShortestPath_addneighbour_VA_expect_neigboring_with_another_vertex(void);
-extern void test_ShortestPath_addneighbour_VA_expect_neigboring_with_another_vertex1(void);
+extern void test_ShortestPath_test_ListReplaceAndUpdateVertexPathCost(void);
+extern void test_ShortestPath_test_ListReplaceAndUpdateVertexPathCost_with_NextVertex_PC_smaller_than_PC_Plus_cost_expected_no_update(void);
+extern void test_ShortestPath_test_ListReplaceAndUpdateVertexPathCost_with_NextVertex_PC_smaller_than_PC_Plus_cost_expected_update(void);
 extern void test_ShortestPath_trying_sorting(void);
 
 
@@ -62,13 +66,17 @@ int main(void)
   RUN_TEST(test_ShortestPath_create_node, 22);
   RUN_TEST(test_ShortestPath_Vertexlink, 41);
   RUN_TEST(test_ShortestPath_CreateNodeForInsertAVL, 61);
-  RUN_TEST(test_ShortestPath_VertexaddAvl_add_VertexNodeB_VertexNodeC_VertexNodeD_to_avl_expect_balance, 97);
-  RUN_TEST(test_ShortestPath_VertexaddAvl_Finding_smallestNode_when_only_root_expect_return_VertexNodeC, 138);
-  RUN_TEST(test_ShortestPath_VertexaddAvl_Finding_smallestNode_expect_return_VertexNodeD, 165);
-  RUN_TEST(test_ShortestPath_VertexaddAvl_Finding_smallestNode_expect_return_VertexNodeE, 204);
-  RUN_TEST(test_ShortestPath_addneighbour_VA_expect_neigboring_with_another_vertex, 261);
-  RUN_TEST(test_ShortestPath_addneighbour_VA_expect_neigboring_with_another_vertex1, 300);
-  RUN_TEST(test_ShortestPath_trying_sorting, 357);
+  RUN_TEST(test_ShortestPath_addneighbour_VA_expect_neigboring_with_another_Graph1, 100);
+  RUN_TEST(test_ShortestPath_addneighbour_VA_expect_neigboring_with_another_Graph2, 139);
+  RUN_TEST(test_ShortestPath_addneighbour_VA_expect_neigboring_with_another_Graph3, 195);
+  RUN_TEST(test_ShortestPath_VertexaddAvl_add_VertexNodeB_VertexNodeC_VertexNodeD_to_avl_expect_balance, 254);
+  RUN_TEST(test_ShortestPath_VertexaddAvl_Finding_smallestNode_when_only_root_expect_return_VertexNodeC, 295);
+  RUN_TEST(test_ShortestPath_VertexaddAvl_Finding_smallestNode_expect_return_VertexNodeD, 322);
+  RUN_TEST(test_ShortestPath_VertexaddAvl_Finding_smallestNode_expect_return_VertexNodeE, 361);
+  RUN_TEST(test_ShortestPath_test_ListReplaceAndUpdateVertexPathCost, 415);
+  RUN_TEST(test_ShortestPath_test_ListReplaceAndUpdateVertexPathCost_with_NextVertex_PC_smaller_than_PC_Plus_cost_expected_no_update, 461);
+  RUN_TEST(test_ShortestPath_test_ListReplaceAndUpdateVertexPathCost_with_NextVertex_PC_smaller_than_PC_Plus_cost_expected_update, 522);
+  RUN_TEST(test_ShortestPath_trying_sorting, 580);
 
   return (UnityEnd());
 }

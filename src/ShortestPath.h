@@ -28,11 +28,11 @@ Item *getVertexFromLinkedList(Vertex *vertex);
 
 void createNodeForAddAVL(Node *node,Vertexlink *vertexlink,Vertex *Vertex);
 void addNeighbors(Vertex *vertex,int numbofneighbors,...);
-LinkedList *ComputeShortestPath(Node **root,Vertex *vertex);
+void ComputeShortestPath(Node **root,Vertex *vertex);
 int CostCompare(Vertexlink *nodedata, Node *refNode);
 int CostCompareforRemove(int nodedata, Node *refNode);
 Node *findSmallestNode(Node **rootPtr);
-void ListReplaceVertexPathCost(Node *VertexNode);
+void ListReplaceAndUpdateVertexPathCost(Node *VertexNode);
 void freeVertexNode(Node *Vertexroot);
 
 

@@ -17,6 +17,14 @@ Vertex *createVertex(char *name, int value)
 }
 
 
+void createNodeForAddAVL(Node *node,Vertexlink *vertexlink,Vertex *Vertex){
+    node->left = NULL;
+    node->right = NULL;
+    node->balanceFactor =0;
+    node->ParentVertex = Vertex;    // the parent of the child.
+    node->data = vertexlink;
+}
+
 void addNeighbors(Vertex *vertex,int numbofneighbors,...)
 {
   int i;
@@ -31,46 +39,6 @@ void addNeighbors(Vertex *vertex,int numbofneighbors,...)
   //free(newItem);
   }
 }
-
-/**
-*/
-
-LinkedList *ComputeShortestPath(Node **root,Vertex *vertex){
-    Node *smallestCost;
-    LinkedList *templist  = vertex->list;
-    Item *TempToPoint1 = NULL ;
-    Item *TempToPoint2 = templist->head;
-
-      	if(templist->head == NULL)
-      	return 0;
-
-      	else
-      	{
-      		while(TempToPoint2 !=NULL)
-      		{
-            Node *newNode = (Node *)malloc(sizeof(Node));
-            createNodeForAddAVL(newNode,TempToPoint2->data,vertex);
-            VertexaddAvl(root,newNode);
-      			TempToPoint1 = TempToPoint2;
-            TempToPoint2 = TempToPoint2->next;
-
-      	}
-      }
-        while(*root!=NULL){
-           smallestCost = findSmallestNode(root);
-           Vertex *tempVertex = smallestCost->data->NextVertex;
-           int *nodetoRemove = (int*)((uintptr_t)(smallestCost->data->cost));
-           ListReplaceVertexPathCost(smallestCost);
-           VertexRemoveNodeAvl(root,nodetoRemove);
-          if(tempVertex->list->head!=NULL){
-           ComputeShortestPath(root,tempVertex);
-          }
-    }
-    return vertex->list;
-}
-
-
-
 
 Node *findSmallestNode(Node **rootPtr)
 {
@@ -93,12 +61,7 @@ Node *current = (*rootPtr)->left;
      return temp1;
 }
 
-
-
-
-
-
-void ListReplaceVertexPathCost(Node *VertexNode)
+void ListReplaceAndUpdateVertexPathCost(Node *VertexNode)
 {
 	Item *temp = VertexNode->ParentVertex->list->head;
 	for(temp; temp!=NULL;temp = temp->next){
@@ -118,13 +81,44 @@ void ListReplaceVertexPathCost(Node *VertexNode)
 }
 
 
-void createNodeForAddAVL(Node *node,Vertexlink *vertexlink,Vertex *Vertex){
-    node->left = NULL;
-    node->right = NULL;
-    node->balanceFactor =0;
-    node->ParentVertex = Vertex;    // the parent of the child.
-    node->data = vertexlink;
+/**
+*/
+
+void ComputeShortestPath(Node **root,Vertex *vertex){
+    Node *smallestCost;
+    LinkedList *templist  = vertex->list;
+    Item *TempToPoint1 = NULL ;
+    Item *TempToPoint2 = templist->head;
+
+      	if(templist->head == NULL)
+      	return ;
+
+      	else
+      	{
+      		while(TempToPoint2 !=NULL)
+      		{
+            Node *newNode = (Node *)malloc(sizeof(Node));
+            createNodeForAddAVL(newNode,TempToPoint2->data,vertex);
+            VertexaddAvl(root,newNode);
+      			TempToPoint1 = TempToPoint2;
+            TempToPoint2 = TempToPoint2->next;
+
+      	}
+      }
+        while(*root!=NULL){
+           smallestCost = findSmallestNode(root);
+           Vertex *tempVertex = smallestCost->data->NextVertex;
+           int *nodetoRemove = (int*)((uintptr_t)(smallestCost->data->cost));
+           ListReplaceAndUpdateVertexPathCost(smallestCost);
+           VertexRemoveNodeAvl(root,nodetoRemove);
+          if(tempVertex->list->head!=NULL){
+           ComputeShortestPath(root,tempVertex);
+          }
+    }
+    return;
 }
+
+
 
 void freeVertexNode(Node *Vertexroot){
   if(Vertexroot ==NULL){

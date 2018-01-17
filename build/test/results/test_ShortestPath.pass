@@ -12,32 +12,44 @@
 - :test: test_ShortestPath_CreateNodeForInsertAVL
   :line: 61
   :message: ''
+- :test: test_ShortestPath_addneighbour_VA_expect_neigboring_with_another_Graph1
+  :line: 100
+  :message: ''
+- :test: test_ShortestPath_addneighbour_VA_expect_neigboring_with_another_Graph2
+  :line: 139
+  :message: ''
+- :test: test_ShortestPath_addneighbour_VA_expect_neigboring_with_another_Graph3
+  :line: 195
+  :message: ''
 - :test: test_ShortestPath_VertexaddAvl_add_VertexNodeB_VertexNodeC_VertexNodeD_to_avl_expect_balance
-  :line: 97
+  :line: 254
   :message: ''
 - :test: test_ShortestPath_VertexaddAvl_Finding_smallestNode_when_only_root_expect_return_VertexNodeC
-  :line: 138
+  :line: 295
   :message: ''
 - :test: test_ShortestPath_VertexaddAvl_Finding_smallestNode_expect_return_VertexNodeD
-  :line: 165
+  :line: 322
   :message: ''
 - :test: test_ShortestPath_VertexaddAvl_Finding_smallestNode_expect_return_VertexNodeE
-  :line: 204
+  :line: 361
   :message: ''
-- :test: test_ShortestPath_addneighbour_VA_expect_neigboring_with_another_vertex
-  :line: 261
+- :test: test_ShortestPath_test_ListReplaceAndUpdateVertexPathCost
+  :line: 415
   :message: ''
-- :test: test_ShortestPath_addneighbour_VA_expect_neigboring_with_another_vertex1
-  :line: 300
+- :test: test_ShortestPath_test_ListReplaceAndUpdateVertexPathCost_with_NextVertex_PC_smaller_than_PC_Plus_cost_expected_no_update
+  :line: 461
+  :message: ''
+- :test: test_ShortestPath_test_ListReplaceAndUpdateVertexPathCost_with_NextVertex_PC_smaller_than_PC_Plus_cost_expected_update
+  :line: 522
   :message: ''
 - :test: test_ShortestPath_trying_sorting
-  :line: 357
+  :line: 580
   :message: ''
 :failures: []
 :ignores: []
 :counts:
-  :total: 10
-  :passed: 10
+  :total: 14
+  :passed: 14
   :failed: 0
   :ignored: 0
 :stdout: []

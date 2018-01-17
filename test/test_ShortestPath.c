@@ -87,6 +87,163 @@ void test_ShortestPath_CreateNodeForInsertAVL(void)
     free(VC);
 }
 
+
+/*
+                      C
+                      |
+                      |2
+                      |
+                   (0)A------B
+                          3
+
+*/
+void test_ShortestPath_addneighbour_VA_expect_neigboring_with_another_Graph1(void)
+{   Vertex *vt;
+    Vertex *VA = createVertex("A",0);
+    Vertex *VB = createVertex("b",0);
+    Vertex *VC = createVertex("C",0);
+
+    Vertexlink LAC = {VC,2};
+    Vertexlink LAB = {VB,3};
+
+    addNeighbors(VA,2,&LAB,&LAC);
+
+    TEST_ASSERT_NOT_NULL(VA->list->head);
+    TEST_ASSERT_EQUAL(3,VA->list->head->data->cost);
+    TEST_ASSERT_NOT_NULL(VA->list->head->next);
+    TEST_ASSERT_EQUAL(2,VA->list->head->next->data->cost);
+    vt = (Vertex *)(VA->list->head->data->NextVertex);
+    TEST_ASSERT_EQUAL_STRING("b",vt->name);
+    TEST_ASSERT_EQUAL(0,vt->PathCost);
+    vt = (Vertex *)(VA->list->head->next->data->NextVertex);
+    TEST_ASSERT_EQUAL_STRING("C",vt->name);
+    TEST_ASSERT_EQUAL(0,vt->PathCost);
+
+    free(VA);
+    free(VB);
+    free(VC);
+}
+
+/*
+                      C
+                      |
+                      |2
+                      |          1
+                   (0)A------B------D
+                          3  |
+                             |4
+                             |
+                             E
+*/
+
+void test_ShortestPath_addneighbour_VA_expect_neigboring_with_another_Graph2(void)
+{   Vertex *vt;
+    Vertex *VA = createVertex("A",0);
+    Vertex *VB = createVertex("b",0);
+    Vertex *VC = createVertex("C",0);
+    Vertex *VE = createVertex("E",0);
+    Vertex *VD = createVertex("D",0);
+
+    Vertexlink LAC = {VC,2};
+    Vertexlink LAB = {VB,3};
+    Vertexlink LBD = {VD,1};
+    Vertexlink LBE = {VE,4};
+
+    addNeighbors(VA,2,&LAB,&LAC);
+    addNeighbors(VB,2,&LBD,&LBE);
+
+    TEST_ASSERT_NOT_NULL(VA->list->head);
+    TEST_ASSERT_EQUAL(3,VA->list->head->data->cost);
+    TEST_ASSERT_NOT_NULL(VA->list->head->next);
+    TEST_ASSERT_EQUAL(2,VA->list->head->next->data->cost);
+    vt = (Vertex *)(VA->list->head->data->NextVertex);
+    TEST_ASSERT_EQUAL_STRING("b",vt->name);
+    TEST_ASSERT_EQUAL(0,vt->PathCost);
+    vt = (Vertex *)(VA->list->head->next->data->NextVertex);
+    TEST_ASSERT_EQUAL_STRING("C",vt->name);
+    TEST_ASSERT_EQUAL(0,vt->PathCost);
+
+    TEST_ASSERT_NOT_NULL(VB->list->head);
+    TEST_ASSERT_EQUAL(1,VB->list->head->data->cost);
+    TEST_ASSERT_NOT_NULL(VB->list->head->next);
+    TEST_ASSERT_EQUAL(4,VB->list->head->next->data->cost);
+    vt = (Vertex *)(VB->list->head->data->NextVertex);
+    TEST_ASSERT_EQUAL_STRING("D",vt->name);
+    TEST_ASSERT_EQUAL(0,vt->PathCost);
+    vt = (Vertex *)(VB->list->head->next->data->NextVertex);
+    TEST_ASSERT_EQUAL_STRING("E",vt->name);
+    TEST_ASSERT_EQUAL(0,vt->PathCost);
+
+    free(VA);
+    free(VB);
+    free(VC);
+}
+
+/*
+                      C
+                      |
+                      |2
+                      |          1
+                   (0)A------B------D
+                      |   3  |
+                      |      |4
+                      |      |
+                      +----- E
+                         5
+*/
+
+void test_ShortestPath_addneighbour_VA_expect_neigboring_with_another_Graph3(void)
+{   Vertex *vt;
+    Vertex *VA = createVertex("A",0);
+    Vertex *VB = createVertex("b",0);
+    Vertex *VC = createVertex("C",0);
+    Vertex *VE = createVertex("E",0);
+    Vertex *VD = createVertex("D",0);
+
+    Vertexlink LAC = {VC,2};
+    Vertexlink LAE = {VE,5};
+    Vertexlink LAB = {VB,3};
+    Vertexlink LBD = {VD,1};
+    Vertexlink LBE = {VE,4};
+
+    addNeighbors(VA,3,&LAB,&LAC,&LAE);
+    addNeighbors(VB,2,&LBD,&LBE);
+
+    TEST_ASSERT_NOT_NULL(VA->list->head);
+    TEST_ASSERT_EQUAL(3,VA->list->head->data->cost);
+    TEST_ASSERT_NOT_NULL(VA->list->head->next);
+    TEST_ASSERT_EQUAL(2,VA->list->head->next->data->cost);
+    TEST_ASSERT_NOT_NULL(VA->list->head->next->next);
+    TEST_ASSERT_EQUAL(5,VA->list->head->next->next->data->cost);
+    vt = (Vertex *)(VA->list->head->data->NextVertex);
+    TEST_ASSERT_EQUAL_STRING("b",vt->name);
+    TEST_ASSERT_EQUAL(0,vt->PathCost);
+    vt = (Vertex *)(VA->list->head->next->data->NextVertex);
+    TEST_ASSERT_EQUAL_STRING("C",vt->name);
+    TEST_ASSERT_EQUAL(0,vt->PathCost);
+    vt = (Vertex *)(VA->list->head->next->next->data->NextVertex);
+    TEST_ASSERT_EQUAL_STRING("E",vt->name);
+    TEST_ASSERT_EQUAL(0,vt->PathCost);
+
+    TEST_ASSERT_NOT_NULL(VB->list->head);
+    TEST_ASSERT_EQUAL(1,VB->list->head->data->cost);
+    TEST_ASSERT_NOT_NULL(VB->list->head->next);
+    TEST_ASSERT_EQUAL(4,VB->list->head->next->data->cost);
+    vt = (Vertex *)(VB->list->head->data->NextVertex);
+    TEST_ASSERT_EQUAL_STRING("D",vt->name);
+    TEST_ASSERT_EQUAL(0,vt->PathCost);
+    vt = (Vertex *)(VB->list->head->next->data->NextVertex);
+    TEST_ASSERT_EQUAL_STRING("E",vt->name);
+    TEST_ASSERT_EQUAL(0,vt->PathCost);
+
+    free(VA);
+    free(VB);
+    free(VC);
+    free(VD);
+    free(VE);
+}
+
+
 /*
                     VertexNodeC(0)
                      /       \                  
@@ -244,100 +401,166 @@ void test_ShortestPath_VertexaddAvl_Finding_smallestNode_expect_return_VertexNod
 
 }
 
-
-
-
-
-
 /*
-                      C
-                      |
-                      |2
-                      |
-                   (0)A------B
-                          3
-
+                      C(INT_MAX)                                      C(3)
+                      |                                                |
+                      |3                                               |
+                      |                                                |
+                   (0)A-------B (INT_MAX)             ------->         A--------B(2)
+                          2   
+                              
+  checking the vertex's path cost is infinity?
+  if(INT_MAX update the cost)                                    
 */
-void test_ShortestPath_addneighbour_VA_expect_neigboring_with_another_vertex(void)
-{   Vertex *vt;
+void test_ShortestPath_test_ListReplaceAndUpdateVertexPathCost(void){
     Vertex *VA = createVertex("A",0);
-    Vertex *VB = createVertex("b",0);
-    Vertex *VC = createVertex("C",0);
+    Vertex *VB = createVertex("B",INT_MAX);
+    Vertex *VC = createVertex("C",INT_MAX);
 
-    Vertexlink LAC = {VC,2};
-    Vertexlink LAB = {VB,3};
+    Vertexlink LAC = {VC,3};
+    Vertexlink LAB = {VB,2};
+
 
     addNeighbors(VA,2,&LAB,&LAC);
 
-    TEST_ASSERT_NOT_NULL(VA->list->head);
-    TEST_ASSERT_EQUAL(3,VA->list->head->data->cost);
-    TEST_ASSERT_NOT_NULL(VA->list->head->next);
-    TEST_ASSERT_EQUAL(2,VA->list->head->next->data->cost);
-    vt = (Vertex *)(VA->list->head->data->NextVertex);
-    TEST_ASSERT_EQUAL_STRING("b",vt->name);
-    TEST_ASSERT_EQUAL(0,vt->PathCost);
-    vt = (Vertex *)(VA->list->head->next->data->NextVertex);
-    TEST_ASSERT_EQUAL_STRING("C",vt->name);
-    TEST_ASSERT_EQUAL(0,vt->PathCost);
+    Node *VertexNodeC = (Node *)malloc(sizeof(Node));
+    Node *VertexNodeB = (Node *)malloc(sizeof(Node));
+    createNodeForAddAVL(VertexNodeB,&LAB,VA);
+    createNodeForAddAVL(VertexNodeC,&LAC,VA);
+    ListReplaceAndUpdateVertexPathCost(VertexNodeC);
+    ListReplaceAndUpdateVertexPathCost(VertexNodeB);
 
+    TEST_ASSERT_EQUAL_STRING("B",VB->name);
+    TEST_ASSERT_EQUAL(2,VB->PathCost);
+    TEST_ASSERT_EQUAL_STRING("C",VC->name);
+    TEST_ASSERT_EQUAL(3,VC->PathCost);
+    free(VertexNodeC);
+    free(VertexNodeB);
     free(VA);
     free(VB);
     free(VC);
 }
 
 /*
-                      C
-                      |
-                      |2
-                      |          1
-                   (0)A------B------D
-                          3  |
-                             |4
-                             |
-                             E
+                      C(INT_MAX)                                      C(3)
+                      |                                                |
+                      |3                                               |
+                      |                                                |
+                   (0)A--------B (INT_MAX)             ------->        A--------B(2)
+                      |    2   |                                       |         |
+                      |        |4                                      |         |
+                      |        |                                       |         |
+                      +--------D(INT_MAX)                              +---------D(3)
+                          3
+  checking the vertex's path cost is infinity?
+   IF INT_MAX update the pathcost 
+   else check the vertex'pathcost after + vertexlink's cost > or < than nextvertex's cost then update or remain 
+   example A-->D = 3 if B'pathcost + vertexlink's cost > A--->D'cost then update
+   PC = pathcost                                  
 */
-
-void test_ShortestPath_addneighbour_VA_expect_neigboring_with_another_vertex1(void)
-{   Vertex *vt;
+void test_ShortestPath_test_ListReplaceAndUpdateVertexPathCost_with_NextVertex_PC_smaller_than_PC_Plus_cost_expected_no_update(void){
     Vertex *VA = createVertex("A",0);
-    Vertex *VB = createVertex("b",0);
-    Vertex *VC = createVertex("C",0);
-    Vertex *VE = createVertex("E",0);
-    Vertex *VD = createVertex("D",0);
+    Vertex *VB = createVertex("B",INT_MAX);
+    Vertex *VC = createVertex("C",INT_MAX);
+    Vertex *VD = createVertex("D",INT_MAX);
 
-    Vertexlink LAC = {VC,2};
-    Vertexlink LAB = {VB,3};
-    Vertexlink LBD = {VD,1};
-    Vertexlink LBE = {VE,4};
+    Vertexlink LAC = {VC,3};
+    Vertexlink LAD = {VD,3};
+    Vertexlink LAB = {VB,2};
+    Vertexlink LBD = {VD,4};
 
-    addNeighbors(VA,2,&LAB,&LAC);
-    addNeighbors(VB,2,&LBD,&LBE);
 
-    TEST_ASSERT_NOT_NULL(VA->list->head);
-    TEST_ASSERT_EQUAL(3,VA->list->head->data->cost);
-    TEST_ASSERT_NOT_NULL(VA->list->head->next);
-    TEST_ASSERT_EQUAL(2,VA->list->head->next->data->cost);
-    vt = (Vertex *)(VA->list->head->data->NextVertex);
-    TEST_ASSERT_EQUAL_STRING("b",vt->name);
-    TEST_ASSERT_EQUAL(0,vt->PathCost);
-    vt = (Vertex *)(VA->list->head->next->data->NextVertex);
-    TEST_ASSERT_EQUAL_STRING("C",vt->name);
-    TEST_ASSERT_EQUAL(0,vt->PathCost);
+    addNeighbors(VA,3,&LAB,&LAC,&LAD);
+    addNeighbors(VB,1,&LBD);
 
-    TEST_ASSERT_NOT_NULL(VB->list->head);
-    TEST_ASSERT_EQUAL(1,VB->list->head->data->cost);
-    TEST_ASSERT_NOT_NULL(VB->list->head->next);
-    TEST_ASSERT_EQUAL(4,VB->list->head->next->data->cost);
-    vt = (Vertex *)(VB->list->head->data->NextVertex);
-    TEST_ASSERT_EQUAL_STRING("D",vt->name);
-    TEST_ASSERT_EQUAL(0,vt->PathCost);
-    vt = (Vertex *)(VB->list->head->next->data->NextVertex);
-    TEST_ASSERT_EQUAL_STRING("E",vt->name);
-    TEST_ASSERT_EQUAL(0,vt->PathCost);
+    Node *VertexNodeC = (Node *)malloc(sizeof(Node));
+    Node *VertexNodeB = (Node *)malloc(sizeof(Node));
+    Node *VertexNodeD = (Node *)malloc(sizeof(Node));
+    Node *VNDafterUpdate = (Node *)malloc(sizeof(Node));
+    createNodeForAddAVL(VertexNodeB,&LAB,VA);
+    createNodeForAddAVL(VertexNodeC,&LAC,VA);
+    createNodeForAddAVL(VertexNodeD,&LAD,VA);
+    createNodeForAddAVL(VNDafterUpdate,&LBD,VB);
+    ListReplaceAndUpdateVertexPathCost(VertexNodeC);
+    ListReplaceAndUpdateVertexPathCost(VertexNodeB);
+    ListReplaceAndUpdateVertexPathCost(VertexNodeD);
+    ListReplaceAndUpdateVertexPathCost(VNDafterUpdate);
 
+    TEST_ASSERT_EQUAL_STRING("B",VB->name);
+    TEST_ASSERT_EQUAL(2,VB->PathCost);
+    TEST_ASSERT_EQUAL_STRING("C",VC->name);
+    TEST_ASSERT_EQUAL(3,VC->PathCost);
+    TEST_ASSERT_EQUAL_STRING("D",VD->name);
+    TEST_ASSERT_EQUAL(3,VD->PathCost);
+    free(VertexNodeC);
+    free(VertexNodeB);
+    free(VertexNodeD);
+    free(VNDafterUpdate);
     free(VA);
     free(VB);
     free(VC);
+    free(VD);
+}
+
+/*
+                      C(INT_MAX)                                      C(3)
+                      |                                                |
+                      |3                                               |
+                      |                                                |
+                   (0)A--------B (INT_MAX)             ------->        A--------B(2)
+                      |    2   |                                       |         |
+                      |        |3                                      |         |
+                      |        |                                       |         |
+                      +--------D(INT_MAX)                              +---------D(5)
+                          7
+  checking the vertex's path cost is infinity?
+   IF INT_MAX update the pathcost 
+   else check the vertex'pathcost after + vertexlink's cost > or < than nextvertex's cost then update or remain 
+   example A-->D = 3 if B'pathcost + vertexlink's cost > A--->D'cost then update
+   PC = pathcost                                  
+*/
+void test_ShortestPath_test_ListReplaceAndUpdateVertexPathCost_with_NextVertex_PC_smaller_than_PC_Plus_cost_expected_update(void){
+    Vertex *VA = createVertex("A",0);
+    Vertex *VB = createVertex("B",INT_MAX);
+    Vertex *VC = createVertex("C",INT_MAX);
+    Vertex *VD = createVertex("D",INT_MAX);
+
+    Vertexlink LAC = {VC,3};
+    Vertexlink LAD = {VD,7};
+    Vertexlink LAB = {VB,2};
+    Vertexlink LBD = {VD,3};
+
+
+    addNeighbors(VA,3,&LAB,&LAC,&LAD);
+    addNeighbors(VB,1,&LBD);
+
+    Node *VertexNodeC = (Node *)malloc(sizeof(Node));
+    Node *VertexNodeB = (Node *)malloc(sizeof(Node));
+    Node *VertexNodeD = (Node *)malloc(sizeof(Node));
+    Node *VNDafterUpdate = (Node *)malloc(sizeof(Node));
+    createNodeForAddAVL(VertexNodeB,&LAB,VA);
+    createNodeForAddAVL(VertexNodeC,&LAC,VA);
+    createNodeForAddAVL(VertexNodeD,&LAD,VA);
+    createNodeForAddAVL(VNDafterUpdate,&LBD,VB);
+    ListReplaceAndUpdateVertexPathCost(VertexNodeC);
+    ListReplaceAndUpdateVertexPathCost(VertexNodeB);
+    ListReplaceAndUpdateVertexPathCost(VertexNodeD);
+    ListReplaceAndUpdateVertexPathCost(VNDafterUpdate);
+
+    TEST_ASSERT_EQUAL_STRING("B",VB->name);
+    TEST_ASSERT_EQUAL(2,VB->PathCost);
+    TEST_ASSERT_EQUAL_STRING("C",VC->name);
+    TEST_ASSERT_EQUAL(3,VC->PathCost);
+    TEST_ASSERT_EQUAL_STRING("D",VD->name);
+    TEST_ASSERT_EQUAL(5,VD->PathCost);
+    free(VertexNodeC);
+    free(VertexNodeB);
+    free(VertexNodeD);
+    free(VNDafterUpdate);
+    free(VA);
+    free(VB);
+    free(VC);
+    free(VD);
 }
 
 
@@ -374,10 +597,11 @@ void test_ShortestPath_trying_sorting(void)
 
     Node *root = NULL;
     Try{
-    LinkedList *shortestpath = ComputeShortestPath(&root,VA);
+    ComputeShortestPath(&root,VA);
     }Catch(ex){
     dumpException(ex);
     }
+
     TEST_ASSERT_EQUAL_STRING("B",VB->name);
     TEST_ASSERT_EQUAL(2,VB->PathCost);
     TEST_ASSERT_EQUAL_STRING("C",VC->name);

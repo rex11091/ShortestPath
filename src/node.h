@@ -9,7 +9,8 @@ struct Node {
   Node *left;
   Node *right;
   int balanceFactor;
-  Vertexlink *data;    // will be change ltr ,no neccessary integer
+  Vertexlink *data;    // will be change ltr ,no neccessary integerd
+  Vertex *ParentVertex;  
 };
 typedef struct intNode intNode;
 struct intNode{

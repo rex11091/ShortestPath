@@ -26,13 +26,13 @@ Vertex *createVertex(char *name, int PathCost);
 Vertex *SearchVertex(LinkedList *list, Vertex *vertex);
 Item *getVertexFromLinkedList(Vertex *vertex);
 
-void createNodeForAddAVL(Node *node,Vertexlink *vertexlink);
+void createNodeForAddAVL(Node *node,Vertexlink *vertexlink,Vertex *Vertex);
 void addNeighbors(Vertex *vertex,int numbofneighbors,...);
 LinkedList *ComputeShortestPath(Node **root,Vertex *vertex);
 int CostCompare(Vertexlink *nodedata, Node *refNode);
 int CostCompareforRemove(int nodedata, Node *refNode);
 Node *findSmallestNode(Node **rootPtr);
-void ListReplaceVertexPathCost(Vertex *vertex,Node *VertexNode);
+void ListReplaceVertexPathCost(Node *VertexNode);
 void freeVertexNode(Node *Vertexroot);
 
 

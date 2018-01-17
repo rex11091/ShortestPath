@@ -70,8 +70,8 @@ void test_ShortestPath_CreateNodeForInsertAVL(void)
 
     Node *VertexNodeC = (Node *)malloc(sizeof(Node));
     Node *VertexNodeB = (Node *)malloc(sizeof(Node));
-    createNodeForAddAVL(VertexNodeB,&LAB);
-    createNodeForAddAVL(VertexNodeC,&LAC);
+    createNodeForAddAVL(VertexNodeB,&LAB,VA);
+    createNodeForAddAVL(VertexNodeC,&LAC,VA);
 
     TEST_ASSERT_NOT_NULL(VertexNodeB);
     TEST_ASSERT_EQUAL(3,VertexNodeB->data->cost);
@@ -87,10 +87,16 @@ void test_ShortestPath_CreateNodeForInsertAVL(void)
     free(VC);
 }
 
+/*
+                    VertexNodeC(0)
+                     /       \                  
+             vertexNodeD(0)  VertexNodeB(0)     
 
+
+*/
 void test_ShortestPath_VertexaddAvl_add_VertexNodeB_VertexNodeC_VertexNodeD_to_avl_expect_balance(void)
 {  
-
+    Vertex *VA = createVertex("a",0);
     Vertex *VB = createVertex("b",0);
     Vertex *VC = createVertex("C",0);
     Vertex *VD = createVertex("D",0);
@@ -102,9 +108,9 @@ void test_ShortestPath_VertexaddAvl_add_VertexNodeB_VertexNodeC_VertexNodeD_to_a
     Node *VertexNodeC = (Node *)malloc(sizeof(Node));
     Node *VertexNodeB = (Node *)malloc(sizeof(Node));
     Node *VertexNodeD = (Node *)malloc(sizeof(Node));
-    createNodeForAddAVL(VertexNodeB,&LAB);
-    createNodeForAddAVL(VertexNodeC,&LAC);
-    createNodeForAddAVL(VertexNodeD,&LAD);
+    createNodeForAddAVL(VertexNodeB,&LAB,VA);
+    createNodeForAddAVL(VertexNodeC,&LAC,VA);
+    createNodeForAddAVL(VertexNodeD,&LAD,VA);
 
 
     VertexaddAvl(&VertexNodeC,VertexNodeB);
@@ -115,8 +121,38 @@ void test_ShortestPath_VertexaddAvl_add_VertexNodeB_VertexNodeC_VertexNodeD_to_a
     free(VertexNodeC);
     free(VertexNodeB);
     free(VertexNodeD);
+    free(VA);
     free(VB);
     free(VC);
+    free(VD);
+}
+
+
+/*
+                    VertexNodeC(0)
+                                        ------search smallest----->          VertexNodeC
+                
+
+
+*/
+void test_ShortestPath_VertexaddAvl_Finding_smallestNode_when_only_root_expect_return_VertexNodeC(void)
+{  
+    Vertex *VA = createVertex("a",0);
+    Vertex *VC = createVertex("C",0);
+
+    Vertexlink LAC = {VC,2};
+
+    Node *VertexNodeC = (Node *)malloc(sizeof(Node));
+    createNodeForAddAVL(VertexNodeC,&LAC,VA);
+
+    Node *root = VertexNodeC;
+
+    Node *smallest = findSmallestNode(&root);
+    TEST_ASSERT_EQUAL(2,smallest->data->cost);
+    free(VertexNodeC);
+    free(VC);
+    free(VA);
+
 }
 
 /*
@@ -128,7 +164,7 @@ void test_ShortestPath_VertexaddAvl_add_VertexNodeB_VertexNodeC_VertexNodeD_to_a
 */
 void test_ShortestPath_VertexaddAvl_Finding_smallestNode_expect_return_VertexNodeD(void)
 {  
-
+    Vertex *VA = createVertex("a",0);
     Vertex *VB = createVertex("b",0);
     Vertex *VC = createVertex("C",0);
     Vertex *VD = createVertex("D",0);
@@ -140,9 +176,9 @@ void test_ShortestPath_VertexaddAvl_Finding_smallestNode_expect_return_VertexNod
     Node *VertexNodeC = (Node *)malloc(sizeof(Node));
     Node *VertexNodeB = (Node *)malloc(sizeof(Node));
     Node *VertexNodeD = (Node *)malloc(sizeof(Node));
-    createNodeForAddAVL(VertexNodeB,&LAB);
-    createNodeForAddAVL(VertexNodeC,&LAC);
-    createNodeForAddAVL(VertexNodeD,&LAD);
+    createNodeForAddAVL(VertexNodeB,&LAB,VA);
+    createNodeForAddAVL(VertexNodeC,&LAC,VA);
+    createNodeForAddAVL(VertexNodeD,&LAD,VA);
 
     Node *root = VertexNodeC;
 
@@ -156,8 +192,57 @@ void test_ShortestPath_VertexaddAvl_Finding_smallestNode_expect_return_VertexNod
     free(VertexNodeD);
     free(VB);
     free(VC);
-}
 
+}
+/*                      
+                    VertexNodeC(-1)
+                     /       \                         ------search smallest----->          VertexNodeE
+             vertexNodeD(1)  VertexNodeB(0)     
+                    \
+                    vertexNodeE(0)
+*/
+void test_ShortestPath_VertexaddAvl_Finding_smallestNode_expect_return_VertexNodeE(void)
+{  
+    Vertex *VA = createVertex("a",0);
+    Vertex *VB = createVertex("b",0);
+    Vertex *VC = createVertex("C",0);
+    Vertex *VD = createVertex("D",0);
+    Vertex *VE = createVertex("E",0);
+
+    Vertexlink LAC = {VC,4};
+    Vertexlink LAB = {VB,5};
+    Vertexlink LAD = {VD,2};
+    Vertexlink LAE = {VE,3};
+
+    Node *VertexNodeC = (Node *)malloc(sizeof(Node));
+    Node *VertexNodeB = (Node *)malloc(sizeof(Node));
+    Node *VertexNodeD = (Node *)malloc(sizeof(Node));
+    Node *VertexNodeE = (Node *)malloc(sizeof(Node));
+    createNodeForAddAVL(VertexNodeB,&LAB,VA);
+    createNodeForAddAVL(VertexNodeC,&LAC,VA);
+    createNodeForAddAVL(VertexNodeD,&LAD,VA);
+    createNodeForAddAVL(VertexNodeE,&LAE,VA);
+
+    Node *root = VertexNodeC;
+
+    VertexaddAvl(&root,VertexNodeB);
+    VertexaddAvl(&root,VertexNodeD); 
+    VertexaddAvl(&root,VertexNodeE); 
+    Node *smallest = findSmallestNode(&root);
+    TEST_ASSERT_EQUAL_NODE(VertexNodeD,VertexNodeB,-1,VertexNodeC);
+    TEST_ASSERT_EQUAL_NODE(NULL,VertexNodeE,1,VertexNodeD);
+    TEST_ASSERT_EQUAL(3,smallest->data->cost);
+    free(VertexNodeC);
+    free(VertexNodeB);
+    free(VertexNodeD);
+    free(VertexNodeE);
+    free(VA);
+    free(VB);
+    free(VC);
+    free(VD);
+    free(VE);
+
+}
 
 
 
@@ -255,11 +340,25 @@ void test_ShortestPath_addneighbour_VA_expect_neigboring_with_another_vertex1(vo
     free(VC);
 }
 
+
+/*
+                      C(3)
+                      |
+                      |3
+                      |       (2)
+                   (0)A-------B-------D (3)
+                          2   |   1
+                              | 4
+                              |
+                              E(6)
+*/
+
+
 void test_ShortestPath_trying_sorting(void)
 {   CEXCEPTION_T ex;
     Vertex *vt;
     Vertex *VA = createVertex("A",0);
-    Vertex *VB = createVertex("b",INT_MAX);
+    Vertex *VB = createVertex("B",INT_MAX);
     Vertex *VC = createVertex("C",INT_MAX);
     Vertex *VE = createVertex("E",INT_MAX);
     Vertex *VD = createVertex("D",INT_MAX);
@@ -279,17 +378,23 @@ void test_ShortestPath_trying_sorting(void)
     }Catch(ex){
     dumpException(ex);
     }
-    //freeException1(ex);
-
-    //TEST_ASSERT_NOT_NULL(VA->list->head);
-    //TEST_ASSERT_EQUAL(3,root->data->cost);
-    //TEST_ASSERT_EQUAL_PTR(NULL,root);
-
+    TEST_ASSERT_EQUAL_STRING("B",VB->name);
+    TEST_ASSERT_EQUAL(2,VB->PathCost);
+    TEST_ASSERT_EQUAL_STRING("C",VC->name);
+    TEST_ASSERT_EQUAL(3,VC->PathCost);
+    TEST_ASSERT_EQUAL_STRING("D",VD->name);
+    TEST_ASSERT_EQUAL(3,VD->PathCost);
+    TEST_ASSERT_EQUAL_STRING("E",VE->name);
+    TEST_ASSERT_EQUAL(6,VE->PathCost);
+    TEST_ASSERT_EQUAL_STRING("A",VA->name);
+    TEST_ASSERT_EQUAL(0,VA->PathCost);
 
 
     free(VA);
     free(VB);
     free(VC);
+    free(VD);
+    free(VE);
 }
 
 

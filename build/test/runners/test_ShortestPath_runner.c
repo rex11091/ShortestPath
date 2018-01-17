@@ -38,7 +38,9 @@ extern void test_ShortestPath_create_node(void);
 extern void test_ShortestPath_Vertexlink(void);
 extern void test_ShortestPath_CreateNodeForInsertAVL(void);
 extern void test_ShortestPath_VertexaddAvl_add_VertexNodeB_VertexNodeC_VertexNodeD_to_avl_expect_balance(void);
+extern void test_ShortestPath_VertexaddAvl_Finding_smallestNode_when_only_root_expect_return_VertexNodeC(void);
 extern void test_ShortestPath_VertexaddAvl_Finding_smallestNode_expect_return_VertexNodeD(void);
+extern void test_ShortestPath_VertexaddAvl_Finding_smallestNode_expect_return_VertexNodeE(void);
 extern void test_ShortestPath_addneighbour_VA_expect_neigboring_with_another_vertex(void);
 extern void test_ShortestPath_addneighbour_VA_expect_neigboring_with_another_vertex1(void);
 extern void test_ShortestPath_trying_sorting(void);
@@ -60,11 +62,13 @@ int main(void)
   RUN_TEST(test_ShortestPath_create_node, 22);
   RUN_TEST(test_ShortestPath_Vertexlink, 41);
   RUN_TEST(test_ShortestPath_CreateNodeForInsertAVL, 61);
-  RUN_TEST(test_ShortestPath_VertexaddAvl_add_VertexNodeB_VertexNodeC_VertexNodeD_to_avl_expect_balance, 91);
-  RUN_TEST(test_ShortestPath_VertexaddAvl_Finding_smallestNode_expect_return_VertexNodeD, 129);
-  RUN_TEST(test_ShortestPath_addneighbour_VA_expect_neigboring_with_another_vertex, 176);
-  RUN_TEST(test_ShortestPath_addneighbour_VA_expect_neigboring_with_another_vertex1, 215);
-  RUN_TEST(test_ShortestPath_trying_sorting, 258);
+  RUN_TEST(test_ShortestPath_VertexaddAvl_add_VertexNodeB_VertexNodeC_VertexNodeD_to_avl_expect_balance, 97);
+  RUN_TEST(test_ShortestPath_VertexaddAvl_Finding_smallestNode_when_only_root_expect_return_VertexNodeC, 138);
+  RUN_TEST(test_ShortestPath_VertexaddAvl_Finding_smallestNode_expect_return_VertexNodeD, 165);
+  RUN_TEST(test_ShortestPath_VertexaddAvl_Finding_smallestNode_expect_return_VertexNodeE, 204);
+  RUN_TEST(test_ShortestPath_addneighbour_VA_expect_neigboring_with_another_vertex, 261);
+  RUN_TEST(test_ShortestPath_addneighbour_VA_expect_neigboring_with_another_vertex1, 300);
+  RUN_TEST(test_ShortestPath_trying_sorting, 357);
 
   return (UnityEnd());
 }

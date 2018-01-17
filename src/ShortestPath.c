@@ -49,7 +49,7 @@ LinkedList *ComputeShortestPath(Node **root,Vertex *vertex){
       		while(TempToPoint2 !=NULL)
       		{
             Node *newNode = (Node *)malloc(sizeof(Node));
-            createNodeForAddAVL(newNode,TempToPoint2->data);
+            createNodeForAddAVL(newNode,TempToPoint2->data,vertex);
             VertexaddAvl(root,newNode);
       			TempToPoint1 = TempToPoint2;
             TempToPoint2 = TempToPoint2->next;
@@ -60,7 +60,7 @@ LinkedList *ComputeShortestPath(Node **root,Vertex *vertex){
            smallestCost = findSmallestNode(root);
            Vertex *tempVertex = smallestCost->data->NextVertex;
            int *nodetoRemove = (int*)((uintptr_t)(smallestCost->data->cost));
-           ListReplaceVertexPathCost(vertex,smallestCost);
+           ListReplaceVertexPathCost(smallestCost);
            VertexRemoveNodeAvl(root,nodetoRemove);
           if(tempVertex->list->head!=NULL){
            ComputeShortestPath(root,tempVertex);
@@ -98,18 +98,18 @@ Node *current = (*rootPtr)->left;
 
 
 
-void ListReplaceVertexPathCost(Vertex *vertex,Node *VertexNode)
+void ListReplaceVertexPathCost(Node *VertexNode)
 {
-	Item *temp;
-	for(temp = vertex->list->head; temp!=NULL;temp = temp->next){
+	Item *temp = VertexNode->ParentVertex->list->head;
+	for(temp; temp!=NULL;temp = temp->next){
 		if(temp->data->NextVertex == VertexNode->data->NextVertex){
       if(temp->data->NextVertex->PathCost == INT_MAX){
-        temp->data->NextVertex->PathCost = VertexNode->data->cost;
+        temp->data->NextVertex->PathCost = (VertexNode->data->cost +VertexNode->ParentVertex->PathCost);
       }
       else{
         //here is if(vertex's path cost + vertexlink->cost >  NextVertex->Pathcost than remain )
-        if(temp->data->NextVertex->PathCost > (vertex->PathCost + VertexNode->data->cost))
-        temp->data->NextVertex->PathCost = VertexNode->data->cost;
+        if(temp->data->NextVertex->PathCost > (VertexNode->ParentVertex->PathCost + VertexNode->data->cost))
+        temp->data->NextVertex->PathCost = (VertexNode->ParentVertex->PathCost + VertexNode->data->cost);
         else
         temp->data->NextVertex->PathCost = temp->data->NextVertex->PathCost;
       }
@@ -118,10 +118,11 @@ void ListReplaceVertexPathCost(Vertex *vertex,Node *VertexNode)
 }
 
 
-void createNodeForAddAVL(Node *node,Vertexlink *vertexlink){
+void createNodeForAddAVL(Node *node,Vertexlink *vertexlink,Vertex *Vertex){
     node->left = NULL;
     node->right = NULL;
     node->balanceFactor =0;
+    node->ParentVertex = Vertex;    // the parent of the child.
     node->data = vertexlink;
 }
 
@@ -130,8 +131,9 @@ void freeVertexNode(Node *Vertexroot){
   return;
   }
   freeVertexNode(Vertexroot->right);
-  freeVertexNode(Vertexroot->right);
+  freeVertexNode(Vertexroot->left);
   free(Vertexroot->data);
+  free(Vertexroot->ParentVertex);
   free(Vertexroot);
 }
 

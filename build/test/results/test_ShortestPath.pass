@@ -24,32 +24,44 @@
 - :test: test_ShortestPath_VertexaddAvl_add_VertexNodeB_VertexNodeC_VertexNodeD_to_avl_expect_balance
   :line: 254
   :message: ''
+- :test: test_ShortestPath_VertexaddAvl_add_VertexNodeB_VertexNodeC_VertexNodeD_to_avl_expect_removed_VertexNodeB
+  :line: 293
+  :message: ''
 - :test: test_ShortestPath_VertexaddAvl_Finding_smallestNode_when_only_root_expect_return_VertexNodeC
-  :line: 295
+  :line: 337
   :message: ''
 - :test: test_ShortestPath_VertexaddAvl_Finding_smallestNode_expect_return_VertexNodeD
-  :line: 322
+  :line: 364
   :message: ''
 - :test: test_ShortestPath_VertexaddAvl_Finding_smallestNode_expect_return_VertexNodeE
-  :line: 361
+  :line: 403
   :message: ''
 - :test: test_ShortestPath_test_ListReplaceAndUpdateVertexPathCost
-  :line: 415
+  :line: 457
   :message: ''
 - :test: test_ShortestPath_test_ListReplaceAndUpdateVertexPathCost_with_NextVertex_PC_smaller_than_PC_Plus_cost_expected_no_update
-  :line: 461
+  :line: 503
   :message: ''
 - :test: test_ShortestPath_test_ListReplaceAndUpdateVertexPathCost_with_NextVertex_PC_smaller_than_PC_Plus_cost_expected_update
-  :line: 522
+  :line: 564
   :message: ''
-- :test: test_ShortestPath_trying_sorting
-  :line: 580
+- :test: test_ShortestPath_main_Compute_shortest_path_graph1
+  :line: 616
+  :message: ''
+- :test: test_ShortestPath_main_Compute_shortest_path_graph2
+  :line: 653
+  :message: ''
+- :test: test_ShortestPath_main_Compute_shortest_path_graph3
+  :line: 710
+  :message: ''
+- :test: test_ShortestPath_main_Compute_shortest_path_graph4
+  :line: 759
   :message: ''
 :failures: []
 :ignores: []
 :counts:
-  :total: 14
-  :passed: 14
+  :total: 18
+  :passed: 18
   :failed: 0
   :ignored: 0
 :stdout: []

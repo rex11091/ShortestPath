@@ -100,7 +100,7 @@ void ComputeShortestPath(Node **root,Vertex *vertex){
             Node *newNode = (Node *)malloc(sizeof(Node));
             createNodeForAddAVL(newNode,TempToPoint2->data,vertex);
             VertexaddAvl(root,newNode);
-      			TempToPoint1 = TempToPoint2;
+			TempToPoint1 = TempToPoint2;
             TempToPoint2 = TempToPoint2->next;
 
       	}

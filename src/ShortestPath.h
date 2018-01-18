@@ -12,16 +12,6 @@
 #define VertexaddAvl(root, nodeToAdd)  avlAdd(root,nodeToAdd,(Compare)CostCompare);
 #define VertexRemoveNodeAvl(rootptr,nodeToAdd)      *avlRemove(rootptr,nodeToAdd,(Compare)CostCompareforRemove);
 
-/*
-typedef struct VertexNode VertexNode;
-struct VertexNode {
-  VertexNode *left;
-  VertexNode *right;
-  int balanceFactor;
-  Vertexlink *data;
-};
-*/
-
 Vertex *createVertex(char *name, int PathCost);
 Vertex *SearchVertex(LinkedList *list, Vertex *vertex);
 Item *getVertexFromLinkedList(Vertex *vertex);

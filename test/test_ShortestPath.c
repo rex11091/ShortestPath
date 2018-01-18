@@ -283,6 +283,48 @@ void test_ShortestPath_VertexaddAvl_add_VertexNodeB_VertexNodeC_VertexNodeD_to_a
     free(VC);
     free(VD);
 }
+/*
+                    VertexNodeC(0)                           remove VB                       VertexNodeC(-1)
+                     /       \                          ---------------->                      /
+             vertexNodeD(0)  VertexNodeB(0)                                            vertexNodeD(0)
+
+
+*/
+void test_ShortestPath_VertexaddAvl_add_VertexNodeB_VertexNodeC_VertexNodeD_to_avl_expect_removed_VertexNodeB(void)
+{  
+    Vertex *VA = createVertex("a",0);
+    Vertex *VB = createVertex("b",0);
+    Vertex *VC = createVertex("C",0);
+    Vertex *VD = createVertex("D",0);
+
+    Vertexlink LAC = {VC,2};
+    Vertexlink LAB = {VB,3};
+    Vertexlink LAD = {VD,1};
+
+    Node *VertexNodeC = (Node *)malloc(sizeof(Node));
+    Node *VertexNodeB = (Node *)malloc(sizeof(Node));
+    Node *VertexNodeD = (Node *)malloc(sizeof(Node));
+    createNodeForAddAVL(VertexNodeB,&LAB,VA);
+    createNodeForAddAVL(VertexNodeC,&LAC,VA);
+    createNodeForAddAVL(VertexNodeD,&LAD,VA);
+
+
+    VertexaddAvl(&VertexNodeC,VertexNodeB);
+    VertexaddAvl(&VertexNodeC,VertexNodeD);
+
+    int* nodoToremove = (int *)(uintptr_t)VertexNodeB->data->cost;
+    VertexRemoveNodeAvl(&VertexNodeC,nodoToremove);
+
+    TEST_ASSERT_EQUAL_NODE(VertexNodeD,NULL,-1,VertexNodeC);
+
+    free(VertexNodeC);
+    free(VertexNodeB);
+    free(VertexNodeD);
+    free(VA);
+    free(VB);
+    free(VC);
+    free(VD);
+}
 
 
 /*
@@ -562,6 +604,37 @@ void test_ShortestPath_test_ListReplaceAndUpdateVertexPathCost_with_NextVertex_P
     free(VC);
     free(VD);
 }
+/*
+       C(INT_MAX)                        C(3)
+       |                                 |
+       |                                 |3
+       |                                 |       (2)
+    (0)A------B(INT_MAX)   ----->     (0)A-------B
+                                            2 
+*/
+
+void test_ShortestPath_main_Compute_shortest_path_graph1(void)
+{ 
+    Vertex *VA = createVertex("A",0);
+    Vertex *VB = createVertex("B",INT_MAX);
+    Vertex *VC = createVertex("C",INT_MAX);
+
+    Vertexlink LAC = {VC,3};
+    Vertexlink LAB = {VB,2};
+
+    addNeighbors(VA,2,&LAB,&LAC);
+
+    Node *root = NULL;
+    ComputeShortestPath(&root,VA);
+
+    TEST_ASSERT_EQUAL_STRING("B",VB->name);
+    TEST_ASSERT_EQUAL(2,VB->PathCost);
+    TEST_ASSERT_EQUAL_STRING("C",VC->name);
+    TEST_ASSERT_EQUAL(3,VC->PathCost);
+    free(VA);
+    free(VB);
+    free(VC);
+}
 
 
 /*
@@ -577,7 +650,7 @@ void test_ShortestPath_test_ListReplaceAndUpdateVertexPathCost_with_NextVertex_P
 */
 
 
-void test_ShortestPath_trying_sorting(void)
+void test_ShortestPath_main_Compute_shortest_path_graph2(void)
 {   CEXCEPTION_T ex;
     Vertex *vt;
     Vertex *VA = createVertex("A",0);
@@ -612,8 +685,6 @@ void test_ShortestPath_trying_sorting(void)
     TEST_ASSERT_EQUAL(6,VE->PathCost);
     TEST_ASSERT_EQUAL_STRING("A",VA->name);
     TEST_ASSERT_EQUAL(0,VA->PathCost);
-
-
     free(VA);
     free(VB);
     free(VC);
@@ -621,8 +692,107 @@ void test_ShortestPath_trying_sorting(void)
     free(VE);
 }
 
+/*
+
+                      C(INT_MAX)                                      C(3)
+                      |                                                |
+                      |3                                               |
+                      |                                                |
+                   (0)A--------B (INT_MAX)             ------->        A--------B(2)
+                      |    2   |                                       |         |
+                      |        |3                                      |         |
+                      |        |                                       |         |
+                      +--------D(INT_MAX)                              +---------D(5)
+                          7
+*/
 
 
+void test_ShortestPath_main_Compute_shortest_path_graph3(void)
+{   CEXCEPTION_T ex;
+    Vertex *vt;
+    Vertex *VA = createVertex("A",0);
+    Vertex *VB = createVertex("B",INT_MAX);
+    Vertex *VC = createVertex("C",INT_MAX);
+    Vertex *VD = createVertex("D",INT_MAX);
+
+    Vertexlink LAC = {VC,3};
+    Vertexlink LAB = {VB,2};
+    Vertexlink LAD = {VD,7};
+    Vertexlink LBD = {VD,1};
+
+    addNeighbors(VA,3,&LAB,&LAC,&LAD);
+    addNeighbors(VB,1,&LBD);
+
+
+    Node *root = NULL;
+    Try{
+    ComputeShortestPath(&root,VA);
+    }Catch(ex){
+    dumpException(ex);
+    }
+
+    TEST_ASSERT_EQUAL_STRING("B",VB->name);
+    TEST_ASSERT_EQUAL(2,VB->PathCost);
+    TEST_ASSERT_EQUAL_STRING("C",VC->name);
+    TEST_ASSERT_EQUAL(3,VC->PathCost);
+    TEST_ASSERT_EQUAL_STRING("D",VD->name);
+    TEST_ASSERT_EQUAL(3,VD->PathCost);
+    TEST_ASSERT_EQUAL_STRING("A",VA->name);
+    TEST_ASSERT_EQUAL(0,VA->PathCost);
+    free(VA);
+    free(VB);
+    free(VC);
+    free(VD);
+}
+
+/*
+                      C(2)------------+7
+                      |               |
+                      |2              |
+                      |       (3)     |
+                   (0)A-------B-------D (4)
+                          3      1
+
+
+
+*/
+void test_ShortestPath_main_Compute_shortest_path_graph4(void)
+{   CEXCEPTION_T ex;
+    Vertex *VA = createVertex("A",0);
+    Vertex *VB = createVertex("B",INT_MAX);
+    Vertex *VC = createVertex("C",INT_MAX);
+    Vertex *VD = createVertex("D",INT_MAX);
+
+    Vertexlink LAC = {VC,2};
+    Vertexlink LAB = {VB,3};
+    Vertexlink LBD = {VD,1};
+    Vertexlink LCD = {VD,7};
+
+    addNeighbors(VA,2,&LAB,&LAC);
+    addNeighbors(VB,1,&LBD);
+    addNeighbors(VC,1,&LCD);
+
+
+    Node *root = NULL;
+    Try{
+    ComputeShortestPath(&root,VA);
+    }Catch(ex){
+    dumpException(ex);
+    }
+
+    TEST_ASSERT_EQUAL_STRING("B",VB->name);
+    TEST_ASSERT_EQUAL(3,VB->PathCost);
+    TEST_ASSERT_EQUAL_STRING("C",VC->name);
+    TEST_ASSERT_EQUAL(2,VC->PathCost);
+    TEST_ASSERT_EQUAL_STRING("D",VD->name);
+    TEST_ASSERT_EQUAL(4,VD->PathCost);
+    TEST_ASSERT_EQUAL_STRING("A",VA->name);
+    TEST_ASSERT_EQUAL(0,VA->PathCost);
+    free(VA);
+    free(VB);
+    free(VC);
+    free(VD);
+}
 
 
 /*

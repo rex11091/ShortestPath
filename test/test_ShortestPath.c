@@ -19,7 +19,7 @@ void tearDown(void)
 }
 
 
-void test_ShortestPath_create_node(void)
+void test_ShortestPath_create_Vertex(void)
 {
     Vertex *VA = createVertex("A",0);
     Vertex *VB = createVertex("b",9);
@@ -544,6 +544,7 @@ void test_ShortestPath_test_ListReplaceAndUpdateVertexPathCost_with_NextVertex_P
     free(VD);
 }
 
+
 /*
                       C(INT_MAX)                                      C(3)
                       |                                                |
@@ -604,6 +605,7 @@ void test_ShortestPath_test_ListReplaceAndUpdateVertexPathCost_with_NextVertex_P
     free(VC);
     free(VD);
 }
+
 /*
        C(INT_MAX)                        C(3)
        |                                 |
@@ -880,6 +882,45 @@ void test_ShortestPath_main_Compute_shortest_path_With_adding_duplicated_cost_pa
     free(VC);
     free(VD);
 }
+
+/*
+                                1                                                               
+                      A(0)------------B(INT_MAX)                    A(0)----------B(1)
+                      |               |                             |             
+                      |2              |4                -------->   |             
+                      |               |                             |             
+             (INT_MAX)C---------------+ (INT_MAX)                   C(2)
+                          
+
+
+
+*/
+void test_ShortestPath_main_Compute_shortest_path_With_adding_duplicated_cost_pattern3(void)
+{   
+    Vertex *VA = createVertex("A",0);
+    Vertex *VB = createVertex("B",INT_MAX);
+    Vertex *VC = createVertex("C",INT_MAX);
+
+    Vertexlink LAC = {VC,2};
+    Vertexlink LAB = {VB,1};
+    Vertexlink LCB = {VB,4};
+
+    addNeighbors(VA,2,&LAB,&LAC);
+    addNeighbors(VC,1,&LCB);
+
+    Node *root = NULL;
+    ComputeShortestPath(&root,VA);
+
+    TEST_ASSERT_EQUAL_STRING("B",VB->name);
+    TEST_ASSERT_EQUAL(1,VB->PathCost);
+    TEST_ASSERT_EQUAL_STRING("C",VC->name);
+    TEST_ASSERT_EQUAL(2,VC->PathCost);
+    TEST_ASSERT_EQUAL_STRING("A",VA->name);
+    TEST_ASSERT_EQUAL(0,VA->PathCost);
+    free(VA);
+    free(VB);
+    free(VC);
+}
 /*
     (INT_MAX)   (INT_MAX)   (INT_MAX)                                       (4)        (12)       (19)
  +-------B-------G-------------H                                    +--------B---------G----------H
@@ -896,6 +937,7 @@ A(0)     |       |    \        |14  \                               |           
 */
 void test_ShortestPath_main_Compute_shortest_path_complex_graph(void)
 {  
+    CEXCEPTION_T ex;
     Vertex *VA = createVertex("A",0);
     Vertex *VB = createVertex("B",INT_MAX);
     Vertex *VC = createVertex("C",INT_MAX);
@@ -932,7 +974,12 @@ void test_ShortestPath_main_Compute_shortest_path_complex_graph(void)
 
 
     Node *root = NULL;
+    Try{
     ComputeShortestPath(&root,VA);
+    }Catch(ex){
+    dumpException(ex);
+    }
+
 
     TEST_ASSERT_EQUAL_STRING("A",VA->name);
     TEST_ASSERT_EQUAL(0,VA->PathCost);

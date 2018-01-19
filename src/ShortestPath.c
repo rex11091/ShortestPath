@@ -65,12 +65,12 @@ void ListReplaceAndUpdateVertexPathCost(Node *VertexNode)
 	for(temp; temp!=NULL;temp = temp->next){
 		if(temp->data->NextVertex == VertexNode->data->NextVertex){
       if(temp->data->NextVertex->PathCost == INT_MAX){
-        temp->data->NextVertex->PathCost = (VertexNode->data->cost +VertexNode->ParentVertex->PathCost);
+        temp->data->NextVertex->PathCost = (VertexNode->data->cost + VertexNode->ParentVertex->PathCost);
       }
       else{
         //here is if(vertex's path cost + vertexlink->cost >  NextVertex->Pathcost than remain )
-        if(temp->data->NextVertex->PathCost > (VertexNode->ParentVertex->PathCost + VertexNode->data->cost))
-        temp->data->NextVertex->PathCost = (VertexNode->ParentVertex->PathCost + VertexNode->data->cost);
+        if(temp->data->NextVertex->PathCost > VertexNode->data->cost + VertexNode->ParentVertex->PathCost)
+        temp->data->NextVertex->PathCost = ( VertexNode->data->cost + VertexNode->ParentVertex->PathCost);
         else
         temp->data->NextVertex->PathCost = temp->data->NextVertex->PathCost;
       }
@@ -93,6 +93,17 @@ void ComputeShortestPath(Node **root,Vertex *vertex){
 
       	else
       	{
+          if(TempToPoint2->data->NextVertex->PathCost !=INT_MAX){
+            int AddPathCost = (TempToPoint2->data->cost + vertex->PathCost );
+              if(AddPathCost > TempToPoint2->data->NextVertex->PathCost )
+              {
+              TempToPoint1 = TempToPoint2;
+              TempToPoint2 = TempToPoint2->next;
+            }
+            else{
+              TempToPoint2 = TempToPoint2;
+            }
+          }
       		while(TempToPoint2 !=NULL)
       		{
             Node *newNode = (Node *)malloc(sizeof(Node));

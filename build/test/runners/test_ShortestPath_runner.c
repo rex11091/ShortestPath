@@ -34,7 +34,7 @@ char* GlobalOrderError;
 /*=======External Functions This Runner Calls=====*/
 extern void setUp(void);
 extern void tearDown(void);
-extern void test_ShortestPath_create_node(void);
+extern void test_ShortestPath_create_Vertex(void);
 extern void test_ShortestPath_Vertexlink(void);
 extern void test_ShortestPath_CreateNodeForInsertAVL(void);
 extern void test_ShortestPath_addneighbour_VA_expect_neigboring_with_another_Graph1(void);
@@ -54,6 +54,7 @@ extern void test_ShortestPath_main_Compute_shortest_path_graph3(void);
 extern void test_ShortestPath_main_Compute_shortest_path_graph4(void);
 extern void test_ShortestPath_main_Compute_shortest_path_With_adding_duplicated_cost_pattern1(void);
 extern void test_ShortestPath_main_Compute_shortest_path_With_adding_duplicated_cost_pattern2(void);
+extern void test_ShortestPath_main_Compute_shortest_path_With_adding_duplicated_cost_pattern3(void);
 extern void test_ShortestPath_main_Compute_shortest_path_complex_graph(void);
 
 
@@ -70,7 +71,7 @@ void resetTest(void)
 int main(void)
 {
   UnityBegin("test_ShortestPath.c");
-  RUN_TEST(test_ShortestPath_create_node, 22);
+  RUN_TEST(test_ShortestPath_create_Vertex, 22);
   RUN_TEST(test_ShortestPath_Vertexlink, 41);
   RUN_TEST(test_ShortestPath_CreateNodeForInsertAVL, 61);
   RUN_TEST(test_ShortestPath_addneighbour_VA_expect_neigboring_with_another_Graph1, 100);
@@ -83,14 +84,15 @@ int main(void)
   RUN_TEST(test_ShortestPath_VertexaddAvl_Finding_smallestNode_expect_return_VertexNodeE, 403);
   RUN_TEST(test_ShortestPath_test_ListReplaceAndUpdateVertexPathCost, 457);
   RUN_TEST(test_ShortestPath_test_ListReplaceAndUpdateVertexPathCost_with_NextVertex_PC_smaller_than_PC_Plus_cost_expected_no_update, 503);
-  RUN_TEST(test_ShortestPath_test_ListReplaceAndUpdateVertexPathCost_with_NextVertex_PC_smaller_than_PC_Plus_cost_expected_update, 564);
-  RUN_TEST(test_ShortestPath_main_Compute_shortest_path_graph1, 616);
-  RUN_TEST(test_ShortestPath_main_Compute_shortest_path_graph2, 653);
-  RUN_TEST(test_ShortestPath_main_Compute_shortest_path_graph3, 710);
-  RUN_TEST(test_ShortestPath_main_Compute_shortest_path_graph4, 759);
-  RUN_TEST(test_ShortestPath_main_Compute_shortest_path_With_adding_duplicated_cost_pattern1, 807);
-  RUN_TEST(test_ShortestPath_main_Compute_shortest_path_With_adding_duplicated_cost_pattern2, 851);
-  RUN_TEST(test_ShortestPath_main_Compute_shortest_path_complex_graph, 897);
+  RUN_TEST(test_ShortestPath_test_ListReplaceAndUpdateVertexPathCost_with_NextVertex_PC_smaller_than_PC_Plus_cost_expected_update, 565);
+  RUN_TEST(test_ShortestPath_main_Compute_shortest_path_graph1, 618);
+  RUN_TEST(test_ShortestPath_main_Compute_shortest_path_graph2, 655);
+  RUN_TEST(test_ShortestPath_main_Compute_shortest_path_graph3, 712);
+  RUN_TEST(test_ShortestPath_main_Compute_shortest_path_graph4, 761);
+  RUN_TEST(test_ShortestPath_main_Compute_shortest_path_With_adding_duplicated_cost_pattern1, 809);
+  RUN_TEST(test_ShortestPath_main_Compute_shortest_path_With_adding_duplicated_cost_pattern2, 853);
+  RUN_TEST(test_ShortestPath_main_Compute_shortest_path_With_adding_duplicated_cost_pattern3, 898);
+  RUN_TEST(test_ShortestPath_main_Compute_shortest_path_complex_graph, 938);
 
   return (UnityEnd());
 }

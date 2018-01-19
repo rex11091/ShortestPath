@@ -3,7 +3,7 @@
   :path: test
   :file: test_ShortestPath.c
 :successes:
-- :test: test_ShortestPath_create_node
+- :test: test_ShortestPath_create_Vertex
   :line: 22
   :message: ''
 - :test: test_ShortestPath_Vertexlink
@@ -43,34 +43,37 @@
   :line: 503
   :message: ''
 - :test: test_ShortestPath_test_ListReplaceAndUpdateVertexPathCost_with_NextVertex_PC_smaller_than_PC_Plus_cost_expected_update
-  :line: 564
+  :line: 565
   :message: ''
 - :test: test_ShortestPath_main_Compute_shortest_path_graph1
-  :line: 616
+  :line: 618
   :message: ''
 - :test: test_ShortestPath_main_Compute_shortest_path_graph2
-  :line: 653
+  :line: 655
   :message: ''
 - :test: test_ShortestPath_main_Compute_shortest_path_graph3
-  :line: 710
+  :line: 712
   :message: ''
 - :test: test_ShortestPath_main_Compute_shortest_path_graph4
-  :line: 759
+  :line: 761
   :message: ''
 - :test: test_ShortestPath_main_Compute_shortest_path_With_adding_duplicated_cost_pattern1
-  :line: 807
+  :line: 809
   :message: ''
 - :test: test_ShortestPath_main_Compute_shortest_path_With_adding_duplicated_cost_pattern2
-  :line: 851
+  :line: 853
+  :message: ''
+- :test: test_ShortestPath_main_Compute_shortest_path_With_adding_duplicated_cost_pattern3
+  :line: 898
   :message: ''
 - :test: test_ShortestPath_main_Compute_shortest_path_complex_graph
-  :line: 897
+  :line: 938
   :message: ''
 :failures: []
 :ignores: []
 :counts:
-  :total: 21
-  :passed: 21
+  :total: 22
+  :passed: 22
   :failed: 0
   :ignored: 0
 :stdout: []

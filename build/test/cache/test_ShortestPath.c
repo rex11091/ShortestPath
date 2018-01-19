@@ -10,6 +10,8 @@
 #include "unity.h"
 
 
+
+
 void setUp(void)
 
 {
@@ -980,7 +982,7 @@ void test_ShortestPath_VertexaddAvl_Finding_smallestNode_expect_return_VertexNod
 
    ,VertexNodeE,1,VertexNodeD,432);
 
-    UnityAssertEqualNumber((UNITY_INT)((3)), (UNITY_INT)((smallest->data->cost)), (
+    UnityAssertEqualNumber((UNITY_INT)((2)), (UNITY_INT)((smallest->data->cost)), (
 
    ((void *)0)
 
@@ -1731,5 +1733,419 @@ void test_ShortestPath_main_Compute_shortest_path_graph4(void)
     free(VC);
 
     free(VD);
+
+}
+
+void test_ShortestPath_main_Compute_shortest_path_With_adding_duplicated_cost_pattern1(void)
+
+{
+
+    Vertex *VA = createVertex("A",0);
+
+    Vertex *VB = createVertex("B",0x7fffffff);
+
+    Vertex *VC = createVertex("C",0x7fffffff);
+
+    Vertex *VD = createVertex("D",0x7fffffff);
+
+
+
+    Vertexlink LAC = {VC,1};
+
+    Vertexlink LAB = {VB,1};
+
+    Vertexlink LBD = {VD,4};
+
+    Vertexlink LCD = {VD,1};
+
+
+
+    addNeighbors(VA,2,&LAB,&LAC);
+
+    addNeighbors(VB,1,&LBD);
+
+    addNeighbors(VC,1,&LCD);
+
+
+
+    Node *root = 
+
+                ((void *)0)
+
+                    ;
+
+    ComputeShortestPath(&root,VA);
+
+
+
+    UnityAssertEqualString((const char*)(("B")), (const char*)((VB->name)), (
+
+   ((void *)0)
+
+   ), (UNITY_UINT)(826));
+
+    UnityAssertEqualNumber((UNITY_INT)((1)), (UNITY_INT)((VB->PathCost)), (
+
+   ((void *)0)
+
+   ), (UNITY_UINT)(827), UNITY_DISPLAY_STYLE_INT);
+
+    UnityAssertEqualString((const char*)(("C")), (const char*)((VC->name)), (
+
+   ((void *)0)
+
+   ), (UNITY_UINT)(828));
+
+    UnityAssertEqualNumber((UNITY_INT)((1)), (UNITY_INT)((VC->PathCost)), (
+
+   ((void *)0)
+
+   ), (UNITY_UINT)(829), UNITY_DISPLAY_STYLE_INT);
+
+    UnityAssertEqualString((const char*)(("D")), (const char*)((VD->name)), (
+
+   ((void *)0)
+
+   ), (UNITY_UINT)(830));
+
+    UnityAssertEqualNumber((UNITY_INT)((2)), (UNITY_INT)((VD->PathCost)), (
+
+   ((void *)0)
+
+   ), (UNITY_UINT)(831), UNITY_DISPLAY_STYLE_INT);
+
+    UnityAssertEqualString((const char*)(("A")), (const char*)((VA->name)), (
+
+   ((void *)0)
+
+   ), (UNITY_UINT)(832));
+
+    UnityAssertEqualNumber((UNITY_INT)((0)), (UNITY_INT)((VA->PathCost)), (
+
+   ((void *)0)
+
+   ), (UNITY_UINT)(833), UNITY_DISPLAY_STYLE_INT);
+
+    free(VA);
+
+    free(VB);
+
+    free(VC);
+
+    free(VD);
+
+}
+
+void test_ShortestPath_main_Compute_shortest_path_With_adding_duplicated_cost_pattern2(void)
+
+{
+
+    Vertex *VA = createVertex("A",0);
+
+    Vertex *VB = createVertex("B",0x7fffffff);
+
+    Vertex *VC = createVertex("C",0x7fffffff);
+
+    Vertex *VD = createVertex("D",0x7fffffff);
+
+
+
+    Vertexlink LAC = {VC,4};
+
+    Vertexlink LAB = {VB,3};
+
+    Vertexlink LBD = {VD,4};
+
+    Vertexlink LCD = {VD,1};
+
+
+
+    addNeighbors(VA,2,&LAB,&LAC);
+
+    addNeighbors(VB,1,&LBD);
+
+    addNeighbors(VC,1,&LCD);
+
+
+
+    Node *root = 
+
+                ((void *)0)
+
+                    ;
+
+    ComputeShortestPath(&root,VA);
+
+
+
+    UnityAssertEqualString((const char*)(("B")), (const char*)((VB->name)), (
+
+   ((void *)0)
+
+   ), (UNITY_UINT)(870));
+
+    UnityAssertEqualNumber((UNITY_INT)((3)), (UNITY_INT)((VB->PathCost)), (
+
+   ((void *)0)
+
+   ), (UNITY_UINT)(871), UNITY_DISPLAY_STYLE_INT);
+
+    UnityAssertEqualString((const char*)(("C")), (const char*)((VC->name)), (
+
+   ((void *)0)
+
+   ), (UNITY_UINT)(872));
+
+    UnityAssertEqualNumber((UNITY_INT)((4)), (UNITY_INT)((VC->PathCost)), (
+
+   ((void *)0)
+
+   ), (UNITY_UINT)(873), UNITY_DISPLAY_STYLE_INT);
+
+    UnityAssertEqualString((const char*)(("D")), (const char*)((VD->name)), (
+
+   ((void *)0)
+
+   ), (UNITY_UINT)(874));
+
+    UnityAssertEqualNumber((UNITY_INT)((5)), (UNITY_INT)((VD->PathCost)), (
+
+   ((void *)0)
+
+   ), (UNITY_UINT)(875), UNITY_DISPLAY_STYLE_INT);
+
+    UnityAssertEqualString((const char*)(("A")), (const char*)((VA->name)), (
+
+   ((void *)0)
+
+   ), (UNITY_UINT)(876));
+
+    UnityAssertEqualNumber((UNITY_INT)((0)), (UNITY_INT)((VA->PathCost)), (
+
+   ((void *)0)
+
+   ), (UNITY_UINT)(877), UNITY_DISPLAY_STYLE_INT);
+
+    free(VA);
+
+    free(VB);
+
+    free(VC);
+
+    free(VD);
+
+}
+
+void test_ShortestPath_main_Compute_shortest_path_complex_graph(void)
+
+{
+
+    Vertex *VA = createVertex("A",0);
+
+    Vertex *VB = createVertex("B",0x7fffffff);
+
+    Vertex *VC = createVertex("C",0x7fffffff);
+
+    Vertex *VD = createVertex("D",0x7fffffff);
+
+    Vertex *VE = createVertex("E",0x7fffffff);
+
+    Vertex *VF = createVertex("F",0x7fffffff);
+
+    Vertex *VG = createVertex("G",0x7fffffff);
+
+    Vertex *VH = createVertex("H",0x7fffffff);
+
+    Vertex *VI = createVertex("I",0x7fffffff);
+
+
+
+    Vertexlink LAC = {VC,8};
+
+    Vertexlink LAB = {VB,4};
+
+    Vertexlink LBG = {VG,8};
+
+    Vertexlink LCB = {VB,11};
+
+    Vertexlink LCD = {VD,1};
+
+    Vertexlink LCE = {VE,7};
+
+    Vertexlink LDE = {VE,6};
+
+    Vertexlink LDF = {VF,2};
+
+    Vertexlink LGE = {VE,2};
+
+    Vertexlink LGH = {VH,7};
+
+    Vertexlink LGF = {VF,4};
+
+    Vertexlink LFI = {VI,10};
+
+    Vertexlink LHI = {VI,9};
+
+    Vertexlink LHF = {VF,14};
+
+
+
+    addNeighbors(VA,2,&LAB,&LAC);
+
+    addNeighbors(VB,1,&LBG);
+
+    addNeighbors(VC,3,&LCB,&LCD,&LCE);
+
+    addNeighbors(VD,2,&LDE,&LDF);
+
+    addNeighbors(VG,3,&LGE,&LGH,&LGF);
+
+    addNeighbors(VH,2,&LHI,&LHF);
+
+    addNeighbors(VF,1,&LFI);
+
+
+
+
+
+
+
+    Node *root = 
+
+                ((void *)0)
+
+                    ;
+
+    ComputeShortestPath(&root,VA);
+
+
+
+    UnityAssertEqualString((const char*)(("A")), (const char*)((VA->name)), (
+
+   ((void *)0)
+
+   ), (UNITY_UINT)(937));
+
+    UnityAssertEqualNumber((UNITY_INT)((0)), (UNITY_INT)((VA->PathCost)), (
+
+   ((void *)0)
+
+   ), (UNITY_UINT)(938), UNITY_DISPLAY_STYLE_INT);
+
+    UnityAssertEqualString((const char*)(("B")), (const char*)((VB->name)), (
+
+   ((void *)0)
+
+   ), (UNITY_UINT)(939));
+
+    UnityAssertEqualNumber((UNITY_INT)((4)), (UNITY_INT)((VB->PathCost)), (
+
+   ((void *)0)
+
+   ), (UNITY_UINT)(940), UNITY_DISPLAY_STYLE_INT);
+
+    UnityAssertEqualString((const char*)(("C")), (const char*)((VC->name)), (
+
+   ((void *)0)
+
+   ), (UNITY_UINT)(941));
+
+    UnityAssertEqualNumber((UNITY_INT)((8)), (UNITY_INT)((VC->PathCost)), (
+
+   ((void *)0)
+
+   ), (UNITY_UINT)(942), UNITY_DISPLAY_STYLE_INT);
+
+    UnityAssertEqualString((const char*)(("D")), (const char*)((VD->name)), (
+
+   ((void *)0)
+
+   ), (UNITY_UINT)(943));
+
+    UnityAssertEqualNumber((UNITY_INT)((9)), (UNITY_INT)((VD->PathCost)), (
+
+   ((void *)0)
+
+   ), (UNITY_UINT)(944), UNITY_DISPLAY_STYLE_INT);
+
+    UnityAssertEqualString((const char*)(("E")), (const char*)((VE->name)), (
+
+   ((void *)0)
+
+   ), (UNITY_UINT)(945));
+
+    UnityAssertEqualNumber((UNITY_INT)((14)), (UNITY_INT)((VE->PathCost)), (
+
+   ((void *)0)
+
+   ), (UNITY_UINT)(946), UNITY_DISPLAY_STYLE_INT);
+
+    UnityAssertEqualString((const char*)(("F")), (const char*)((VF->name)), (
+
+   ((void *)0)
+
+   ), (UNITY_UINT)(947));
+
+    UnityAssertEqualNumber((UNITY_INT)((11)), (UNITY_INT)((VF->PathCost)), (
+
+   ((void *)0)
+
+   ), (UNITY_UINT)(948), UNITY_DISPLAY_STYLE_INT);
+
+    UnityAssertEqualString((const char*)(("G")), (const char*)((VG->name)), (
+
+   ((void *)0)
+
+   ), (UNITY_UINT)(949));
+
+    UnityAssertEqualNumber((UNITY_INT)((12)), (UNITY_INT)((VG->PathCost)), (
+
+   ((void *)0)
+
+   ), (UNITY_UINT)(950), UNITY_DISPLAY_STYLE_INT);
+
+    UnityAssertEqualString((const char*)(("H")), (const char*)((VH->name)), (
+
+   ((void *)0)
+
+   ), (UNITY_UINT)(951));
+
+    UnityAssertEqualNumber((UNITY_INT)((19)), (UNITY_INT)((VH->PathCost)), (
+
+   ((void *)0)
+
+   ), (UNITY_UINT)(952), UNITY_DISPLAY_STYLE_INT);
+
+    UnityAssertEqualString((const char*)(("I")), (const char*)((VI->name)), (
+
+   ((void *)0)
+
+   ), (UNITY_UINT)(953));
+
+    UnityAssertEqualNumber((UNITY_INT)((21)), (UNITY_INT)((VI->PathCost)), (
+
+   ((void *)0)
+
+   ), (UNITY_UINT)(954), UNITY_DISPLAY_STYLE_INT);
+
+
+
+    free(VA);
+
+    free(VB);
+
+    free(VC);
+
+    free(VD);
+
+    free(VE);
+
+    free(VF);
+
+    free(VG);
+
+    free(VH);
+
+    free(VI);
 
 }

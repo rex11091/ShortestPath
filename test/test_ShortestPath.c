@@ -430,7 +430,7 @@ void test_ShortestPath_VertexaddAvl_Finding_smallestNode_expect_return_VertexNod
     Node *smallest = findSmallestNode(&root);
     TEST_ASSERT_EQUAL_NODE(VertexNodeD,VertexNodeB,-1,VertexNodeC);
     TEST_ASSERT_EQUAL_NODE(NULL,VertexNodeE,1,VertexNodeD);
-    TEST_ASSERT_EQUAL(3,smallest->data->cost);
+    TEST_ASSERT_EQUAL(2,smallest->data->cost);
     free(VertexNodeC);
     free(VertexNodeB);
     free(VertexNodeD);
@@ -489,9 +489,9 @@ void test_ShortestPath_test_ListReplaceAndUpdateVertexPathCost(void){
                       |3                                               |
                       |                                                |
                    (0)A--------B (INT_MAX)             ------->        A--------B(2)
-                      |    2   |                                       |         |
-                      |        |4                                      |         |
-                      |        |                                       |         |
+                      |    2   |                                       |         
+                      |        |4                                      |         
+                      |        |                                       |         
                       +--------D(INT_MAX)                              +---------D(3)
                           3
   checking the vertex's path cost is infinity?
@@ -550,10 +550,10 @@ void test_ShortestPath_test_ListReplaceAndUpdateVertexPathCost_with_NextVertex_P
                       |3                                               |
                       |                                                |
                    (0)A--------B (INT_MAX)             ------->        A--------B(2)
-                      |    2   |                                       |         |
-                      |        |3                                      |         |
-                      |        |                                       |         |
-                      +--------D(INT_MAX)                              +---------D(5)
+                      |    2   |                                                |
+                      |        |3                                               |
+                      |        |                                                |
+                      +--------D(INT_MAX)                                       D(5)
                           7
   checking the vertex's path cost is infinity?
    IF INT_MAX update the pathcost 
@@ -699,10 +699,10 @@ void test_ShortestPath_main_Compute_shortest_path_graph2(void)
                       |3                                               |
                       |                                                |
                    (0)A--------B (INT_MAX)             ------->        A--------B(2)
-                      |    2   |                                       |         |
-                      |        |3                                      |         |
-                      |        |                                       |         |
-                      +--------D(INT_MAX)                              +---------D(5)
+                      |    2   |                                                |
+                      |        |3                                               |
+                      |        |                                                |
+                      +--------D(INT_MAX)                                       D(5)
                           7
 */
 
@@ -746,12 +746,12 @@ void test_ShortestPath_main_Compute_shortest_path_graph3(void)
 }
 
 /*
-                      C(2)------------+7
-                      |               |
-                      |2              |
-                      |       (3)     |
-                   (0)A-------B-------D (4)
-                          3      1
+    C(INT_MAX)--------+7                          C(2)
+    |                 |                           |                  
+    |2                |          --------->       |2                 
+    |    3      1     |                           |         (3)      
+   (0)A------B--------D(INT_MAX)                (0)A-------B---------D (4)
+           (INT_MAX)                                     3      1
 
 
 
@@ -796,179 +796,170 @@ void test_ShortestPath_main_Compute_shortest_path_graph4(void)
 
 
 /*
-                      C(2)
-                      |
-                      |2
-                      |       (3)
-                   (0)A-------B-------D (4)
-                          3   |   1
-                              | 4
-                              |
-                              E(7)
+                                1                                                               
+                      A(0)------------B(INT_MAX)                    A(0)----------B(1)
+                      |               |                             |             
+                      |1              |4                -------->   |             
+                      |       1       |                             |             
+             (INT_MAX)C---------------D (INT_MAX)                   C(1)--------- D(2)
+                          
+*/
+void test_ShortestPath_main_Compute_shortest_path_With_adding_duplicated_cost_pattern1(void)
+{   
+    Vertex *VA = createVertex("A",0);
+    Vertex *VB = createVertex("B",INT_MAX);
+    Vertex *VC = createVertex("C",INT_MAX);
+    Vertex *VD = createVertex("D",INT_MAX);
+
+    Vertexlink LAC = {VC,1};
+    Vertexlink LAB = {VB,1};
+    Vertexlink LBD = {VD,4};
+    Vertexlink LCD = {VD,1};
+
+    addNeighbors(VA,2,&LAB,&LAC);
+    addNeighbors(VB,1,&LBD);
+    addNeighbors(VC,1,&LCD);
+
+    Node *root = NULL;
+    ComputeShortestPath(&root,VA);
+
+    TEST_ASSERT_EQUAL_STRING("B",VB->name);
+    TEST_ASSERT_EQUAL(1,VB->PathCost);
+    TEST_ASSERT_EQUAL_STRING("C",VC->name);
+    TEST_ASSERT_EQUAL(1,VC->PathCost);
+    TEST_ASSERT_EQUAL_STRING("D",VD->name);
+    TEST_ASSERT_EQUAL(2,VD->PathCost);
+    TEST_ASSERT_EQUAL_STRING("A",VA->name);
+    TEST_ASSERT_EQUAL(0,VA->PathCost);
+    free(VA);
+    free(VB);
+    free(VC);
+    free(VD);
+}
+/*
+                                3                                                               
+                      A(0)------------B(INT_MAX)                    A(0)----------B(3)
+                      |               |                             |             
+                      |4              |4                -------->   |             
+                      |       1       |                             |             
+             (INT_MAX)C---------------D (INT_MAX)                   C(4)--------- D(5)
+                          
 
 
-void test_ShortestPath_compute_shortestPath(void)
-{   Vertex *vt;
+
+*/
+void test_ShortestPath_main_Compute_shortest_path_With_adding_duplicated_cost_pattern2(void)
+{   
+    Vertex *VA = createVertex("A",0);
+    Vertex *VB = createVertex("B",INT_MAX);
+    Vertex *VC = createVertex("C",INT_MAX);
+    Vertex *VD = createVertex("D",INT_MAX);
+
+    Vertexlink LAC = {VC,4};
+    Vertexlink LAB = {VB,3};
+    Vertexlink LBD = {VD,4};
+    Vertexlink LCD = {VD,1};
+
+    addNeighbors(VA,2,&LAB,&LAC);
+    addNeighbors(VB,1,&LBD);
+    addNeighbors(VC,1,&LCD);
+
+    Node *root = NULL;
+    ComputeShortestPath(&root,VA);
+
+    TEST_ASSERT_EQUAL_STRING("B",VB->name);
+    TEST_ASSERT_EQUAL(3,VB->PathCost);
+    TEST_ASSERT_EQUAL_STRING("C",VC->name);
+    TEST_ASSERT_EQUAL(4,VC->PathCost);
+    TEST_ASSERT_EQUAL_STRING("D",VD->name);
+    TEST_ASSERT_EQUAL(5,VD->PathCost);
+    TEST_ASSERT_EQUAL_STRING("A",VA->name);
+    TEST_ASSERT_EQUAL(0,VA->PathCost);
+    free(VA);
+    free(VB);
+    free(VC);
+    free(VD);
+}
+/*
+    (INT_MAX)   (INT_MAX)   (INT_MAX)                                       (4)        (12)       (19)
+ +-------B-------G-------------H                                    +--------B---------G----------H
+ |4      |  8    | \    7      | \                                  |                  |           
+ |       |       |  \          |  \9                                |                  |          
+ |    11 |     2 |   \ 4       |   \                                |                  |          
+A(0)     |       |    \        |14  \                               |                  |          
+ |       +-------E(INT_MAX)    |     I(INT_MAX)     ----------->    A(0)            E(14)             I(21) 
+ |8      |7      |       \     |    /                               |                                /
+ |       |       |6        \   |   /10                              |                               /
+ |       |   1   |     2     \ |  /                                 |                              /
+ +-------C-------D-------------F /                                  +--------C---------D----------F
+    (INT_MAX)   (INT_MAX)                                                    (8)       (9)        (11)
+*/
+void test_ShortestPath_main_Compute_shortest_path_complex_graph(void)
+{  
     Vertex *VA = createVertex("A",0);
     Vertex *VB = createVertex("B",INT_MAX);
     Vertex *VC = createVertex("C",INT_MAX);
     Vertex *VD = createVertex("D",INT_MAX);
     Vertex *VE = createVertex("E",INT_MAX);
+    Vertex *VF = createVertex("F",INT_MAX);
+    Vertex *VG = createVertex("G",INT_MAX);
+    Vertex *VH = createVertex("H",INT_MAX);
+    Vertex *VI = createVertex("I",INT_MAX);
 
-    Vertexlink LAC = {VC,2};
-    Vertexlink LAB = {VB,3};
-    Vertexlink LBD = {VD,1};
-    Vertexlink LBE = {VE,4};
+    Vertexlink LAC = {VC,8};
+    Vertexlink LAB = {VB,4};
+    Vertexlink LBG = {VG,8};
+    Vertexlink LCB = {VB,11};
+    Vertexlink LCD = {VD,1};
+    Vertexlink LCE = {VE,7};
+    Vertexlink LDE = {VE,6};
+    Vertexlink LDF = {VF,2};
+    Vertexlink LGE = {VE,2};
+    Vertexlink LGH = {VH,7};
+    Vertexlink LGF = {VF,4};
+    Vertexlink LFI = {VI,10};
+    Vertexlink LHI = {VI,9};
+    Vertexlink LHF = {VF,14};
 
-    addNeighbors(VA,2,LAB,LAC);
-    addNeighbors(VB,2,LBD,LBE);
-
-    LinkedList *ShortestPath = ComputeShortestPath(VA);
-
-    TEST_ASSERT_NOT_NULL(VA->list->head);
-    TEST_ASSERT_NOT_NULL(VA->list->head->next);
-    vt = (Vertex *)(VA->list->head->data);
-    TEST_ASSERT_EQUAL_STRING("B",vt->name);
-    TEST_ASSERT_EQUAL(3,vt->PathCost);
-    vt = (Vertex *)(VA->list->head->next->data);
-    TEST_ASSERT_EQUAL_STRING("C",vt->name);
-    TEST_ASSERT_EQUAL(2,vt->PathCost);
+    addNeighbors(VA,2,&LAB,&LAC);
+    addNeighbors(VB,1,&LBG);
+    addNeighbors(VC,3,&LCB,&LCD,&LCE);
+    addNeighbors(VD,2,&LDE,&LDF);
+    addNeighbors(VG,3,&LGE,&LGH,&LGF);
+    addNeighbors(VH,2,&LHI,&LHF);
+    addNeighbors(VF,1,&LFI);
 
 
-    TEST_ASSERT_NOT_NULL(VB->list->head);
-    TEST_ASSERT_NOT_NULL(VA->list->head->next);
-    vt = (Vertex *)(VB->list->head->data);
-    TEST_ASSERT_EQUAL_STRING("D",vt->name);
-    TEST_ASSERT_EQUAL(4,vt->PathCost);
-    vt = (Vertex *)(VB->list->head->next->data);
-    TEST_ASSERT_EQUAL_STRING("E",vt->name);
-    TEST_ASSERT_EQUAL(7,vt->PathCost);
 
+    Node *root = NULL;
+    ComputeShortestPath(&root,VA);
+
+    TEST_ASSERT_EQUAL_STRING("A",VA->name);
+    TEST_ASSERT_EQUAL(0,VA->PathCost);
+    TEST_ASSERT_EQUAL_STRING("B",VB->name);
+    TEST_ASSERT_EQUAL(4,VB->PathCost);
+    TEST_ASSERT_EQUAL_STRING("C",VC->name);
+    TEST_ASSERT_EQUAL(8,VC->PathCost);
+    TEST_ASSERT_EQUAL_STRING("D",VD->name);
+    TEST_ASSERT_EQUAL(9,VD->PathCost);
+    TEST_ASSERT_EQUAL_STRING("E",VE->name);
+    TEST_ASSERT_EQUAL(14,VE->PathCost);
+    TEST_ASSERT_EQUAL_STRING("F",VF->name);
+    TEST_ASSERT_EQUAL(11,VF->PathCost);
+    TEST_ASSERT_EQUAL_STRING("G",VG->name);
+    TEST_ASSERT_EQUAL(12,VG->PathCost);
+    TEST_ASSERT_EQUAL_STRING("H",VH->name);
+    TEST_ASSERT_EQUAL(19,VH->PathCost);
+    TEST_ASSERT_EQUAL_STRING("I",VI->name);
+    TEST_ASSERT_EQUAL(21,VI->PathCost);
 
     free(VA);
     free(VB);
     free(VC);
     free(VD);
     free(VE);
+    free(VF);
+    free(VG);
+    free(VH);
+    free(VI);
 }
-*/
-/*
-                      C(2)
-                      |
-                      |2
-                      |       (3)
-                   (0)A-------B-------D (4)
-                      |   3   |   1
-                      |       | 4
-                      |       |
-                  4   +-------E (4)    // get smaller cost
-
-
-
-
-void test_ShortestPath_compute_shortestPath_va_and_vb_have_same_next_vertex_expect_smaller_cost_will_be_stored(void)
-{   Vertex *vt;
-    Vertex *VA = createVertex("A",0);
-    Vertex *VB = createVertex("B",INT_MAX);
-    Vertex *VC = createVertex("C",INT_MAX);
-    Vertex *VD = createVertex("D",INT_MAX);
-    Vertex *VE = createVertex("E",INT_MAX);
-
-    Vertexlink LAC = {VC,2};
-    Vertexlink LAB = {VB,3};
-    Vertexlink LBD = {VD,1};
-    Vertexlink LBE = {VE,4};
-    Vertexlink LAE = {VE,4};
-
-    addNeighbors(VA,3,LAB,LAC,LAE);
-    addNeighbors(VB,2,LBD,LBE);
-
-    LinkedList *ShortestPath = ComputeShortestPath(VA);
-
-    TEST_ASSERT_NOT_NULL(VA->list->head);
-    TEST_ASSERT_NOT_NULL(VA->list->head->next);
-    TEST_ASSERT_NOT_NULL(VA->list->head->next->next);
-    vt = (Vertex *)(VA->list->head->data);
-    TEST_ASSERT_EQUAL_STRING("B",vt->name);
-    TEST_ASSERT_EQUAL(3,vt->PathCost);
-    vt = (Vertex *)(VA->list->head->next->data);
-    TEST_ASSERT_EQUAL_STRING("C",vt->name);
-    TEST_ASSERT_EQUAL(2,vt->PathCost);
-    vt = (Vertex *)(VA->list->head->next->next->data);
-    TEST_ASSERT_EQUAL_STRING("E",vt->name);
-    TEST_ASSERT_EQUAL(4,vt->PathCost);
-
-
-    TEST_ASSERT_NOT_NULL(VB->list->head);
-    TEST_ASSERT_NOT_NULL(VA->list->head->next);
-    vt = (Vertex *)(VB->list->head->data);
-    TEST_ASSERT_EQUAL_STRING("D",vt->name);
-    TEST_ASSERT_EQUAL(4,vt->PathCost);
-    vt = (Vertex *)(VB->list->head->next->data);
-    TEST_ASSERT_EQUAL_STRING("E",vt->name);
-    TEST_ASSERT_EQUAL(4,vt->PathCost);
-
-
-    free(VA);
-    free(VB);
-    free(VC);
-    free(VD);
-    free(VE);
-}
-
-*/
-/*
-                      C(2)------------+7
-                      |               |
-                      |2              |
-                      |       (3)     |
-                   (0)A-------B-------D (4)
-                          3      1
-
-
-
-
-void test_ShortestPath_compute_shortestPath_have_same_next_vertex_expect_smaller_cost_will_be_stored(void)
-{   Vertex *vt;
-    Vertex *VA = createVertex("A",0);
-    Vertex *VB = createVertex("B",INT_MAX);
-    Vertex *VC = createVertex("C",INT_MAX);
-    Vertex *VD = createVertex("D",INT_MAX);
-
-    Vertexlink LAC = {VC,2};
-    Vertexlink LAB = {VB,3};
-    Vertexlink LBD = {VD,1};
-    Vertexlink LCD = {VD,7};
-
-    addNeighbors(VA,2,LAB,LAC);
-    addNeighbors(VB,1,LBD);
-    addNeighbors(VC,1,LCD);
-
-    LinkedList *ShortestPath = ComputeShortestPath(VA);
-
-    TEST_ASSERT_NOT_NULL(VA->list->head);
-    TEST_ASSERT_NOT_NULL(VA->list->head->next);
-    vt = (Vertex *)(VA->list->head->data);
-    TEST_ASSERT_EQUAL_STRING("B",vt->name);
-    TEST_ASSERT_EQUAL(3,vt->PathCost);
-    vt = (Vertex *)(VA->list->head->next->data);
-    TEST_ASSERT_EQUAL_STRING("C",vt->name);
-    TEST_ASSERT_EQUAL(2,vt->PathCost);
-
-    TEST_ASSERT_NOT_NULL(VB->list->head);
-    vt = (Vertex *)(VB->list->head->data);
-    TEST_ASSERT_EQUAL_STRING("D",vt->name);
-    TEST_ASSERT_EQUAL(4,vt->PathCost);
-
-    TEST_ASSERT_NOT_NULL(VC->list->head);
-    vt = (Vertex *)(VC->list->head->data);
-    TEST_ASSERT_EQUAL_STRING("D",vt->name);
-    TEST_ASSERT_EQUAL(4,vt->PathCost);
-
-
-    free(VA);
-    free(VB);
-    free(VC);
-    free(VD);
-}
-*/

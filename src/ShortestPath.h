@@ -7,6 +7,8 @@
 #include "node.h"
 #include "nodeHelper.h"
 #include "nodeVerifier.h"
+#include "Exception.h"
+#include "CException.h"
 
 
 #define VertexaddAvl(root, nodeToAdd)  avlAdd(root,nodeToAdd,(Compare)CostCompare);
@@ -23,7 +25,6 @@ int CostCompare(Vertexlink *nodedata, Node *refNode);
 int CostCompareforRemove(int nodedata, Node *refNode);
 Node *findSmallestNode(Node **rootPtr);
 void ListReplaceAndUpdateVertexPathCost(Node *VertexNode);
-void freeVertexNode(Node *Vertexroot);
 
 
 

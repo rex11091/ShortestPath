@@ -57,11 +57,20 @@
 - :test: test_ShortestPath_main_Compute_shortest_path_graph4
   :line: 759
   :message: ''
+- :test: test_ShortestPath_main_Compute_shortest_path_With_adding_duplicated_cost_pattern1
+  :line: 807
+  :message: ''
+- :test: test_ShortestPath_main_Compute_shortest_path_With_adding_duplicated_cost_pattern2
+  :line: 851
+  :message: ''
+- :test: test_ShortestPath_main_Compute_shortest_path_complex_graph
+  :line: 897
+  :message: ''
 :failures: []
 :ignores: []
 :counts:
-  :total: 18
-  :passed: 18
+  :total: 21
+  :passed: 21
   :failed: 0
   :ignored: 0
 :stdout: []

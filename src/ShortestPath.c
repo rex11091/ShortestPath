@@ -5,6 +5,8 @@
 #include <string.h>
 #include "LinkedList.h"
 
+CEXCEPTION_T ex;
+
 Vertex *createVertex(char *name, int value)
 {
     Vertex *newVertex=(Vertex*) malloc(sizeof(Vertex));
@@ -21,7 +23,7 @@ void createNodeForAddAVL(Node *node,Vertexlink *vertexlink,Vertex *Vertex){
     node->left = NULL;
     node->right = NULL;
     node->balanceFactor =0;
-    node->ParentVertex = Vertex;    // the parent of the child.
+    node->ParentVertex = Vertex;    // the source of neigbour for adding the source's pathcost with cost
     node->data = vertexlink;
 }
 
@@ -49,16 +51,12 @@ Node *current = (*rootPtr)->left;
       if(current->left != NULL)
          findSmallestNode(&(*rootPtr)->left);
      else{
-         if(current->right !=NULL){
-          return current->right;
-        }
-        else
          return current;
         }
   }
-  else
-    temp1 = *rootPtr;
-     return temp1;
+  else{
+     return *rootPtr;
+  }
 }
 
 void ListReplaceAndUpdateVertexPathCost(Node *VertexNode)
@@ -99,37 +97,38 @@ void ComputeShortestPath(Node **root,Vertex *vertex){
       		{
             Node *newNode = (Node *)malloc(sizeof(Node));
             createNodeForAddAVL(newNode,TempToPoint2->data,vertex);
+
+            Try{
+            // adding duplicated to avl and it will throw str do the node and will be catch 
+            //  do the duplicated node first
             VertexaddAvl(root,newNode);
-			TempToPoint1 = TempToPoint2;
+
+            }Catch(ex){
+
+            ListReplaceAndUpdateVertexPathCost(newNode);        // update the vertex's pathcost of the node
+            Vertex *temp = newNode->data->NextVertex;
+            if(temp->list->head!=NULL)                          //checking the node have neighbour?
+            ComputeShortestPath(root,temp);
+          }
+          
+			      TempToPoint1 = TempToPoint2;
             TempToPoint2 = TempToPoint2->next;
 
       	}
       }
         while(*root!=NULL){
-           smallestCost = findSmallestNode(root);
+           smallestCost = findSmallestNode(root);               //find smallest node in avltree
            Vertex *tempVertex = smallestCost->data->NextVertex;
-           int *nodetoRemove = (int*)((uintptr_t)(smallestCost->data->cost));
-           ListReplaceAndUpdateVertexPathCost(smallestCost);
-           VertexRemoveNodeAvl(root,nodetoRemove);
-          if(tempVertex->list->head!=NULL){
-           ComputeShortestPath(root,tempVertex);
+           int *nodetoRemove = (int*)((uintptr_t)(smallestCost->data->cost)); 
+           ListReplaceAndUpdateVertexPathCost(smallestCost);    // do updated vertex's path cost
+           VertexRemoveNodeAvl(root,nodetoRemove);              // delete the smallest node on avl
+          if(tempVertex->list->head!=NULL){                     // checking the vertex have neighbour?
+           ComputeShortestPath(root,tempVertex);                // redo the process
           }
     }
     return;
 }
 
-
-
-void freeVertexNode(Node *Vertexroot){
-  if(Vertexroot ==NULL){
-  return;
-  }
-  freeVertexNode(Vertexroot->right);
-  freeVertexNode(Vertexroot->left);
-  free(Vertexroot->data);
-  free(Vertexroot->ParentVertex);
-  free(Vertexroot);
-}
 
 int CostCompare(Vertexlink *nodedata, Node *refNode)
 {
@@ -162,57 +161,3 @@ int CostCompareforRemove(int nodedata, Node *refNode)
   else
     return 0;
 }
-
-
-
-
-
-
-
-/*
-LinkedList *ComputeShortestPath(Vertex *vertex){
-    Vertex *temp;
-    LinkedList *templist  = vertex->list;
-
-    Item *TempToPoint1 = NULL ;
-  	Item *TempToPoint2 = templist->head;
-
-  	if(templist->head == NULL)
-  	return NULL;
-
-  	else
-  	{
-  		while(TempToPoint2 !=NULL)
-  		{
-        if(TempToPoint2->data->value == INT_MAX){
-        TempToPoint2->data->value = TempToPoint2->cost;
-        }
-        else if(TempToPoint2->data->value > TempToPoint2->cost){
-        TempToPoint2->data->value = TempToPoint2->cost;
-        }
-        else
-        {
-        TempToPoint2->data->value = TempToPoint2->data->value;
-        }
-        //here is if the data->LinkedList have things then do storing cost to Vertex->value
-        if(TempToPoint2->data->list->head!=NULL)
-          {
-            Item *previous = NULL;
-            Item *current  = TempToPoint2->data->list->head;
-
-            while(current !=NULL)
-            {
-              current->data->value = (TempToPoint2->data->value + current->cost);
-              previous = current;
-              current = current->next;
-            }
-          }
-
-  			TempToPoint1 = TempToPoint2;
-  			TempToPoint2 = TempToPoint2->next;
-  	}
-    return templist;
-    }
-
-}
-*/

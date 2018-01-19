@@ -52,6 +52,9 @@ extern void test_ShortestPath_main_Compute_shortest_path_graph1(void);
 extern void test_ShortestPath_main_Compute_shortest_path_graph2(void);
 extern void test_ShortestPath_main_Compute_shortest_path_graph3(void);
 extern void test_ShortestPath_main_Compute_shortest_path_graph4(void);
+extern void test_ShortestPath_main_Compute_shortest_path_With_adding_duplicated_cost_pattern1(void);
+extern void test_ShortestPath_main_Compute_shortest_path_With_adding_duplicated_cost_pattern2(void);
+extern void test_ShortestPath_main_Compute_shortest_path_complex_graph(void);
 
 
 /*=======Test Reset Option=====*/
@@ -85,6 +88,9 @@ int main(void)
   RUN_TEST(test_ShortestPath_main_Compute_shortest_path_graph2, 653);
   RUN_TEST(test_ShortestPath_main_Compute_shortest_path_graph3, 710);
   RUN_TEST(test_ShortestPath_main_Compute_shortest_path_graph4, 759);
+  RUN_TEST(test_ShortestPath_main_Compute_shortest_path_With_adding_duplicated_cost_pattern1, 807);
+  RUN_TEST(test_ShortestPath_main_Compute_shortest_path_With_adding_duplicated_cost_pattern2, 851);
+  RUN_TEST(test_ShortestPath_main_Compute_shortest_path_complex_graph, 897);
 
   return (UnityEnd());
 }

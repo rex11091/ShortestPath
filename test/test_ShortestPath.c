@@ -1,6 +1,7 @@
 #include "unity.h"
 #include "stdlib.h"
 #include "LinkedList.h"
+#include "node.h"
 #include "ShortestPath.h"
 #include "avlAdd.h"
 #include "remove.h"
@@ -22,15 +23,13 @@ void tearDown(void)
 void test_ShortestPath_create_Vertex(void)
 {
     Vertex *VA = createVertex("A",0);
-    Vertex *VB = createVertex("b",9);
+    Vertex *VB = createVertex("B",9);
     Vertex *VC = createVertex("C",10);
 
-    TEST_ASSERT_EQUAL("A",VA->name);
-    TEST_ASSERT_EQUAL(0,VA->PathCost);
-    TEST_ASSERT_EQUAL("b",VB->name);
-    TEST_ASSERT_EQUAL(9,VB->PathCost);
-    TEST_ASSERT_EQUAL("C",VC->name);
-    TEST_ASSERT_EQUAL(10,VC->PathCost);
+    TEST_ASSERT_EQUAL_VERTEX("A",0,VA);
+    TEST_ASSERT_EQUAL_VERTEX("B",9,VB);
+    TEST_ASSERT_EQUAL_VERTEX("C",10,VC);
+
 
     free(VA);
     free(VB);
@@ -472,10 +471,9 @@ void test_ShortestPath_test_ListReplaceAndUpdateVertexPathCost(void){
     ListReplaceAndUpdateVertexPathCost(VertexNodeC);
     ListReplaceAndUpdateVertexPathCost(VertexNodeB);
 
-    TEST_ASSERT_EQUAL_STRING("B",VB->name);
-    TEST_ASSERT_EQUAL(2,VB->PathCost);
-    TEST_ASSERT_EQUAL_STRING("C",VC->name);
-    TEST_ASSERT_EQUAL(3,VC->PathCost);
+    TEST_ASSERT_EQUAL_VERTEX("A",0,VA);
+    TEST_ASSERT_EQUAL_VERTEX("B",2,VB);
+    TEST_ASSERT_EQUAL_VERTEX("C",3,VC);
     free(VertexNodeC);
     free(VertexNodeB);
     free(VA);
@@ -531,12 +529,10 @@ void test_ShortestPath_test_ListReplaceAndUpdateVertexPathCost_with_NextVertex_P
     createNodeForAddAVL(VNDafterUpdate,&LBD,VB);
     ListReplaceAndUpdateVertexPathCost(VNDafterUpdate);
 
-    TEST_ASSERT_EQUAL_STRING("B",VB->name);
-    TEST_ASSERT_EQUAL(2,VB->PathCost);
-    TEST_ASSERT_EQUAL_STRING("C",VC->name);
-    TEST_ASSERT_EQUAL(3,VC->PathCost);
-    TEST_ASSERT_EQUAL_STRING("D",VD->name);
-    TEST_ASSERT_EQUAL(3,VD->PathCost);
+    TEST_ASSERT_EQUAL_VERTEX("A",0,VA);
+    TEST_ASSERT_EQUAL_VERTEX("B",2,VB);
+    TEST_ASSERT_EQUAL_VERTEX("C",3,VC);
+    TEST_ASSERT_EQUAL_VERTEX("D",3,VD);
     free(VertexNodeC);
     free(VertexNodeB);
     free(VertexNodeD);
@@ -594,12 +590,10 @@ void test_ShortestPath_test_ListReplaceAndUpdateVertexPathCost_with_NextVertex_P
     createNodeForAddAVL(VNDafterUpdate,&LBD,VB);
     ListReplaceAndUpdateVertexPathCost(VNDafterUpdate);
 
-    TEST_ASSERT_EQUAL_STRING("B",VB->name);
-    TEST_ASSERT_EQUAL(2,VB->PathCost);
-    TEST_ASSERT_EQUAL_STRING("C",VC->name);
-    TEST_ASSERT_EQUAL(3,VC->PathCost);
-    TEST_ASSERT_EQUAL_STRING("D",VD->name);
-    TEST_ASSERT_EQUAL(5,VD->PathCost);
+    TEST_ASSERT_EQUAL_VERTEX("A",0,VA);
+    TEST_ASSERT_EQUAL_VERTEX("B",2,VB);
+    TEST_ASSERT_EQUAL_VERTEX("C",3,VC);
+    TEST_ASSERT_EQUAL_VERTEX("D",5,VD);
     free(VertexNodeC);
     free(VertexNodeB);
     free(VertexNodeD);
@@ -633,10 +627,9 @@ void test_ShortestPath_main_Compute_shortest_path_graph1(void)
     Node *root = NULL;
     ComputeShortestPath(&root,VA);
 
-    TEST_ASSERT_EQUAL_STRING("B",VB->name);
-    TEST_ASSERT_EQUAL(2,VB->PathCost);
-    TEST_ASSERT_EQUAL_STRING("C",VC->name);
-    TEST_ASSERT_EQUAL(3,VC->PathCost);
+    TEST_ASSERT_EQUAL_VERTEX("A",0,VA);
+    TEST_ASSERT_EQUAL_VERTEX("B",2,VB);
+    TEST_ASSERT_EQUAL_VERTEX("C",3,VC);
     free(VA);
     free(VB);
     free(VC);
@@ -681,16 +674,11 @@ void test_ShortestPath_main_Compute_shortest_path_graph2(void)
     dumpException(ex);
     }
 
-    TEST_ASSERT_EQUAL_STRING("B",VB->name);
-    TEST_ASSERT_EQUAL(2,VB->PathCost);
-    TEST_ASSERT_EQUAL_STRING("C",VC->name);
-    TEST_ASSERT_EQUAL(3,VC->PathCost);
-    TEST_ASSERT_EQUAL_STRING("D",VD->name);
-    TEST_ASSERT_EQUAL(3,VD->PathCost);
-    TEST_ASSERT_EQUAL_STRING("E",VE->name);
-    TEST_ASSERT_EQUAL(6,VE->PathCost);
-    TEST_ASSERT_EQUAL_STRING("A",VA->name);
-    TEST_ASSERT_EQUAL(0,VA->PathCost);
+    TEST_ASSERT_EQUAL_VERTEX("A",0,VA);
+    TEST_ASSERT_EQUAL_VERTEX("B",2,VB);
+    TEST_ASSERT_EQUAL_VERTEX("C",3,VC);
+    TEST_ASSERT_EQUAL_VERTEX("D",3,VD);
+    TEST_ASSERT_EQUAL_VERTEX("E",6,VE);
     free(VA);
     free(VB);
     free(VC);
@@ -737,14 +725,10 @@ void test_ShortestPath_main_Compute_shortest_path_graph3(void)
     dumpException(ex);
     }
 
-    TEST_ASSERT_EQUAL_STRING("B",VB->name);
-    TEST_ASSERT_EQUAL(2,VB->PathCost);
-    TEST_ASSERT_EQUAL_STRING("C",VC->name);
-    TEST_ASSERT_EQUAL(3,VC->PathCost);
-    TEST_ASSERT_EQUAL_STRING("D",VD->name);
-    TEST_ASSERT_EQUAL(3,VD->PathCost);
-    TEST_ASSERT_EQUAL_STRING("A",VA->name);
-    TEST_ASSERT_EQUAL(0,VA->PathCost);
+    TEST_ASSERT_EQUAL_VERTEX("A",0,VA);
+    TEST_ASSERT_EQUAL_VERTEX("B",2,VB);
+    TEST_ASSERT_EQUAL_VERTEX("C",3,VC);
+    TEST_ASSERT_EQUAL_VERTEX("D",3,VD);
     free(VA);
     free(VB);
     free(VC);
@@ -786,14 +770,10 @@ void test_ShortestPath_main_Compute_shortest_path_graph4(void)
     dumpException(ex);
     }
 
-    TEST_ASSERT_EQUAL_STRING("B",VB->name);
-    TEST_ASSERT_EQUAL(3,VB->PathCost);
-    TEST_ASSERT_EQUAL_STRING("C",VC->name);
-    TEST_ASSERT_EQUAL(2,VC->PathCost);
-    TEST_ASSERT_EQUAL_STRING("D",VD->name);
-    TEST_ASSERT_EQUAL(4,VD->PathCost);
-    TEST_ASSERT_EQUAL_STRING("A",VA->name);
-    TEST_ASSERT_EQUAL(0,VA->PathCost);
+    TEST_ASSERT_EQUAL_VERTEX("A",0,VA);
+    TEST_ASSERT_EQUAL_VERTEX("B",3,VB);
+    TEST_ASSERT_EQUAL_VERTEX("C",2,VC);
+    TEST_ASSERT_EQUAL_VERTEX("D",4,VD);
     free(VA);
     free(VB);
     free(VC);
@@ -829,14 +809,10 @@ void test_ShortestPath_main_Compute_shortest_path_With_adding_duplicated_cost_pa
     Node *root = NULL;
     ComputeShortestPath(&root,VA);
 
-    TEST_ASSERT_EQUAL_STRING("B",VB->name);
-    TEST_ASSERT_EQUAL(1,VB->PathCost);
-    TEST_ASSERT_EQUAL_STRING("C",VC->name);
-    TEST_ASSERT_EQUAL(1,VC->PathCost);
-    TEST_ASSERT_EQUAL_STRING("D",VD->name);
-    TEST_ASSERT_EQUAL(2,VD->PathCost);
-    TEST_ASSERT_EQUAL_STRING("A",VA->name);
-    TEST_ASSERT_EQUAL(0,VA->PathCost);
+    TEST_ASSERT_EQUAL_VERTEX("A",0,VA);
+    TEST_ASSERT_EQUAL_VERTEX("B",1,VB);
+    TEST_ASSERT_EQUAL_VERTEX("C",1,VC);
+    TEST_ASSERT_EQUAL_VERTEX("D",2,VD);
     free(VA);
     free(VB);
     free(VC);
@@ -873,14 +849,11 @@ void test_ShortestPath_main_Compute_shortest_path_With_adding_duplicated_cost_pa
     Node *root = NULL;
     ComputeShortestPath(&root,VA);
 
-    TEST_ASSERT_EQUAL_STRING("B",VB->name);
-    TEST_ASSERT_EQUAL(3,VB->PathCost);
-    TEST_ASSERT_EQUAL_STRING("C",VC->name);
-    TEST_ASSERT_EQUAL(4,VC->PathCost);
-    TEST_ASSERT_EQUAL_STRING("D",VD->name);
-    TEST_ASSERT_EQUAL(5,VD->PathCost);
-    TEST_ASSERT_EQUAL_STRING("A",VA->name);
-    TEST_ASSERT_EQUAL(0,VA->PathCost);
+    TEST_ASSERT_EQUAL_VERTEX("A",0,VA);
+    TEST_ASSERT_EQUAL_VERTEX("B",3,VB);
+    TEST_ASSERT_EQUAL_VERTEX("C",4,VC);
+    TEST_ASSERT_EQUAL_VERTEX("D",5,VD);
+
     free(VA);
     free(VB);
     free(VC);
@@ -915,12 +888,9 @@ void test_ShortestPath_main_Compute_shortest_path_With_adding_duplicated_cost_pa
     Node *root = NULL;
     ComputeShortestPath(&root,VA);
 
-    TEST_ASSERT_EQUAL_STRING("B",VB->name);
-    TEST_ASSERT_EQUAL(1,VB->PathCost);
-    TEST_ASSERT_EQUAL_STRING("C",VC->name);
-    TEST_ASSERT_EQUAL(2,VC->PathCost);
-    TEST_ASSERT_EQUAL_STRING("A",VA->name);
-    TEST_ASSERT_EQUAL(0,VA->PathCost);
+    TEST_ASSERT_EQUAL_VERTEX("A",0,VA);
+    TEST_ASSERT_EQUAL_VERTEX("B",1,VB);
+    TEST_ASSERT_EQUAL_VERTEX("C",2,VC);
     free(VA);
     free(VB);
     free(VC);
@@ -980,24 +950,15 @@ void test_ShortestPath_main_Compute_shortest_path_complex_graph(void)
     Node *root = NULL;
     ComputeShortestPath(&root,VA);
 
-    TEST_ASSERT_EQUAL_STRING("A",VA->name);
-    TEST_ASSERT_EQUAL(0,VA->PathCost);
-    TEST_ASSERT_EQUAL_STRING("B",VB->name);
-    TEST_ASSERT_EQUAL(4,VB->PathCost);
-    TEST_ASSERT_EQUAL_STRING("C",VC->name);
-    TEST_ASSERT_EQUAL(8,VC->PathCost);
-    TEST_ASSERT_EQUAL_STRING("D",VD->name);
-    TEST_ASSERT_EQUAL(9,VD->PathCost);
-    TEST_ASSERT_EQUAL_STRING("E",VE->name);
-    TEST_ASSERT_EQUAL(14,VE->PathCost);
-    TEST_ASSERT_EQUAL_STRING("F",VF->name);
-    TEST_ASSERT_EQUAL(11,VF->PathCost);
-    TEST_ASSERT_EQUAL_STRING("G",VG->name);
-    TEST_ASSERT_EQUAL(12,VG->PathCost);
-    TEST_ASSERT_EQUAL_STRING("H",VH->name);
-    TEST_ASSERT_EQUAL(19,VH->PathCost);
-    TEST_ASSERT_EQUAL_STRING("I",VI->name);
-    TEST_ASSERT_EQUAL(21,VI->PathCost);
+    TEST_ASSERT_EQUAL_VERTEX("A",0,VA);
+    TEST_ASSERT_EQUAL_VERTEX("B",4,VB);
+    TEST_ASSERT_EQUAL_VERTEX("C",8,VC);
+    TEST_ASSERT_EQUAL_VERTEX("D",9,VD);
+    TEST_ASSERT_EQUAL_VERTEX("E",14,VE);
+    TEST_ASSERT_EQUAL_VERTEX("F",11,VF);
+    TEST_ASSERT_EQUAL_VERTEX("G",12,VG);
+    TEST_ASSERT_EQUAL_VERTEX("H",19,VH);
+    TEST_ASSERT_EQUAL_VERTEX("I",21,VI);
 
     free(VA);
     free(VB);

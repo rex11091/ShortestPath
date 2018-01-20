@@ -71,28 +71,28 @@ void resetTest(void)
 int main(void)
 {
   UnityBegin("test_ShortestPath.c");
-  RUN_TEST(test_ShortestPath_create_Vertex, 22);
-  RUN_TEST(test_ShortestPath_Vertexlink, 41);
-  RUN_TEST(test_ShortestPath_CreateNodeForInsertAVL, 61);
-  RUN_TEST(test_ShortestPath_addneighbour_VA_expect_neigboring_with_another_Graph1, 100);
-  RUN_TEST(test_ShortestPath_addneighbour_VA_expect_neigboring_with_another_Graph2, 139);
-  RUN_TEST(test_ShortestPath_addneighbour_VA_expect_neigboring_with_another_Graph3, 195);
-  RUN_TEST(test_ShortestPath_VertexaddAvl_add_VertexNodeB_VertexNodeC_VertexNodeD_to_avl_expect_balance, 254);
-  RUN_TEST(test_ShortestPath_VertexaddAvl_add_VertexNodeB_VertexNodeC_VertexNodeD_to_avl_expect_removed_VertexNodeB, 293);
-  RUN_TEST(test_ShortestPath_VertexaddAvl_Finding_smallestNode_when_only_root_expect_return_VertexNodeC, 337);
-  RUN_TEST(test_ShortestPath_VertexaddAvl_Finding_smallestNode_expect_return_VertexNodeD, 364);
-  RUN_TEST(test_ShortestPath_VertexaddAvl_Finding_smallestNode_expect_return_VertexNodeE, 403);
-  RUN_TEST(test_ShortestPath_test_ListReplaceAndUpdateVertexPathCost, 457);
-  RUN_TEST(test_ShortestPath_test_ListReplaceAndUpdateVertexPathCost_with_NextVertex_PC_smaller_than_PC_Plus_cost_expected_no_update, 503);
-  RUN_TEST(test_ShortestPath_test_ListReplaceAndUpdateVertexPathCost_with_NextVertex_PC_smaller_than_PC_Plus_cost_expected_update, 568);
-  RUN_TEST(test_ShortestPath_main_Compute_shortest_path_graph1, 622);
-  RUN_TEST(test_ShortestPath_main_Compute_shortest_path_graph2, 659);
-  RUN_TEST(test_ShortestPath_main_Compute_shortest_path_graph3, 716);
-  RUN_TEST(test_ShortestPath_main_Compute_shortest_path_graph4, 765);
-  RUN_TEST(test_ShortestPath_main_Compute_shortest_path_With_adding_duplicated_cost_pattern1, 813);
-  RUN_TEST(test_ShortestPath_main_Compute_shortest_path_With_adding_duplicated_cost_pattern2, 857);
-  RUN_TEST(test_ShortestPath_main_Compute_shortest_path_With_adding_duplicated_cost_pattern3, 902);
-  RUN_TEST(test_ShortestPath_main_Compute_shortest_path_complex_graph, 942);
+  RUN_TEST(test_ShortestPath_create_Vertex, 23);
+  RUN_TEST(test_ShortestPath_Vertexlink, 40);
+  RUN_TEST(test_ShortestPath_CreateNodeForInsertAVL, 60);
+  RUN_TEST(test_ShortestPath_addneighbour_VA_expect_neigboring_with_another_Graph1, 99);
+  RUN_TEST(test_ShortestPath_addneighbour_VA_expect_neigboring_with_another_Graph2, 138);
+  RUN_TEST(test_ShortestPath_addneighbour_VA_expect_neigboring_with_another_Graph3, 194);
+  RUN_TEST(test_ShortestPath_VertexaddAvl_add_VertexNodeB_VertexNodeC_VertexNodeD_to_avl_expect_balance, 253);
+  RUN_TEST(test_ShortestPath_VertexaddAvl_add_VertexNodeB_VertexNodeC_VertexNodeD_to_avl_expect_removed_VertexNodeB, 292);
+  RUN_TEST(test_ShortestPath_VertexaddAvl_Finding_smallestNode_when_only_root_expect_return_VertexNodeC, 336);
+  RUN_TEST(test_ShortestPath_VertexaddAvl_Finding_smallestNode_expect_return_VertexNodeD, 363);
+  RUN_TEST(test_ShortestPath_VertexaddAvl_Finding_smallestNode_expect_return_VertexNodeE, 402);
+  RUN_TEST(test_ShortestPath_test_ListReplaceAndUpdateVertexPathCost, 456);
+  RUN_TEST(test_ShortestPath_test_ListReplaceAndUpdateVertexPathCost_with_NextVertex_PC_smaller_than_PC_Plus_cost_expected_no_update, 501);
+  RUN_TEST(test_ShortestPath_test_ListReplaceAndUpdateVertexPathCost_with_NextVertex_PC_smaller_than_PC_Plus_cost_expected_update, 564);
+  RUN_TEST(test_ShortestPath_main_Compute_shortest_path_graph1, 616);
+  RUN_TEST(test_ShortestPath_main_Compute_shortest_path_graph2, 652);
+  RUN_TEST(test_ShortestPath_main_Compute_shortest_path_graph3, 704);
+  RUN_TEST(test_ShortestPath_main_Compute_shortest_path_graph4, 749);
+  RUN_TEST(test_ShortestPath_main_Compute_shortest_path_With_adding_duplicated_cost_pattern1, 793);
+  RUN_TEST(test_ShortestPath_main_Compute_shortest_path_With_adding_duplicated_cost_pattern2, 833);
+  RUN_TEST(test_ShortestPath_main_Compute_shortest_path_With_adding_duplicated_cost_pattern3, 875);
+  RUN_TEST(test_ShortestPath_main_Compute_shortest_path_complex_graph, 912);
 
   return (UnityEnd());
 }

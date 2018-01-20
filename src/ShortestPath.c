@@ -148,7 +148,7 @@ void ComputeShortestPath(Node **root,Vertex *vertex){
           }
         }
         while(*root!=NULL){
-           smallestCost = findSmallestNode(root);                    //find smallest node in avltree
+           smallestCost = findSmallestNode(root);                     //find smallest node in avltree
            Vertex *tempVertex = smallestCost->data->NextVertex;
            int *nodetoRemove = (int*)((uintptr_t)(smallestCost->data->cost)); 
            ListReplaceAndUpdateVertexPathCost(smallestCost);         // do updated vertex's path cost

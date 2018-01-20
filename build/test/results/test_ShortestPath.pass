@@ -4,70 +4,70 @@
   :file: test_ShortestPath.c
 :successes:
 - :test: test_ShortestPath_create_Vertex
-  :line: 22
+  :line: 23
   :message: ''
 - :test: test_ShortestPath_Vertexlink
-  :line: 41
+  :line: 40
   :message: ''
 - :test: test_ShortestPath_CreateNodeForInsertAVL
-  :line: 61
+  :line: 60
   :message: ''
 - :test: test_ShortestPath_addneighbour_VA_expect_neigboring_with_another_Graph1
-  :line: 100
+  :line: 99
   :message: ''
 - :test: test_ShortestPath_addneighbour_VA_expect_neigboring_with_another_Graph2
-  :line: 139
+  :line: 138
   :message: ''
 - :test: test_ShortestPath_addneighbour_VA_expect_neigboring_with_another_Graph3
-  :line: 195
+  :line: 194
   :message: ''
 - :test: test_ShortestPath_VertexaddAvl_add_VertexNodeB_VertexNodeC_VertexNodeD_to_avl_expect_balance
-  :line: 254
+  :line: 253
   :message: ''
 - :test: test_ShortestPath_VertexaddAvl_add_VertexNodeB_VertexNodeC_VertexNodeD_to_avl_expect_removed_VertexNodeB
-  :line: 293
+  :line: 292
   :message: ''
 - :test: test_ShortestPath_VertexaddAvl_Finding_smallestNode_when_only_root_expect_return_VertexNodeC
-  :line: 337
+  :line: 336
   :message: ''
 - :test: test_ShortestPath_VertexaddAvl_Finding_smallestNode_expect_return_VertexNodeD
-  :line: 364
+  :line: 363
   :message: ''
 - :test: test_ShortestPath_VertexaddAvl_Finding_smallestNode_expect_return_VertexNodeE
-  :line: 403
+  :line: 402
   :message: ''
 - :test: test_ShortestPath_test_ListReplaceAndUpdateVertexPathCost
-  :line: 457
+  :line: 456
   :message: ''
 - :test: test_ShortestPath_test_ListReplaceAndUpdateVertexPathCost_with_NextVertex_PC_smaller_than_PC_Plus_cost_expected_no_update
-  :line: 503
+  :line: 501
   :message: ''
 - :test: test_ShortestPath_test_ListReplaceAndUpdateVertexPathCost_with_NextVertex_PC_smaller_than_PC_Plus_cost_expected_update
-  :line: 568
+  :line: 564
   :message: ''
 - :test: test_ShortestPath_main_Compute_shortest_path_graph1
-  :line: 622
+  :line: 616
   :message: ''
 - :test: test_ShortestPath_main_Compute_shortest_path_graph2
-  :line: 659
+  :line: 652
   :message: ''
 - :test: test_ShortestPath_main_Compute_shortest_path_graph3
-  :line: 716
+  :line: 704
   :message: ''
 - :test: test_ShortestPath_main_Compute_shortest_path_graph4
-  :line: 765
+  :line: 749
   :message: ''
 - :test: test_ShortestPath_main_Compute_shortest_path_With_adding_duplicated_cost_pattern1
-  :line: 813
+  :line: 793
   :message: ''
 - :test: test_ShortestPath_main_Compute_shortest_path_With_adding_duplicated_cost_pattern2
-  :line: 857
+  :line: 833
   :message: ''
 - :test: test_ShortestPath_main_Compute_shortest_path_With_adding_duplicated_cost_pattern3
-  :line: 902
+  :line: 875
   :message: ''
 - :test: test_ShortestPath_main_Compute_shortest_path_complex_graph
-  :line: 942
+  :line: 912
   :message: ''
 :failures: []
 :ignores: []

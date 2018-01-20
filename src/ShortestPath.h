@@ -5,7 +5,6 @@
 #include "avlAdd.h"
 #include "remove.h"
 #include "node.h"
-#include "nodeHelper.h"
 #include "nodeVerifier.h"
 #include "Exception.h"
 #include "CException.h"

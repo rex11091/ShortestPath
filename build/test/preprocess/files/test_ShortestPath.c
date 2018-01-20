@@ -1120,19 +1120,25 @@ void test_ShortestPath_test_ListReplaceAndUpdateVertexPathCost_with_NextVertex_P
 
     Node *VNDafterUpdate = (Node *)malloc(sizeof(Node));
 
+
+
     createNodeForAddAVL(VertexNodeB,&LAB,VA);
 
     createNodeForAddAVL(VertexNodeC,&LAC,VA);
 
     createNodeForAddAVL(VertexNodeD,&LAD,VA);
 
-    createNodeForAddAVL(VNDafterUpdate,&LBD,VB);
-
     ListReplaceAndUpdateVertexPathCost(VertexNodeC);
 
     ListReplaceAndUpdateVertexPathCost(VertexNodeB);
 
     ListReplaceAndUpdateVertexPathCost(VertexNodeD);
+
+
+
+
+
+    createNodeForAddAVL(VNDafterUpdate,&LBD,VB);
 
     ListReplaceAndUpdateVertexPathCost(VNDafterUpdate);
 
@@ -1142,37 +1148,37 @@ void test_ShortestPath_test_ListReplaceAndUpdateVertexPathCost_with_NextVertex_P
 
    ((void *)0)
 
-   ), (UNITY_UINT)(531));
+   ), (UNITY_UINT)(534));
 
     UnityAssertEqualNumber((UNITY_INT)((2)), (UNITY_INT)((VB->PathCost)), (
 
    ((void *)0)
 
-   ), (UNITY_UINT)(532), UNITY_DISPLAY_STYLE_INT);
+   ), (UNITY_UINT)(535), UNITY_DISPLAY_STYLE_INT);
 
     UnityAssertEqualString((const char*)(("C")), (const char*)((VC->name)), (
 
    ((void *)0)
 
-   ), (UNITY_UINT)(533));
+   ), (UNITY_UINT)(536));
 
     UnityAssertEqualNumber((UNITY_INT)((3)), (UNITY_INT)((VC->PathCost)), (
 
    ((void *)0)
 
-   ), (UNITY_UINT)(534), UNITY_DISPLAY_STYLE_INT);
+   ), (UNITY_UINT)(537), UNITY_DISPLAY_STYLE_INT);
 
     UnityAssertEqualString((const char*)(("D")), (const char*)((VD->name)), (
 
    ((void *)0)
 
-   ), (UNITY_UINT)(535));
+   ), (UNITY_UINT)(538));
 
     UnityAssertEqualNumber((UNITY_INT)((3)), (UNITY_INT)((VD->PathCost)), (
 
    ((void *)0)
 
-   ), (UNITY_UINT)(536), UNITY_DISPLAY_STYLE_INT);
+   ), (UNITY_UINT)(539), UNITY_DISPLAY_STYLE_INT);
 
     free(VertexNodeC);
 
@@ -1236,13 +1242,15 @@ void test_ShortestPath_test_ListReplaceAndUpdateVertexPathCost_with_NextVertex_P
 
     createNodeForAddAVL(VertexNodeD,&LAD,VA);
 
-    createNodeForAddAVL(VNDafterUpdate,&LBD,VB);
-
     ListReplaceAndUpdateVertexPathCost(VertexNodeC);
 
     ListReplaceAndUpdateVertexPathCost(VertexNodeB);
 
     ListReplaceAndUpdateVertexPathCost(VertexNodeD);
+
+
+
+    createNodeForAddAVL(VNDafterUpdate,&LBD,VB);
 
     ListReplaceAndUpdateVertexPathCost(VNDafterUpdate);
 
@@ -1252,37 +1260,37 @@ void test_ShortestPath_test_ListReplaceAndUpdateVertexPathCost_with_NextVertex_P
 
    ((void *)0)
 
-   ), (UNITY_UINT)(593));
+   ), (UNITY_UINT)(597));
 
     UnityAssertEqualNumber((UNITY_INT)((2)), (UNITY_INT)((VB->PathCost)), (
 
    ((void *)0)
 
-   ), (UNITY_UINT)(594), UNITY_DISPLAY_STYLE_INT);
+   ), (UNITY_UINT)(598), UNITY_DISPLAY_STYLE_INT);
 
     UnityAssertEqualString((const char*)(("C")), (const char*)((VC->name)), (
 
    ((void *)0)
 
-   ), (UNITY_UINT)(595));
+   ), (UNITY_UINT)(599));
 
     UnityAssertEqualNumber((UNITY_INT)((3)), (UNITY_INT)((VC->PathCost)), (
 
    ((void *)0)
 
-   ), (UNITY_UINT)(596), UNITY_DISPLAY_STYLE_INT);
+   ), (UNITY_UINT)(600), UNITY_DISPLAY_STYLE_INT);
 
     UnityAssertEqualString((const char*)(("D")), (const char*)((VD->name)), (
 
    ((void *)0)
 
-   ), (UNITY_UINT)(597));
+   ), (UNITY_UINT)(601));
 
     UnityAssertEqualNumber((UNITY_INT)((5)), (UNITY_INT)((VD->PathCost)), (
 
    ((void *)0)
 
-   ), (UNITY_UINT)(598), UNITY_DISPLAY_STYLE_INT);
+   ), (UNITY_UINT)(602), UNITY_DISPLAY_STYLE_INT);
 
     free(VertexNodeC);
 
@@ -1338,25 +1346,25 @@ void test_ShortestPath_main_Compute_shortest_path_graph1(void)
 
    ((void *)0)
 
-   ), (UNITY_UINT)(632));
+   ), (UNITY_UINT)(636));
 
     UnityAssertEqualNumber((UNITY_INT)((2)), (UNITY_INT)((VB->PathCost)), (
 
    ((void *)0)
 
-   ), (UNITY_UINT)(633), UNITY_DISPLAY_STYLE_INT);
+   ), (UNITY_UINT)(637), UNITY_DISPLAY_STYLE_INT);
 
     UnityAssertEqualString((const char*)(("C")), (const char*)((VC->name)), (
 
    ((void *)0)
 
-   ), (UNITY_UINT)(634));
+   ), (UNITY_UINT)(638));
 
     UnityAssertEqualNumber((UNITY_INT)((3)), (UNITY_INT)((VC->PathCost)), (
 
    ((void *)0)
 
-   ), (UNITY_UINT)(635), UNITY_DISPLAY_STYLE_INT);
+   ), (UNITY_UINT)(639), UNITY_DISPLAY_STYLE_INT);
 
     free(VA);
 
@@ -1432,61 +1440,61 @@ void test_ShortestPath_main_Compute_shortest_path_graph2(void)
 
    ((void *)0)
 
-   ), (UNITY_UINT)(680));
+   ), (UNITY_UINT)(684));
 
     UnityAssertEqualNumber((UNITY_INT)((2)), (UNITY_INT)((VB->PathCost)), (
 
    ((void *)0)
 
-   ), (UNITY_UINT)(681), UNITY_DISPLAY_STYLE_INT);
+   ), (UNITY_UINT)(685), UNITY_DISPLAY_STYLE_INT);
 
     UnityAssertEqualString((const char*)(("C")), (const char*)((VC->name)), (
 
    ((void *)0)
 
-   ), (UNITY_UINT)(682));
+   ), (UNITY_UINT)(686));
 
     UnityAssertEqualNumber((UNITY_INT)((3)), (UNITY_INT)((VC->PathCost)), (
 
    ((void *)0)
 
-   ), (UNITY_UINT)(683), UNITY_DISPLAY_STYLE_INT);
+   ), (UNITY_UINT)(687), UNITY_DISPLAY_STYLE_INT);
 
     UnityAssertEqualString((const char*)(("D")), (const char*)((VD->name)), (
 
    ((void *)0)
 
-   ), (UNITY_UINT)(684));
+   ), (UNITY_UINT)(688));
 
     UnityAssertEqualNumber((UNITY_INT)((3)), (UNITY_INT)((VD->PathCost)), (
 
    ((void *)0)
 
-   ), (UNITY_UINT)(685), UNITY_DISPLAY_STYLE_INT);
+   ), (UNITY_UINT)(689), UNITY_DISPLAY_STYLE_INT);
 
     UnityAssertEqualString((const char*)(("E")), (const char*)((VE->name)), (
 
    ((void *)0)
 
-   ), (UNITY_UINT)(686));
+   ), (UNITY_UINT)(690));
 
     UnityAssertEqualNumber((UNITY_INT)((6)), (UNITY_INT)((VE->PathCost)), (
 
    ((void *)0)
 
-   ), (UNITY_UINT)(687), UNITY_DISPLAY_STYLE_INT);
+   ), (UNITY_UINT)(691), UNITY_DISPLAY_STYLE_INT);
 
     UnityAssertEqualString((const char*)(("A")), (const char*)((VA->name)), (
 
    ((void *)0)
 
-   ), (UNITY_UINT)(688));
+   ), (UNITY_UINT)(692));
 
     UnityAssertEqualNumber((UNITY_INT)((0)), (UNITY_INT)((VA->PathCost)), (
 
    ((void *)0)
 
-   ), (UNITY_UINT)(689), UNITY_DISPLAY_STYLE_INT);
+   ), (UNITY_UINT)(693), UNITY_DISPLAY_STYLE_INT);
 
     free(VA);
 
@@ -1564,49 +1572,49 @@ void test_ShortestPath_main_Compute_shortest_path_graph3(void)
 
    ((void *)0)
 
-   ), (UNITY_UINT)(736));
+   ), (UNITY_UINT)(740));
 
     UnityAssertEqualNumber((UNITY_INT)((2)), (UNITY_INT)((VB->PathCost)), (
 
    ((void *)0)
 
-   ), (UNITY_UINT)(737), UNITY_DISPLAY_STYLE_INT);
+   ), (UNITY_UINT)(741), UNITY_DISPLAY_STYLE_INT);
 
     UnityAssertEqualString((const char*)(("C")), (const char*)((VC->name)), (
 
    ((void *)0)
 
-   ), (UNITY_UINT)(738));
+   ), (UNITY_UINT)(742));
 
     UnityAssertEqualNumber((UNITY_INT)((3)), (UNITY_INT)((VC->PathCost)), (
 
    ((void *)0)
 
-   ), (UNITY_UINT)(739), UNITY_DISPLAY_STYLE_INT);
+   ), (UNITY_UINT)(743), UNITY_DISPLAY_STYLE_INT);
 
     UnityAssertEqualString((const char*)(("D")), (const char*)((VD->name)), (
 
    ((void *)0)
 
-   ), (UNITY_UINT)(740));
+   ), (UNITY_UINT)(744));
 
     UnityAssertEqualNumber((UNITY_INT)((3)), (UNITY_INT)((VD->PathCost)), (
 
    ((void *)0)
 
-   ), (UNITY_UINT)(741), UNITY_DISPLAY_STYLE_INT);
+   ), (UNITY_UINT)(745), UNITY_DISPLAY_STYLE_INT);
 
     UnityAssertEqualString((const char*)(("A")), (const char*)((VA->name)), (
 
    ((void *)0)
 
-   ), (UNITY_UINT)(742));
+   ), (UNITY_UINT)(746));
 
     UnityAssertEqualNumber((UNITY_INT)((0)), (UNITY_INT)((VA->PathCost)), (
 
    ((void *)0)
 
-   ), (UNITY_UINT)(743), UNITY_DISPLAY_STYLE_INT);
+   ), (UNITY_UINT)(747), UNITY_DISPLAY_STYLE_INT);
 
     free(VA);
 
@@ -1682,49 +1690,49 @@ void test_ShortestPath_main_Compute_shortest_path_graph4(void)
 
    ((void *)0)
 
-   ), (UNITY_UINT)(785));
+   ), (UNITY_UINT)(789));
 
     UnityAssertEqualNumber((UNITY_INT)((3)), (UNITY_INT)((VB->PathCost)), (
 
    ((void *)0)
 
-   ), (UNITY_UINT)(786), UNITY_DISPLAY_STYLE_INT);
+   ), (UNITY_UINT)(790), UNITY_DISPLAY_STYLE_INT);
 
     UnityAssertEqualString((const char*)(("C")), (const char*)((VC->name)), (
 
    ((void *)0)
 
-   ), (UNITY_UINT)(787));
+   ), (UNITY_UINT)(791));
 
     UnityAssertEqualNumber((UNITY_INT)((2)), (UNITY_INT)((VC->PathCost)), (
 
    ((void *)0)
 
-   ), (UNITY_UINT)(788), UNITY_DISPLAY_STYLE_INT);
+   ), (UNITY_UINT)(792), UNITY_DISPLAY_STYLE_INT);
 
     UnityAssertEqualString((const char*)(("D")), (const char*)((VD->name)), (
 
    ((void *)0)
 
-   ), (UNITY_UINT)(789));
+   ), (UNITY_UINT)(793));
 
     UnityAssertEqualNumber((UNITY_INT)((4)), (UNITY_INT)((VD->PathCost)), (
 
    ((void *)0)
 
-   ), (UNITY_UINT)(790), UNITY_DISPLAY_STYLE_INT);
+   ), (UNITY_UINT)(794), UNITY_DISPLAY_STYLE_INT);
 
     UnityAssertEqualString((const char*)(("A")), (const char*)((VA->name)), (
 
    ((void *)0)
 
-   ), (UNITY_UINT)(791));
+   ), (UNITY_UINT)(795));
 
     UnityAssertEqualNumber((UNITY_INT)((0)), (UNITY_INT)((VA->PathCost)), (
 
    ((void *)0)
 
-   ), (UNITY_UINT)(792), UNITY_DISPLAY_STYLE_INT);
+   ), (UNITY_UINT)(796), UNITY_DISPLAY_STYLE_INT);
 
     free(VA);
 
@@ -1782,49 +1790,49 @@ void test_ShortestPath_main_Compute_shortest_path_With_adding_duplicated_cost_pa
 
    ((void *)0)
 
-   ), (UNITY_UINT)(828));
+   ), (UNITY_UINT)(832));
 
     UnityAssertEqualNumber((UNITY_INT)((1)), (UNITY_INT)((VB->PathCost)), (
 
    ((void *)0)
 
-   ), (UNITY_UINT)(829), UNITY_DISPLAY_STYLE_INT);
+   ), (UNITY_UINT)(833), UNITY_DISPLAY_STYLE_INT);
 
     UnityAssertEqualString((const char*)(("C")), (const char*)((VC->name)), (
 
    ((void *)0)
 
-   ), (UNITY_UINT)(830));
+   ), (UNITY_UINT)(834));
 
     UnityAssertEqualNumber((UNITY_INT)((1)), (UNITY_INT)((VC->PathCost)), (
 
    ((void *)0)
 
-   ), (UNITY_UINT)(831), UNITY_DISPLAY_STYLE_INT);
+   ), (UNITY_UINT)(835), UNITY_DISPLAY_STYLE_INT);
 
     UnityAssertEqualString((const char*)(("D")), (const char*)((VD->name)), (
 
    ((void *)0)
 
-   ), (UNITY_UINT)(832));
+   ), (UNITY_UINT)(836));
 
     UnityAssertEqualNumber((UNITY_INT)((2)), (UNITY_INT)((VD->PathCost)), (
 
    ((void *)0)
 
-   ), (UNITY_UINT)(833), UNITY_DISPLAY_STYLE_INT);
+   ), (UNITY_UINT)(837), UNITY_DISPLAY_STYLE_INT);
 
     UnityAssertEqualString((const char*)(("A")), (const char*)((VA->name)), (
 
    ((void *)0)
 
-   ), (UNITY_UINT)(834));
+   ), (UNITY_UINT)(838));
 
     UnityAssertEqualNumber((UNITY_INT)((0)), (UNITY_INT)((VA->PathCost)), (
 
    ((void *)0)
 
-   ), (UNITY_UINT)(835), UNITY_DISPLAY_STYLE_INT);
+   ), (UNITY_UINT)(839), UNITY_DISPLAY_STYLE_INT);
 
     free(VA);
 
@@ -1882,49 +1890,49 @@ void test_ShortestPath_main_Compute_shortest_path_With_adding_duplicated_cost_pa
 
    ((void *)0)
 
-   ), (UNITY_UINT)(872));
+   ), (UNITY_UINT)(876));
 
     UnityAssertEqualNumber((UNITY_INT)((3)), (UNITY_INT)((VB->PathCost)), (
 
    ((void *)0)
 
-   ), (UNITY_UINT)(873), UNITY_DISPLAY_STYLE_INT);
+   ), (UNITY_UINT)(877), UNITY_DISPLAY_STYLE_INT);
 
     UnityAssertEqualString((const char*)(("C")), (const char*)((VC->name)), (
 
    ((void *)0)
 
-   ), (UNITY_UINT)(874));
+   ), (UNITY_UINT)(878));
 
     UnityAssertEqualNumber((UNITY_INT)((4)), (UNITY_INT)((VC->PathCost)), (
 
    ((void *)0)
 
-   ), (UNITY_UINT)(875), UNITY_DISPLAY_STYLE_INT);
+   ), (UNITY_UINT)(879), UNITY_DISPLAY_STYLE_INT);
 
     UnityAssertEqualString((const char*)(("D")), (const char*)((VD->name)), (
 
    ((void *)0)
 
-   ), (UNITY_UINT)(876));
+   ), (UNITY_UINT)(880));
 
     UnityAssertEqualNumber((UNITY_INT)((5)), (UNITY_INT)((VD->PathCost)), (
 
    ((void *)0)
 
-   ), (UNITY_UINT)(877), UNITY_DISPLAY_STYLE_INT);
+   ), (UNITY_UINT)(881), UNITY_DISPLAY_STYLE_INT);
 
     UnityAssertEqualString((const char*)(("A")), (const char*)((VA->name)), (
 
    ((void *)0)
 
-   ), (UNITY_UINT)(878));
+   ), (UNITY_UINT)(882));
 
     UnityAssertEqualNumber((UNITY_INT)((0)), (UNITY_INT)((VA->PathCost)), (
 
    ((void *)0)
 
-   ), (UNITY_UINT)(879), UNITY_DISPLAY_STYLE_INT);
+   ), (UNITY_UINT)(883), UNITY_DISPLAY_STYLE_INT);
 
     free(VA);
 
@@ -1976,37 +1984,37 @@ void test_ShortestPath_main_Compute_shortest_path_With_adding_duplicated_cost_pa
 
    ((void *)0)
 
-   ), (UNITY_UINT)(914));
+   ), (UNITY_UINT)(918));
 
     UnityAssertEqualNumber((UNITY_INT)((1)), (UNITY_INT)((VB->PathCost)), (
 
    ((void *)0)
 
-   ), (UNITY_UINT)(915), UNITY_DISPLAY_STYLE_INT);
+   ), (UNITY_UINT)(919), UNITY_DISPLAY_STYLE_INT);
 
     UnityAssertEqualString((const char*)(("C")), (const char*)((VC->name)), (
 
    ((void *)0)
 
-   ), (UNITY_UINT)(916));
+   ), (UNITY_UINT)(920));
 
     UnityAssertEqualNumber((UNITY_INT)((2)), (UNITY_INT)((VC->PathCost)), (
 
    ((void *)0)
 
-   ), (UNITY_UINT)(917), UNITY_DISPLAY_STYLE_INT);
+   ), (UNITY_UINT)(921), UNITY_DISPLAY_STYLE_INT);
 
     UnityAssertEqualString((const char*)(("A")), (const char*)((VA->name)), (
 
    ((void *)0)
 
-   ), (UNITY_UINT)(918));
+   ), (UNITY_UINT)(922));
 
     UnityAssertEqualNumber((UNITY_INT)((0)), (UNITY_INT)((VA->PathCost)), (
 
    ((void *)0)
 
-   ), (UNITY_UINT)(919), UNITY_DISPLAY_STYLE_INT);
+   ), (UNITY_UINT)(923), UNITY_DISPLAY_STYLE_INT);
 
     free(VA);
 
@@ -2098,25 +2106,7 @@ void test_ShortestPath_main_Compute_shortest_path_complex_graph(void)
 
                     ;
 
-    { jmp_buf *PrevFrame, NewFrame; unsigned int MY_ID = (0); PrevFrame = CExceptionFrames[MY_ID].pFrame; CExceptionFrames[MY_ID].pFrame = (jmp_buf*)(&NewFrame); CExceptionFrames[MY_ID].Exception = ((ExceptionPtr)0x5A5A5A5A); ; if (
-
-   _setjmp((
-
-   NewFrame
-
-   ), __builtin_frame_address (0)) 
-
-   == 0) { if (1){
-
     ComputeShortestPath(&root,VA);
-
-    }else { } CExceptionFrames[MY_ID].Exception = ((ExceptionPtr)0x5A5A5A5A); ; } else { ex = CExceptionFrames[MY_ID].Exception; (void)ex; ; } CExceptionFrames[MY_ID].pFrame = PrevFrame; ; } if (CExceptionFrames[(0)].Exception != ((ExceptionPtr)0x5A5A5A5A)){
-
-    dumpException(ex);
-
-    }
-
-
 
 
 
@@ -2124,109 +2114,109 @@ void test_ShortestPath_main_Compute_shortest_path_complex_graph(void)
 
    ((void *)0)
 
-   ), (UNITY_UINT)(984));
+   ), (UNITY_UINT)(983));
 
     UnityAssertEqualNumber((UNITY_INT)((0)), (UNITY_INT)((VA->PathCost)), (
 
    ((void *)0)
 
-   ), (UNITY_UINT)(985), UNITY_DISPLAY_STYLE_INT);
+   ), (UNITY_UINT)(984), UNITY_DISPLAY_STYLE_INT);
 
     UnityAssertEqualString((const char*)(("B")), (const char*)((VB->name)), (
 
    ((void *)0)
 
-   ), (UNITY_UINT)(986));
+   ), (UNITY_UINT)(985));
 
     UnityAssertEqualNumber((UNITY_INT)((4)), (UNITY_INT)((VB->PathCost)), (
 
    ((void *)0)
 
-   ), (UNITY_UINT)(987), UNITY_DISPLAY_STYLE_INT);
+   ), (UNITY_UINT)(986), UNITY_DISPLAY_STYLE_INT);
 
     UnityAssertEqualString((const char*)(("C")), (const char*)((VC->name)), (
 
    ((void *)0)
 
-   ), (UNITY_UINT)(988));
+   ), (UNITY_UINT)(987));
 
     UnityAssertEqualNumber((UNITY_INT)((8)), (UNITY_INT)((VC->PathCost)), (
 
    ((void *)0)
 
-   ), (UNITY_UINT)(989), UNITY_DISPLAY_STYLE_INT);
+   ), (UNITY_UINT)(988), UNITY_DISPLAY_STYLE_INT);
 
     UnityAssertEqualString((const char*)(("D")), (const char*)((VD->name)), (
 
    ((void *)0)
 
-   ), (UNITY_UINT)(990));
+   ), (UNITY_UINT)(989));
 
     UnityAssertEqualNumber((UNITY_INT)((9)), (UNITY_INT)((VD->PathCost)), (
 
    ((void *)0)
 
-   ), (UNITY_UINT)(991), UNITY_DISPLAY_STYLE_INT);
+   ), (UNITY_UINT)(990), UNITY_DISPLAY_STYLE_INT);
 
     UnityAssertEqualString((const char*)(("E")), (const char*)((VE->name)), (
 
    ((void *)0)
 
-   ), (UNITY_UINT)(992));
+   ), (UNITY_UINT)(991));
 
     UnityAssertEqualNumber((UNITY_INT)((14)), (UNITY_INT)((VE->PathCost)), (
 
    ((void *)0)
 
-   ), (UNITY_UINT)(993), UNITY_DISPLAY_STYLE_INT);
+   ), (UNITY_UINT)(992), UNITY_DISPLAY_STYLE_INT);
 
     UnityAssertEqualString((const char*)(("F")), (const char*)((VF->name)), (
 
    ((void *)0)
 
-   ), (UNITY_UINT)(994));
+   ), (UNITY_UINT)(993));
 
     UnityAssertEqualNumber((UNITY_INT)((11)), (UNITY_INT)((VF->PathCost)), (
 
    ((void *)0)
 
-   ), (UNITY_UINT)(995), UNITY_DISPLAY_STYLE_INT);
+   ), (UNITY_UINT)(994), UNITY_DISPLAY_STYLE_INT);
 
     UnityAssertEqualString((const char*)(("G")), (const char*)((VG->name)), (
 
    ((void *)0)
 
-   ), (UNITY_UINT)(996));
+   ), (UNITY_UINT)(995));
 
     UnityAssertEqualNumber((UNITY_INT)((12)), (UNITY_INT)((VG->PathCost)), (
 
    ((void *)0)
 
-   ), (UNITY_UINT)(997), UNITY_DISPLAY_STYLE_INT);
+   ), (UNITY_UINT)(996), UNITY_DISPLAY_STYLE_INT);
 
     UnityAssertEqualString((const char*)(("H")), (const char*)((VH->name)), (
 
    ((void *)0)
 
-   ), (UNITY_UINT)(998));
+   ), (UNITY_UINT)(997));
 
     UnityAssertEqualNumber((UNITY_INT)((19)), (UNITY_INT)((VH->PathCost)), (
 
    ((void *)0)
 
-   ), (UNITY_UINT)(999), UNITY_DISPLAY_STYLE_INT);
+   ), (UNITY_UINT)(998), UNITY_DISPLAY_STYLE_INT);
 
     UnityAssertEqualString((const char*)(("I")), (const char*)((VI->name)), (
 
    ((void *)0)
 
-   ), (UNITY_UINT)(1000));
+   ), (UNITY_UINT)(999));
 
     UnityAssertEqualNumber((UNITY_INT)((21)), (UNITY_INT)((VI->PathCost)), (
 
    ((void *)0)
 
-   ), (UNITY_UINT)(1001), UNITY_DISPLAY_STYLE_INT);
+   ), (UNITY_UINT)(1000), UNITY_DISPLAY_STYLE_INT);
 
 
 

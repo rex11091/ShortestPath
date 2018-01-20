@@ -25,6 +25,7 @@ int CostCompare(Vertexlink *nodedata, Node *refNode);
 int CostCompareforRemove(int nodedata, Node *refNode);
 Node *findSmallestNode(Node **rootPtr);
 void ListReplaceAndUpdateVertexPathCost(Node *VertexNode);
+Item *checking(Item *TempToPoint1,Item *TempToPoint2,Vertex *Vertex);
 
 
 

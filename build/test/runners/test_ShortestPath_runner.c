@@ -84,15 +84,15 @@ int main(void)
   RUN_TEST(test_ShortestPath_VertexaddAvl_Finding_smallestNode_expect_return_VertexNodeE, 403);
   RUN_TEST(test_ShortestPath_test_ListReplaceAndUpdateVertexPathCost, 457);
   RUN_TEST(test_ShortestPath_test_ListReplaceAndUpdateVertexPathCost_with_NextVertex_PC_smaller_than_PC_Plus_cost_expected_no_update, 503);
-  RUN_TEST(test_ShortestPath_test_ListReplaceAndUpdateVertexPathCost_with_NextVertex_PC_smaller_than_PC_Plus_cost_expected_update, 565);
-  RUN_TEST(test_ShortestPath_main_Compute_shortest_path_graph1, 618);
-  RUN_TEST(test_ShortestPath_main_Compute_shortest_path_graph2, 655);
-  RUN_TEST(test_ShortestPath_main_Compute_shortest_path_graph3, 712);
-  RUN_TEST(test_ShortestPath_main_Compute_shortest_path_graph4, 761);
-  RUN_TEST(test_ShortestPath_main_Compute_shortest_path_With_adding_duplicated_cost_pattern1, 809);
-  RUN_TEST(test_ShortestPath_main_Compute_shortest_path_With_adding_duplicated_cost_pattern2, 853);
-  RUN_TEST(test_ShortestPath_main_Compute_shortest_path_With_adding_duplicated_cost_pattern3, 898);
-  RUN_TEST(test_ShortestPath_main_Compute_shortest_path_complex_graph, 938);
+  RUN_TEST(test_ShortestPath_test_ListReplaceAndUpdateVertexPathCost_with_NextVertex_PC_smaller_than_PC_Plus_cost_expected_update, 568);
+  RUN_TEST(test_ShortestPath_main_Compute_shortest_path_graph1, 622);
+  RUN_TEST(test_ShortestPath_main_Compute_shortest_path_graph2, 659);
+  RUN_TEST(test_ShortestPath_main_Compute_shortest_path_graph3, 716);
+  RUN_TEST(test_ShortestPath_main_Compute_shortest_path_graph4, 765);
+  RUN_TEST(test_ShortestPath_main_Compute_shortest_path_With_adding_duplicated_cost_pattern1, 813);
+  RUN_TEST(test_ShortestPath_main_Compute_shortest_path_With_adding_duplicated_cost_pattern2, 857);
+  RUN_TEST(test_ShortestPath_main_Compute_shortest_path_With_adding_duplicated_cost_pattern3, 902);
+  RUN_TEST(test_ShortestPath_main_Compute_shortest_path_complex_graph, 942);
 
   return (UnityEnd());
 }

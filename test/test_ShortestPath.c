@@ -519,13 +519,16 @@ void test_ShortestPath_test_ListReplaceAndUpdateVertexPathCost_with_NextVertex_P
     Node *VertexNodeB = (Node *)malloc(sizeof(Node));
     Node *VertexNodeD = (Node *)malloc(sizeof(Node));
     Node *VNDafterUpdate = (Node *)malloc(sizeof(Node));
+
     createNodeForAddAVL(VertexNodeB,&LAB,VA);
     createNodeForAddAVL(VertexNodeC,&LAC,VA);
     createNodeForAddAVL(VertexNodeD,&LAD,VA);
-    createNodeForAddAVL(VNDafterUpdate,&LBD,VB);
     ListReplaceAndUpdateVertexPathCost(VertexNodeC);
     ListReplaceAndUpdateVertexPathCost(VertexNodeB);
     ListReplaceAndUpdateVertexPathCost(VertexNodeD);
+    // needd updated the pathcost of VB just can create
+    // else it take the pathcost  of VB which no update
+    createNodeForAddAVL(VNDafterUpdate,&LBD,VB);
     ListReplaceAndUpdateVertexPathCost(VNDafterUpdate);
 
     TEST_ASSERT_EQUAL_STRING("B",VB->name);
@@ -584,10 +587,11 @@ void test_ShortestPath_test_ListReplaceAndUpdateVertexPathCost_with_NextVertex_P
     createNodeForAddAVL(VertexNodeB,&LAB,VA);
     createNodeForAddAVL(VertexNodeC,&LAC,VA);
     createNodeForAddAVL(VertexNodeD,&LAD,VA);
-    createNodeForAddAVL(VNDafterUpdate,&LBD,VB);
     ListReplaceAndUpdateVertexPathCost(VertexNodeC);
     ListReplaceAndUpdateVertexPathCost(VertexNodeB);
     ListReplaceAndUpdateVertexPathCost(VertexNodeD);
+
+    createNodeForAddAVL(VNDafterUpdate,&LBD,VB);
     ListReplaceAndUpdateVertexPathCost(VNDafterUpdate);
 
     TEST_ASSERT_EQUAL_STRING("B",VB->name);
@@ -974,12 +978,7 @@ void test_ShortestPath_main_Compute_shortest_path_complex_graph(void)
 
 
     Node *root = NULL;
-    Try{
     ComputeShortestPath(&root,VA);
-    }Catch(ex){
-    dumpException(ex);
-    }
-
 
     TEST_ASSERT_EQUAL_STRING("A",VA->name);
     TEST_ASSERT_EQUAL(0,VA->PathCost);

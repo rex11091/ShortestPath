@@ -25,6 +25,7 @@ void createNodeForAddAVL(Node *node,Vertexlink *vertexlink,Vertex *Vertex){
     node->balanceFactor =0;
     node->ParentVertex = Vertex;    // the source of neigbour for adding the source's pathcost with cost
     node->data = vertexlink;
+    node->data->cost= vertexlink->cost + Vertex->PathCost;
 }
 
 void addNeighbors(Vertex *vertex,int numbofneighbors,...)
@@ -65,12 +66,12 @@ void ListReplaceAndUpdateVertexPathCost(Node *VertexNode)
 	for(temp; temp!=NULL;temp = temp->next){
 		if(temp->data->NextVertex == VertexNode->data->NextVertex){
       if(temp->data->NextVertex->PathCost == INT_MAX){
-        temp->data->NextVertex->PathCost = (VertexNode->data->cost + VertexNode->ParentVertex->PathCost);
+        temp->data->NextVertex->PathCost = (VertexNode->data->cost );
       }
       else{
         //here is if(vertex's path cost + vertexlink->cost >  NextVertex->Pathcost than remain )
-        if(temp->data->NextVertex->PathCost > VertexNode->data->cost + VertexNode->ParentVertex->PathCost)
-        temp->data->NextVertex->PathCost = ( VertexNode->data->cost + VertexNode->ParentVertex->PathCost);
+        if(temp->data->NextVertex->PathCost > VertexNode->data->cost )
+        temp->data->NextVertex->PathCost = ( VertexNode->data->cost );
         else
         temp->data->NextVertex->PathCost = temp->data->NextVertex->PathCost;
       }
@@ -93,17 +94,21 @@ void ComputeShortestPath(Node **root,Vertex *vertex){
 
       	else
       	{
+          /*
+          * checking purpose = check either the path cost is INT_MAX or smaller than coming cost 
+          * if match my condition it will change the tempToPoint2 else remain
+          */
           if(TempToPoint2->data->NextVertex->PathCost !=INT_MAX){
-            int AddPathCost = (TempToPoint2->data->cost + vertex->PathCost );
-              if(AddPathCost > TempToPoint2->data->NextVertex->PathCost )
-              {
-              TempToPoint1 = TempToPoint2;
-              TempToPoint2 = TempToPoint2->next;
-            }
-            else{
-              TempToPoint2 = TempToPoint2;
-            }
+              int AddPathCost = (TempToPoint2->data->cost + vertex->PathCost );
+                if(AddPathCost > TempToPoint2->data->NextVertex->PathCost ){
+                    TempToPoint1 = TempToPoint2;
+                    TempToPoint2 = TempToPoint2->next;
+                }
+                else{
+                    TempToPoint2 = TempToPoint2;
+                }
           }
+
       		while(TempToPoint2 !=NULL)
       		{
             Node *newNode = (Node *)malloc(sizeof(Node));
@@ -120,23 +125,38 @@ void ComputeShortestPath(Node **root,Vertex *vertex){
             Vertex *temp = newNode->data->NextVertex;
             if(temp->list->head!=NULL)                          //checking the node have neighbour?
             ComputeShortestPath(root,temp);
-          }
+            }
           
 			      TempToPoint1 = TempToPoint2;
             TempToPoint2 = TempToPoint2->next;
 
-      	}
-      }
+            // checking purpose same as top
+            if(TempToPoint2 !=NULL){
+              if(TempToPoint2->data->NextVertex->PathCost !=INT_MAX){         
+                int AddPathCost = (TempToPoint2->data->cost + vertex->PathCost );
+                  if(AddPathCost > TempToPoint2->data->NextVertex->PathCost ){
+                        TempToPoint1 = TempToPoint2;
+                        TempToPoint2 = TempToPoint2->next;
+                   }
+                  else{
+                        TempToPoint2 = TempToPoint2;
+                    }
+              }
+            }
+            else
+                TempToPoint2 = TempToPoint2;
+          }
+        }
         while(*root!=NULL){
-           smallestCost = findSmallestNode(root);               //find smallest node in avltree
+           smallestCost = findSmallestNode(root);                    //find smallest node in avltree
            Vertex *tempVertex = smallestCost->data->NextVertex;
            int *nodetoRemove = (int*)((uintptr_t)(smallestCost->data->cost)); 
-           ListReplaceAndUpdateVertexPathCost(smallestCost);    // do updated vertex's path cost
-           VertexRemoveNodeAvl(root,nodetoRemove);              // delete the smallest node on avl
-          if(tempVertex->list->head!=NULL){                     // checking the vertex have neighbour?
-           ComputeShortestPath(root,tempVertex);                // redo the process
-          }
-    }
+           ListReplaceAndUpdateVertexPathCost(smallestCost);         // do updated vertex's path cost
+           VertexRemoveNodeAvl(root,nodetoRemove);                   // delete the smallest node on avl
+            if(tempVertex->list->head!=NULL){                        // checking the vertex have neighbour?
+                ComputeShortestPath(root,tempVertex);                // redo the process
+            }
+        }
     return;
 }
 
@@ -172,3 +192,4 @@ int CostCompareforRemove(int nodedata, Node *refNode)
   else
     return 0;
 }
+

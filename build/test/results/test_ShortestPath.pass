@@ -43,31 +43,31 @@
   :line: 503
   :message: ''
 - :test: test_ShortestPath_test_ListReplaceAndUpdateVertexPathCost_with_NextVertex_PC_smaller_than_PC_Plus_cost_expected_update
-  :line: 565
+  :line: 568
   :message: ''
 - :test: test_ShortestPath_main_Compute_shortest_path_graph1
-  :line: 618
+  :line: 622
   :message: ''
 - :test: test_ShortestPath_main_Compute_shortest_path_graph2
-  :line: 655
+  :line: 659
   :message: ''
 - :test: test_ShortestPath_main_Compute_shortest_path_graph3
-  :line: 712
+  :line: 716
   :message: ''
 - :test: test_ShortestPath_main_Compute_shortest_path_graph4
-  :line: 761
+  :line: 765
   :message: ''
 - :test: test_ShortestPath_main_Compute_shortest_path_With_adding_duplicated_cost_pattern1
-  :line: 809
+  :line: 813
   :message: ''
 - :test: test_ShortestPath_main_Compute_shortest_path_With_adding_duplicated_cost_pattern2
-  :line: 853
+  :line: 857
   :message: ''
 - :test: test_ShortestPath_main_Compute_shortest_path_With_adding_duplicated_cost_pattern3
-  :line: 898
+  :line: 902
   :message: ''
 - :test: test_ShortestPath_main_Compute_shortest_path_complex_graph
-  :line: 938
+  :line: 942
   :message: ''
 :failures: []
 :ignores: []

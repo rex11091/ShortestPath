@@ -70,6 +70,7 @@ void ListReplaceAndUpdateVertexPathCost(Node *VertexNode)
       }
       else{
         //here is if(vertex's path cost + vertexlink->cost >  NextVertex->Pathcost than remain )
+       // else updated the Pathcost of the vertex
         if(temp->data->NextVertex->PathCost > VertexNode->data->cost )
         temp->data->NextVertex->PathCost = ( VertexNode->data->cost );
         else
@@ -115,7 +116,7 @@ void ComputeShortestPath(Node **root,Vertex *vertex){
             createNodeForAddAVL(newNode,TempToPoint2->data,vertex);
 
             Try{
-            // adding duplicated to avl and it will throw str do the node and will be catch 
+            // adding duplicated to avl and it will throw and will be catch in here 
             //  do the duplicated node first
             VertexaddAvl(root,newNode);
 

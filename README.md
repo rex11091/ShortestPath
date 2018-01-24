@@ -20,7 +20,7 @@ The struct of vertexLink is store the vertex and the destination of it:
 
 The neigbouring between vertex and it’s neighbour can be link by function below:
 
--LinkedList will be use in this function for storing it's neighbour
+        -LinkedList will be use in this function for storing it's neighbour
         void addNeighbors(Vertex *vertex,int numbofneighbors,...)
 
 To create a node which need to insert to AVL Tree for sorting purpose:
@@ -48,6 +48,5 @@ The main function which using the function above  will be used to pass in the co
         void ComputeShortestPath(Node **root,Vertex *vertex);
 
 # References
-        1.http://ieeexplore.ieee.org/document/8073641/
-
-        2.https://www.geeksforgeeks.org/greedy-algorithms-set-6-dijkstras-shortest-path-algorithm/
+http://ieeexplore.ieee.org/document/8073641/
+https://www.geeksforgeeks.org/greedy-algorithms-set-6-dijkstras-shortest-path-algorithm/

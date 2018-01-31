@@ -6,46 +6,50 @@
 #include "Exception.h"
 #include "CException.h"
 
-
-
 Node *findnearest(Node **rootPtr, int *heightchange)
 {
 Node *temp1;
-Node *current = (*rootPtr)->left;
+//Node *current = (*rootPtr)->left;
+ if((*rootPtr) == NULL){
+        *heightchange = CHANGED;
+         return NULL;
+    }
     /* loop down to find the leftmost leaf */
- if(current!=NULL){
-      if(current->left != NULL)
-         findnearest(&(*rootPtr)->left,heightchange);
-     else{
-         if(current->right !=NULL){
-          (*rootPtr)->left = current->right;
-          (*rootPtr)->balanceFactor +=1;
-           current->right = NULL;
-           *heightchange = CHANGED;
-         }
-         else{
-           (*rootPtr)->left = NULL;
-           (*rootPtr)->balanceFactor +=1;
-           if((*rootPtr)->balanceFactor >= 2)
+ if((*rootPtr)->left !=NULL){
+       temp1=findnearest(&(*rootPtr)->left,heightchange);
+	   
+	   if(*heightchange == CHANGED)
+	       (*rootPtr)->balanceFactor +=1;
+	   else 
+		   (*rootPtr)->balanceFactor = (*rootPtr)->balanceFactor;
+	   
+			if((*rootPtr)->balanceFactor >= 2)
               avlBalanceRightTree(&(*rootPtr));
-           else if((*rootPtr)->balanceFactor <= -2)
+			else if((*rootPtr)->balanceFactor <= -2)
               avlBalanceLeftTree(&(*rootPtr));
-           else{
+			else{
                 (*rootPtr) = (*rootPtr);
                }
-            if((*rootPtr)->balanceFactor!=0)
+			   
+            if((*rootPtr)->balanceFactor!=0) // check the rootPtr have changes?
               *heightchange = UNCHANGE;
-           else
-             *heightchange = CHANGED;
-         }
-       return current;
-        }
-  }
-  else
+			//else
+             //*heightchange = CHANGED;
+			
+			
+			
+       if(temp1->right !=NULL){
+          (*rootPtr)->left = temp1->right;	
+           temp1->right = NULL;
+       }
+	   return temp1;
+   }
+  else{
     temp1 = *rootPtr;
     *heightchange = CHANGED;
-     *rootPtr = NULL;
+     *rootPtr = NULL;							//delete the node which found is smallest
      return temp1;
+  }
  }
 
 
@@ -68,7 +72,8 @@ Node *_avlRemove(Node **root, void *nodeToRemove ,int *heightchange,Compare Comp
        if (*root == NULL)
            return NULL; //heigh change
 
-       int compareResult = CompareFunc(nodeToRemove,*root);
+       //int compareResult = CompareFunc(nodeToRemove,*root);
+	   int compareResult = CompareFunc((void *)(intptr_t)nodeToRemove,*root);
        if(compareResult==-1){
          if(temp->left==NULL){
            Throw(createException("This data cannot be found in this Avl tree ",Data_not_found));
@@ -153,23 +158,29 @@ Node *_avlRemove(Node **root, void *nodeToRemove ,int *heightchange,Compare Comp
             if((*root)->balanceFactor == 0)
             *heightchange = CHANGED;
             else
-            *heightchange = UNCHANGE;
+            *heightchange = *heightchange;
             return temp;
         }
     }
     if(*root==NULL){
           return temp;
         }
-    if((*root)->balanceFactor >= 2)
+    if((*root)->balanceFactor >= 2){
           avlBalanceRightTree(&(*root));
-    else if((*root)->balanceFactor <= -2)
+	      if((*root)->balanceFactor == 0)
+			*heightchange = CHANGED;
+		  else
+			*heightchange = *heightchange;
+	}
+    else if((*root)->balanceFactor <= -2){
           avlBalanceLeftTree(&(*root));
+	  	  if((*root)->balanceFactor == 0)
+			*heightchange = CHANGED;
+		  else
+			*heightchange = *heightchange;
+	}
     else{
           *root = *root;
         }
-    if((*root)->balanceFactor == 0)
-        *heightchange = CHANGED;
-    else
-        *heightchange = UNCHANGE;
     return temp;
 }

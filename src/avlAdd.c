@@ -34,7 +34,7 @@ int avlAdd(Node **rootPtr, Node *nodeToAdd,Compare CompareFunc){
         if(m==1){
         (*rootPtr)->balanceFactor += 1;
           if((*rootPtr)->balanceFactor==0)
-            m=0;;
+            m=0;
           }
         else
           (*rootPtr)->balanceFactor =(*rootPtr)->balanceFactor;
@@ -43,10 +43,20 @@ int avlAdd(Node **rootPtr, Node *nodeToAdd,Compare CompareFunc){
         Throw(createException("Node to add is already exist", NODE_ADD_EXIST));
       }
     }
-    if((*rootPtr)->balanceFactor >= 2)
+    if((*rootPtr)->balanceFactor >= 2){
         avlBalanceRightTree(&(*rootPtr));
-    else if((*rootPtr)->balanceFactor <= -2)
+		if((*rootPtr)->balanceFactor ==0)			//checking either the height(m) got change or not
+			m=0;
+		else
+			m=m;
+	}
+    else if((*rootPtr)->balanceFactor <= -2){
         avlBalanceLeftTree(&(*rootPtr));
+		if((*rootPtr)->balanceFactor ==0)			//checking either the height(m) got change or not
+			m=0;
+		else
+			m=m;
+	}
     else{
        *rootPtr = *rootPtr;
       }
